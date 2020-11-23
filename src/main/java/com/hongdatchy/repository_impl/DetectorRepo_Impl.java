@@ -20,16 +20,18 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Override
     public Detector createAndUpdate(Detector detector) {
-        List<Detector> detectors = findBySlotId(detector.getSlotId());
-        if(detectors.size() != 0){
-            return null;
-        }
         if(detector.getId() == null || entityManager.find(Detector.class, detector.getId()) == null){
-            detector.setLastTimeSetup(new Date());
+            List<Detector> detectors = findBySlotId(detector.getSlotId());
+            if(detectors.size() != 0){
+                return null;
+            }
         }else{
-            detector.setLastTimeSetup(entityManager.find(Detector.class, detector.getId()).getLastTimeSetup());
+            Detector oldDetector = entityManager.find(Detector.class, detector.getId());
+            if(oldDetector.getSlotId() == detector.getSlotId()){
+                // if slotId of detector not change -> keep stable lastTimeSetup
+                detector.setLastTimeSetup(oldDetector.getLastTimeSetup());
+            }
         }
-        detector.setLastTimeUpdate(new Date());
         return entityManager.merge(detector);
     }
 

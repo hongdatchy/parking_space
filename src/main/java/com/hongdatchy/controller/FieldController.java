@@ -23,7 +23,7 @@ public class FieldController {
         return ResponseEntity.ok(MyResponse.success(fieldService.findAll()));
     }
 
-    @GetMapping("api/field/delete/{id}")
+    @DeleteMapping("api/field/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(fieldService.delete(id)));
     }

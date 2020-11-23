@@ -14,4 +14,6 @@ public class Invoice {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 }

@@ -15,6 +15,6 @@ public interface GatewayService {
 
     List<GatewayJson> findAll();
 
-    GatewayJson data2Json(Gateway gateway);
+
 
 }

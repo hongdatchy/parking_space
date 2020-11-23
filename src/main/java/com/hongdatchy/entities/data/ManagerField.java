@@ -1,6 +1,9 @@
 package com.hongdatchy.entities.data;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,6 +12,9 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "manager_field")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ManagerField {
 
     @Id

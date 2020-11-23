@@ -30,7 +30,7 @@ public class User {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "last_time_access", nullable = false)
+    @Column(name = "last_time_access")
     private Date lastTimeAccess;
 
     @Column(name = "equipment", nullable = false)

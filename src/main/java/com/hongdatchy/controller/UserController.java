@@ -1,8 +1,11 @@
 package com.hongdatchy.controller;
 
+import com.hongdatchy.entities.data.Slot;
+import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
+import com.hongdatchy.entities.payload.UserPayload;
 import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +45,18 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.logout(token)));
     }
 
+    @PostMapping("api/user")
+    public ResponseEntity<Object> createAndUpdate(@RequestBody UserPayload userPayload){
+        return ResponseEntity.ok(MyResponse.success(userService.createAndUpdate(userPayload)));
+    }
+
+    @GetMapping("api/user/find_all")
+    public ResponseEntity<Object> findAll(){
+        return ResponseEntity.ok(MyResponse.success(userService.findAll()));
+    }
+
+    @DeleteMapping("api/user/delete/{id}")
+    public ResponseEntity<Object> delete(@PathVariable int id){
+        return ResponseEntity.ok(MyResponse.success(userService.delete(id)));
+    }
 }

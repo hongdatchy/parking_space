@@ -28,4 +28,5 @@ public class BlackListRepo_Impl implements BlackListRepo {
         return query.getResultList();
     }
 
+
 }

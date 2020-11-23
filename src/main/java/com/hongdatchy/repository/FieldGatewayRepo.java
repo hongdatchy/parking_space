@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FieldGatewayRepo {
 
-    FieldGateway createAndUpdate(FieldGateway fieldGw);
+    FieldGateway createAndUpdate(FieldGateway fieldGateway);
 
     boolean delete(int id);
 

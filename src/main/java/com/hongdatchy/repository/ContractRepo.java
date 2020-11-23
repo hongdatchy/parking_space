@@ -11,4 +11,5 @@ public interface ContractRepo {
     boolean delete(int id);
 
     List<Contract> findAll();
+
 }

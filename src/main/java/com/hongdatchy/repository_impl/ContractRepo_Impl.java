@@ -20,6 +20,10 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public Contract createAndUpdate(Contract contract) {
+    // Contract cannot be changed
+        if(entityManager.find(Contract.class, contract.getId()) != null){
+            return null;
+        }
         return entityManager.merge(contract);
     }
 
@@ -36,7 +40,8 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public List<Contract> findAll() {
-        Query query = entityManager.createQuery("select g from Gateway g");
+        Query query = entityManager.createQuery("select g from Contract g");
         return query.getResultList();
     }
+
 }

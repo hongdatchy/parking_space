@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -20,6 +21,9 @@ public class JWTFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse rs = (HttpServletResponse) servletResponse;
         String token = servletRequest.getParameter("token");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String tokenManager = request.getHeader("tokenManager");
+        System.out.println(tokenManager);
         if (token != null) {
             String phone = jwtService.decode(token);
             if (phone != null && userRepository.findByPhone(phone) != null && blackListRepo.findByToken(token).size() ==0)

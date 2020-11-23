@@ -11,6 +11,6 @@ public interface SlotService {
 
     boolean delete(int id);
 
-    List<Slot> findAll();
+    List<SlotJson> findAll();
 
 }

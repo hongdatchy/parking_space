@@ -2,6 +2,7 @@ package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.ManagerField;
 import com.hongdatchy.entities.data.Slot;
+import com.hongdatchy.entities.payload.ManagerFieldPayload;
 import com.hongdatchy.repository.ManagerFieldRepo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

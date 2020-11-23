@@ -29,6 +29,9 @@ public class GatewayRepo_Impl implements GatewayRepo {
             Query query = entityManager.createQuery("delete from Detector x where x.gatewayId =:id");
             query.setParameter("id", id).executeUpdate();
 
+            Query query2 = entityManager.createQuery("delete from FieldGateway x where x.gatewayId =:id");
+            query2.setParameter("id", id).executeUpdate();
+
             entityManager.remove(gateway);
             return true;
         }else {

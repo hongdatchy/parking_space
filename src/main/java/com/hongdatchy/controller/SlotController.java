@@ -23,7 +23,7 @@ public class SlotController {
         return ResponseEntity.ok(MyResponse.success(slotService.findAll()));
     }
 
-    @GetMapping("api/slot/delete/{id}")
+    @DeleteMapping("api/slot/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(slotService.delete(id)));
     }

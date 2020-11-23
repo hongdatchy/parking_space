@@ -38,7 +38,8 @@ public class FieldService_Impl implements FieldService {
     public FieldJson data2Json(Field field) {
         return FieldJson.builder()
                 .id(field.getId())
-                .busySlot(slotRepo.findAll().stream().filter(slot -> slot.getStatus()== true).collect(Collectors.toList()).size())
+                .busySlot(slotRepo.findAll().stream().filter(slot -> slot.getStatus()== true)
+                        .collect(Collectors.toList()).size())
                 .position(field.getPosition())
                 .totalSlot(slotRepo.findAll().size())
                 .build();

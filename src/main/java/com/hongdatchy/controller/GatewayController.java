@@ -23,7 +23,7 @@ public class GatewayController {
         return ResponseEntity.ok(MyResponse.success(gatewayService.findAll()));
     }
 
-    @GetMapping("api/gateway/delete/{id}")
+    @DeleteMapping("api/gateway/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(gatewayService.delete(id)));
     }

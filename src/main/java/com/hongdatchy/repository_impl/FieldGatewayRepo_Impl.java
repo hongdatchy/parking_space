@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -20,6 +21,11 @@ public class FieldGatewayRepo_Impl implements FieldGatewayRepo {
 
     @Override
     public FieldGateway createAndUpdate(FieldGateway fieldGateway) {
+        if(fieldGateway.getFieldId() != null
+                || entityManager.find(FieldGateway.class, fieldGateway.getId()) != null){
+            FieldGateway oldFieldGateway =entityManager.find(FieldGateway.class, fieldGateway.getId());
+            fieldGateway.setLastTimeSetup(oldFieldGateway.getLastTimeSetup());
+        }
         return entityManager.merge(fieldGateway);
     }
 

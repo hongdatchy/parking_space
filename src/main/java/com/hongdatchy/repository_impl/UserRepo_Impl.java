@@ -1,11 +1,14 @@
 package com.hongdatchy.repository_impl;
 
+import com.hongdatchy.entities.data.Invoice;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
+import com.hongdatchy.repository.InvoiceRepo;
 import com.hongdatchy.repository.UserRepo;
 import com.hongdatchy.security.SHA256Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +25,9 @@ public class UserRepo_Impl implements UserRepo {
     @PersistenceContext
     EntityManager entityManager;
 
+    @Autowired
+    InvoiceRepo invoiceRepo;
+
     @Override
     public boolean login(LoginForm loginForm) {
         Query query = entityManager
@@ -31,6 +37,7 @@ public class UserRepo_Impl implements UserRepo {
                 .setParameter("password", SHA256Service.getSHA256(loginForm.getPassword()))
                 .getResultList();
         if(users.size() != 0){
+            users.get(0).setLastTimeAccess(new Date());
             return true;
         }
         return false;
@@ -72,6 +79,7 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public User createAndUpdate(User user) {
+        user.setPassword(SHA256Service.getSHA256(user.getPassword()));
         return entityManager.merge(user);
     }
 
@@ -79,10 +87,12 @@ public class UserRepo_Impl implements UserRepo {
     public boolean delete(int id) {
         User user = entityManager.find(User.class, id);
         if(user != null){
-
-            Query query = entityManager.createQuery("delete from Contract x where x.userId =:id");
-            query.setParameter("id", id).executeUpdate();
-
+            Query query = entityManager.createQuery("select x FROM Invoice x where x.userId =:id");
+            query.setParameter("id", user.getId());
+            List<Invoice> invoices = query.getResultList();
+            for (Invoice invoice: invoices) {
+                invoiceRepo.delete(invoice.getId());
+            }
             entityManager.remove(user);
             return true;
         }else {
