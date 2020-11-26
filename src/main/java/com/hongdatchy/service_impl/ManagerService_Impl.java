@@ -1,7 +1,9 @@
 package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.Manager;
+import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.ManagerPayload;
+import com.hongdatchy.repository.BlackListRepo;
 import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class ManagerService_Impl implements ManagerService {
 
     @Autowired
     ManagerRepo managerRepo;
+
+    @Autowired
+    BlackListRepo blackListRepo;
 
     @Override
     public Manager createAndUpdate(ManagerPayload  managerPayload) {
@@ -31,9 +36,21 @@ public class ManagerService_Impl implements ManagerService {
         return managerRepo.findAll();
     }
 
+    @Override
+    public boolean login(LoginForm loginForm) {
+        return managerRepo.login(loginForm);
+    }
+
+    @Override
+    public boolean logout(String token) {
+        blackListRepo.create(token);
+        return true;
+    }
+
     public Manager payload2data(ManagerPayload managerPayload){
         return Manager.builder()
                 .id(managerPayload.getId())
+                .phone(managerPayload.getPhone())
                 .acp(managerPayload.getAcp())
                 .pass(managerPayload.getPass())
                 .lastTimeAccess(new Date())

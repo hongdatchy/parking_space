@@ -1,5 +1,7 @@
 package com.hongdatchy.repository_impl;
 
+import com.hongdatchy.entities.data.Field;
+import com.hongdatchy.entities.data.FieldGateway;
 import com.hongdatchy.entities.data.Gateway;
 import com.hongdatchy.repository.GatewayRepo;
 import org.springframework.stereotype.Repository;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -48,5 +51,20 @@ public class GatewayRepo_Impl implements GatewayRepo {
     @Override
     public Gateway findById(int id) {
         return entityManager.find(Gateway.class, id);
+    }
+
+    @Override
+    public List<Gateway> managerFind(List<Field> fields) {
+        List<Gateway> gateways = new ArrayList<>();
+        for (Field field: fields) {
+            List<FieldGateway> fieldGateways = entityManager
+                    .createQuery("select x from FieldGateway x where x.fieldId =:id")
+                    .setParameter("id", field.getId())
+                    .getResultList();
+            for (FieldGateway fieldGateway: fieldGateways) {
+                gateways.add(entityManager.find(Gateway.class,fieldGateway.getGatewayId()));
+            }
+        }
+        return gateways;
     }
 }

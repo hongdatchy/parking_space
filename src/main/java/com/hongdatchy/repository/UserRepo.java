@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface UserRepo {
 
+    boolean checkPhoneExisted(String phone);
+
     boolean login(LoginForm loginForm);
 
     boolean register(RegisterForm registerForm);

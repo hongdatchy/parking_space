@@ -6,6 +6,7 @@ import lombok.Data;
 public class ManagerPayload {
 
     private Integer id;
+    private String phone;
     private String pass;
     private Boolean acp;
 

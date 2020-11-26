@@ -1,9 +1,6 @@
 package com.hongdatchy.controller;
 
-import com.hongdatchy.entities.data.Slot;
-import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.json.MyResponse;
-import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
 import com.hongdatchy.entities.payload.UserPayload;
 import com.hongdatchy.security.JWTService;
@@ -30,14 +27,6 @@ public class UserController {
             return ResponseEntity.ok(MyResponse.fail("phone number already exist"));
         }
         return ResponseEntity.ok(MyResponse.success(true));
-    }
-
-    @PostMapping("api/user/login")
-    public ResponseEntity<Object> login(@RequestBody LoginForm loginForm) throws Exception {
-        if(userService.login(loginForm)){
-            return ResponseEntity.ok(MyResponse.success(jwtService.getToken(loginForm.getPhone())));
-        }
-        return ResponseEntity.ok(MyResponse.fail("wrong phone or password"));
     }
 
     @GetMapping("api/user/logout/{token}")

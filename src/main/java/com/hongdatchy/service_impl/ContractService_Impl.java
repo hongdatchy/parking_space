@@ -38,8 +38,9 @@ public class ContractService_Impl implements ContractService {
                 .slotId(contractPayload.getSlotId())
                 .timeCarIn(null)
                 .timeCarOut(null)
-                .timeInBook(contractPayload.getTimeInBook())
                 .timeOutBook(contractPayload.getTimeOutBook())
+                .timeInBook(contractPayload.getTimeInBook())
                 .build();
     }
+
 }

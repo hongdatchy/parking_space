@@ -1,6 +1,7 @@
 package com.hongdatchy.repository;
 
 import com.hongdatchy.entities.data.Field;
+import com.hongdatchy.entities.data.Manager;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ public interface FieldRepo{
     boolean delete(int id);
 
     List<Field> findAll();
+
+    List<Field> managerFind(Manager manager);
+
+    Field managerUpdate(Field field, Manager manager);
 
 }

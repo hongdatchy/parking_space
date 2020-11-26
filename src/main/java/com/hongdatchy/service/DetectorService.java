@@ -12,4 +12,6 @@ public interface DetectorService {
     boolean delete(int id);
 
     List<Detector> findAll();
+
+    List<Detector> managerFind(String phone);
 }

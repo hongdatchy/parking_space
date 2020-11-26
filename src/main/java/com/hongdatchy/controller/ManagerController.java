@@ -29,4 +29,9 @@ public class ManagerController {
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(managerService.delete(id)));
     }
+
+    @GetMapping("api/manager/logout/{token}")
+    public ResponseEntity<Object> logout(@PathVariable String token){
+        return ResponseEntity.ok(MyResponse.success(managerService.logout(token)));
+    }
 }

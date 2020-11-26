@@ -4,6 +4,7 @@ import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Gateway;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.DetectorPayload;
+import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.DetectorService;
 import com.hongdatchy.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class DetectorController {
 
     @Autowired
     DetectorService detectorService;
+
+    @Autowired
+    JWTService jwtService;
 
     @PostMapping("api/detector")
     public ResponseEntity<Object> createAndUpdate(@RequestBody DetectorPayload detectorPayload){
@@ -31,4 +35,9 @@ public class DetectorController {
         return ResponseEntity.ok(MyResponse.success(detectorService.delete(id)));
     }
 
+    @GetMapping(value = {"api/manager/detector"})
+    public ResponseEntity<Object> findSome(@RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(detectorService.managerFind(phone)));
+    }
 }

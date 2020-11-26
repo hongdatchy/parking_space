@@ -1,8 +1,6 @@
 package com.hongdatchy.repository_impl;
 
-import com.hongdatchy.entities.data.Invoice;
-import com.hongdatchy.entities.data.Slot;
-import com.hongdatchy.entities.data.User;
+import com.hongdatchy.entities.data.*;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
 import com.hongdatchy.repository.InvoiceRepo;
@@ -45,11 +43,7 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public boolean register(RegisterForm registerForm) {
-        Query query = entityManager
-                .createQuery("select u from User u where u.phone= :phone");
-        List<User> users = query.setParameter("phone", registerForm.getPhone()).getResultList();
-
-        if(users.size() == 0){
+        if(!checkPhoneExisted(registerForm.getPhone())){
             User newUser = entityManager.merge(User.builder()
                     .id(null)
                     .phone(registerForm.getPhone())
@@ -77,9 +71,35 @@ public class UserRepo_Impl implements UserRepo {
         return null;
     }
 
+
+
+
+
+    @Override
+    public boolean checkPhoneExisted(String phone){
+        Query query = entityManager
+                .createQuery("select u from User u where u.phone= :phone");
+        List<User> users = query.setParameter("phone", phone).getResultList();
+
+        Query query2 = entityManager
+                .createQuery("select m from Manager m where m.phone= :phone");
+        List<Manager>managers = query2.setParameter("phone", phone).getResultList();
+
+        Query query3 = entityManager
+                .createQuery("select a from Admin a where a.phone= :phone");
+        List<Admin>admins = query3.setParameter("phone", phone).getResultList();
+        if(users.size() == 0 && managers.size() == 0 && admins.size() == 0){
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public User createAndUpdate(User user) {
         user.setPassword(SHA256Service.getSHA256(user.getPassword()));
+        if(checkPhoneExisted(user.getPhone())){
+            return null;
+        }
         return entityManager.merge(user);
     }
 

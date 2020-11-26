@@ -2,6 +2,7 @@ package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.Gateway;
+import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.repository.ContractRepo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +21,11 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public Contract createAndUpdate(Contract contract) {
-    // Contract cannot be changed
-        if(entityManager.find(Contract.class, contract.getId()) != null){
+        Slot slot = entityManager.find(Slot.class, contract.getSlotId());
+        if(contract.getTimeInBook().compareTo(contract.getTimeOutBook()) >= 0 || slot.getStatus()){
             return null;
         }
+        entityManager.merge(slot);
         return entityManager.merge(contract);
     }
 

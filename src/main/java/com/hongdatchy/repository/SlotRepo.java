@@ -12,4 +12,6 @@ public interface SlotRepo {
 
     List<Slot> findAll();
 
+    public Slot findById(int id);
+
 }

@@ -1,20 +1,13 @@
 package com.hongdatchy.entities.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
+@Table(name = "admin")
 @Data
-@Table(name = "manager")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Manager {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +19,5 @@ public class Manager {
 
     @Column(name = "pass", nullable = false)
     private String pass;
-
-    @Column(name = "last_time_access")
-    private Date lastTimeAccess;
-
-    @Column(name = "acp", nullable = false)
-    private Boolean acp;
 
 }

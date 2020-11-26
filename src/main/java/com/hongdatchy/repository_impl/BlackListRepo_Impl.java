@@ -23,9 +23,8 @@ public class BlackListRepo_Impl implements BlackListRepo {
     }
 
     public List<BlackList> findByToken(String token){
-        Query query = entityManager.createQuery("select b from BlackList b where b.token = :token");
-        query.setParameter("token", token);
-        return query.getResultList();
+        return entityManager.createQuery("select b from BlackList b where b.token = :token")
+        .setParameter("token", token).getResultList();
     }
 
 

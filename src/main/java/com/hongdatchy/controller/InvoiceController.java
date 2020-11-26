@@ -3,6 +3,7 @@ package com.hongdatchy.controller;
 import com.hongdatchy.entities.data.Invoice;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.DetectorPayload;
+import com.hongdatchy.entities.payload.InvoicePayload;
 import com.hongdatchy.service.DetectorService;
 import com.hongdatchy.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class InvoiceController {
     InvoiceService invoiceService;
 
     @PostMapping("api/invoice")
-    public ResponseEntity<Object> createAndUpdate(@RequestBody Invoice invoice){
-        return ResponseEntity.ok(MyResponse.success(invoiceService.createAndUpdate(invoice)));
+    public ResponseEntity<Object> createAndUpdate(@RequestBody InvoicePayload invoicePayload){
+        return ResponseEntity.ok(MyResponse.success(invoiceService.createAndUpdate(invoicePayload)));
     }
 
     @GetMapping("api/invoice/find_all")

@@ -17,4 +17,8 @@ public class MyResponse {
     public static MyResponse fail(Object data){
         return new MyResponse("fail", data);
     }
+
+    public static MyResponse loginSuccess(String role,Object data){
+        return new MyResponse(role, data);
+    }
 }

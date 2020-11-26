@@ -1,7 +1,9 @@
 package com.hongdatchy.security;
 
 
+import com.hongdatchy.repository.AdminRepo;
 import com.hongdatchy.repository.BlackListRepo;
+import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -17,15 +19,36 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserRepo userRepository;
+    private final UserRepo userRepo;
+    private final ManagerRepo managerRepo;
+    private final AdminRepo adminRepo;
     private final JWTService jwtService;
     private BlackListRepo blackListRepo;
 
     @Bean
-    public FilterRegistrationBean<JWTFilter> jwtFilter() {
-        FilterRegistrationBean<JWTFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new JWTFilter(userRepository,jwtService, blackListRepo));
-        registrationBean.addUrlPatterns("/api/*");
+    public FilterRegistrationBean<JWTFilterUser> jwtFilterUser() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new JWTFilterUser(userRepo,jwtService, blackListRepo));
+        registrationBean.addUrlPatterns("/jjgkjdsgd");
+//        registrationBean.addUrlPatterns("/api/user/*");
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<JWTFilterManager> jwtFilterManger() {
+        FilterRegistrationBean<JWTFilterManager> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new JWTFilterManager(managerRepo,jwtService, blackListRepo));
+        registrationBean.addUrlPatterns("/api/manager/*");
+//        registrationBean.addUrlPatterns("/jjgkjdsgd");
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<JWTFilterAdmin> jwtFilterAdmin() {
+        FilterRegistrationBean<JWTFilterAdmin> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new JWTFilterAdmin(adminRepo,jwtService, blackListRepo));
+//        registrationBean.addUrlPatterns("/api/admin/*");
+        registrationBean.addUrlPatterns("/jjgkjdsgd");
         return registrationBean;
     }
 

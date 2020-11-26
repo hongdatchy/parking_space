@@ -1,9 +1,12 @@
 package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.Detector;
+import com.hongdatchy.entities.data.Gateway;
 import com.hongdatchy.entities.payload.DetectorPayload;
 import com.hongdatchy.repository.DetectorRepo;
+import com.hongdatchy.repository.FieldRepo;
 import com.hongdatchy.service.DetectorService;
+import com.hongdatchy.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,12 @@ public class DetectorService_Impl implements DetectorService {
 
     @Autowired
     DetectorRepo detectorRepo;
+
+    @Autowired
+    FieldRepo fieldRepo;
+
+    @Autowired
+    GatewayService gatewayService;
 
     @Override
     public Detector createAndUpdate(DetectorPayload detectorPayload) {
@@ -29,6 +38,12 @@ public class DetectorService_Impl implements DetectorService {
     @Override
     public List<Detector> findAll() {
         return detectorRepo.findAll();
+    }
+
+    @Override
+    public List<Detector> managerFind(String phone) {
+        List<Gateway> gateways = gatewayService.managerFind(phone);
+        return detectorRepo.managerFind(gateways);
     }
 
     public Detector payLoad2Data(DetectorPayload detectorPayload){

@@ -43,4 +43,9 @@ public class SlotRepo_Impl implements SlotRepo {
     public List<Slot> findAll() {
         return entityManager.createQuery("select s from Slot s").getResultList();
     }
+
+    @Override
+    public Slot findById(int id){
+        return entityManager.find(Slot.class, id);
+    }
 }

@@ -2,6 +2,7 @@ package com.hongdatchy.controller;
 
 import com.hongdatchy.entities.data.Gateway;
 import com.hongdatchy.entities.json.MyResponse;
+import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,9 @@ public class GatewayController {
 
     @Autowired
     GatewayService gatewayService;
+
+    @Autowired
+    JWTService jwtService;
 
     @PostMapping("api/gateway")
     public ResponseEntity<Object> createAndUpdate(@RequestBody Gateway gateway){
@@ -28,4 +32,9 @@ public class GatewayController {
         return ResponseEntity.ok(MyResponse.success(gatewayService.delete(id)));
     }
 
+    @GetMapping(value = {"api/manager/gateway"})
+    public ResponseEntity<Object> findSome(@RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(gatewayService.managerFind(phone)));
+    }
 }

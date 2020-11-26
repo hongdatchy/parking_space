@@ -15,6 +15,6 @@ public interface GatewayService {
 
     List<GatewayJson> findAll();
 
-
+    List<Gateway> managerFind(String phone);
 
 }
