@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public FilterRegistrationBean<JWTFilterManager> jwtFilterManger() {
         FilterRegistrationBean<JWTFilterManager> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JWTFilterManager(managerRepo,jwtService, blackListRepo));
-        registrationBean.addUrlPatterns("/api/manager/*");
-//        registrationBean.addUrlPatterns("/jjgkjdsgd");
+//        registrationBean.addUrlPatterns("/api/manager/*");
+        registrationBean.addUrlPatterns("/jjgkjdsgd");
         return registrationBean;
     }
 
