@@ -13,17 +13,17 @@ public class SlotController {
     @Autowired
     SlotService slotService;
 
-    @PostMapping("api/slot")
+    @PostMapping("api/ad/slot/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody Slot slot){
         return ResponseEntity.ok(MyResponse.success(slotService.createAndUpdate(slot)));
     }
 
-    @GetMapping("api/slot/find_all")
+    @GetMapping(value = {"api/public/slot/find_all","api/ad/slot/find_all"})
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(slotService.findAll()));
     }
 
-    @DeleteMapping("api/slot/delete/{id}")
+    @DeleteMapping("api/ad/slot/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(slotService.delete(id)));
     }

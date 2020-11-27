@@ -2,9 +2,11 @@ package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Gateway;
+import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.payload.DetectorPayload;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.FieldRepo;
+import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.service.DetectorService;
 import com.hongdatchy.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class DetectorService_Impl implements DetectorService {
     FieldRepo fieldRepo;
 
     @Autowired
-    GatewayService gatewayService;
+    ManagerRepo managerRepo;
 
     @Override
     public Detector createAndUpdate(DetectorPayload detectorPayload) {
@@ -42,8 +44,20 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public List<Detector> managerFind(String phone) {
-        List<Gateway> gateways = gatewayService.managerFind(phone);
-        return detectorRepo.managerFind(gateways);
+        Manager manager = managerRepo.findByPhone(phone);
+        return detectorRepo.managerFind(manager);
+    }
+
+    @Override
+    public Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone) {
+        Manager manager = managerRepo.findByPhone(phone);
+        return detectorRepo.managerCreateAndUpdate(payLoad2Data(detectorPayload), manager);
+    }
+
+    @Override
+    public boolean managerDelete(int id, String phone) {
+        Manager manager = managerRepo.findByPhone(phone);
+        return detectorRepo.managerDelete(id, manager);
     }
 
     public Detector payLoad2Data(DetectorPayload detectorPayload){

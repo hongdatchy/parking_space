@@ -2,6 +2,7 @@ package com.hongdatchy.repository;
 
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Gateway;
+import com.hongdatchy.entities.data.Manager;
 
 import java.util.List;
 
@@ -15,5 +16,9 @@ public interface DetectorRepo {
 
     List<Detector> findBySlotId(int id);
 
-    List<Detector> managerFind(List<Gateway> gateways);
+    List<Detector> managerFind(Manager manager);
+
+    Detector managerCreateAndUpdate(Detector detector, Manager manager);
+
+    boolean managerDelete(int id, Manager manager);
 }

@@ -46,8 +46,8 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("*** Start server ***");
-        GetData initGetData = new GetData();
-        initGetData.main(args);
+//        GetData initGetData = new GetData();
+//        initGetData.main(args);
         while (true){
             List<Contract> contracts = contractRepo.findAll().stream()
                     .filter(contract -> contract.getTimeOutBook().getTime() - new Date().getTime()<=0
@@ -63,8 +63,6 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             }
             Thread.sleep(Integer.valueOf(timeRefreshDataSlot));
         }
-
-
 
     }
 }

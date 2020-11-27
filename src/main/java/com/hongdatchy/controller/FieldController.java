@@ -17,30 +17,37 @@ public class FieldController {
     @Autowired
     JWTService jwtService;
 
-    @PostMapping("api/field")
+    @PostMapping("api/ad/field/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody Field field){
         return ResponseEntity.ok(MyResponse.success(fieldService.createAndUpdate(field)));
     }
 
-    @GetMapping(value = {"api/field/find_all"})// can multiple mapping
+    @GetMapping(value = {"api/public/field/find_all","api/ad/field/find_all"})// can multiple mapping
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(fieldService.findAll()));
     }
 
-    @DeleteMapping("api/field/delete/{id}")
+    @DeleteMapping("api/ad/field/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(fieldService.delete(id)));
     }
 
-    @GetMapping(value = {"api/manager/field"})
-    public ResponseEntity<Object> findSome(@RequestHeader String token){
+    @GetMapping(value = {"api/mn/field/find_all"})
+    public ResponseEntity<Object> managerFindAll(@RequestHeader String token){
         String phone = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(fieldService.managerFind(phone)));
     }
 
-    @PostMapping(value = {"api/manager/field"})
-    public ResponseEntity<Object> updateSome(@RequestBody Field field ,@RequestHeader String token){
+    @PostMapping(value = {"api/mn/field/update"})
+    public ResponseEntity<Object> managerUpdate(@RequestBody Field field ,@RequestHeader String token){
         String phone = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(fieldService.managerUpdate(field,phone)));
     }
+
+    @DeleteMapping("api/mn/field/delete/{id}")
+    public ResponseEntity<Object> managerDelete(@PathVariable int id, @RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(fieldService.managerDelete(id, phone)));
+    }
+
 }

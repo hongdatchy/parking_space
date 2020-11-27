@@ -2,17 +2,13 @@ package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.Invoice;
-import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.entities.json.InvoiceJson;
-import com.hongdatchy.entities.json.SlotJson;
-import com.hongdatchy.entities.payload.InvoicePayload;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.InvoiceRepo;
 import com.hongdatchy.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +22,8 @@ public class InvoiceService_Impl implements InvoiceService {
     ContractRepo contractRepo;
 
     @Override
-    public InvoiceJson createAndUpdate(InvoicePayload invoicePayload) {
-        return data2Json(invoiceRepo.createAndUpdate(payload2Data(invoicePayload)));
+    public InvoiceJson createAndUpdate(Invoice invoice) {
+        return data2Json(invoiceRepo.createAndUpdate(invoice));
     }
 
     @Override
@@ -55,10 +51,5 @@ public class InvoiceService_Impl implements InvoiceService {
                 .contracts(contracts)
                 .build();
     }
-    public Invoice payload2Data(InvoicePayload invoicePayload){
-        return Invoice.builder()
-                .id(invoicePayload.getId())
-                .userId(invoicePayload.getUserId())
-                .build();
-    }
+
 }

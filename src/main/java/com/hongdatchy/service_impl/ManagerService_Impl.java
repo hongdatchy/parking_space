@@ -41,12 +41,6 @@ public class ManagerService_Impl implements ManagerService {
         return managerRepo.login(loginForm);
     }
 
-    @Override
-    public boolean logout(String token) {
-        blackListRepo.create(token);
-        return true;
-    }
-
     public Manager payload2data(ManagerPayload managerPayload){
         return Manager.builder()
                 .id(managerPayload.getId())

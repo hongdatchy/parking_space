@@ -15,23 +15,19 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
-    @PostMapping("api/manager")
+    @PostMapping("api/ad/manager/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody ManagerPayload managerPayload){
         return ResponseEntity.ok(MyResponse.success(managerService.createAndUpdate(managerPayload)));
     }
 
-    @GetMapping("api/manager/find_all")
+    @GetMapping("api/ad/manager/find_all")
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(managerService.findAll()));
     }
 
-    @DeleteMapping("api/manager/delete/{id}")
+    @DeleteMapping("api/ad/manager/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(managerService.delete(id)));
     }
 
-    @GetMapping("api/manager/logout/{token}")
-    public ResponseEntity<Object> logout(@PathVariable String token){
-        return ResponseEntity.ok(MyResponse.success(managerService.logout(token)));
-    }
 }

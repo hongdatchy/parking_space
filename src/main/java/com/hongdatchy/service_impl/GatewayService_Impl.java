@@ -1,12 +1,11 @@
 package com.hongdatchy.service_impl;
 
-import com.hongdatchy.entities.data.Field;
 import com.hongdatchy.entities.data.Gateway;
+import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.json.GatewayJson;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.GatewayRepo;
-import com.hongdatchy.repository.SlotRepo;
-import com.hongdatchy.service.FieldService;
+import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class GatewayService_Impl implements GatewayService {
     DetectorRepo detectorRepo;
 
     @Autowired
-    FieldService fieldService;
+    ManagerRepo managerRepo;
 
     @Override
     public GatewayJson createAndUpdate(Gateway gateway) {
@@ -43,8 +42,23 @@ public class GatewayService_Impl implements GatewayService {
 
     @Override
     public List<Gateway> managerFind(String phone) {
-        List<Field> fields = fieldService.managerFind(phone);
-        return gatewayRepo.managerFind(fields);
+        Manager manager = managerRepo.findByPhone(phone);
+        if(manager == null) return null;
+        return gatewayRepo.managerFind(manager);
+    }
+
+    @Override
+    public Gateway managerUpdate(Gateway gateway, String phone) {
+        Manager manager = managerRepo.findByPhone(phone);
+        if(manager == null) return null;
+        return gatewayRepo.managerUpdate(gateway, manager);
+    }
+
+    @Override
+    public boolean managerDelete(int id, String phone) {
+        Manager manager = managerRepo.findByPhone(phone);
+        if(manager == null) return false;
+        return gatewayRepo.managerDelete(id, manager);
     }
 
     public GatewayJson data2Json(Gateway gateway){

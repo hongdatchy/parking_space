@@ -14,4 +14,8 @@ public interface DetectorService {
     List<Detector> findAll();
 
     List<Detector> managerFind(String phone);
+
+    Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone);
+
+    boolean managerDelete(int id, String phone);
 }

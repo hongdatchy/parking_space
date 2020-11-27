@@ -2,6 +2,9 @@ package com.hongdatchy.controller;
 
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.LoginForm;
+import com.hongdatchy.repository.AdminRepo;
+import com.hongdatchy.repository.ManagerRepo;
+import com.hongdatchy.repository.UserRepo;
 import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.AdminService;
 import com.hongdatchy.service.ManagerService;
@@ -10,8 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
-public class LoginController {
+public class LoginAndLogoutController {
 
     @Autowired
     UserService userService;
@@ -25,8 +29,16 @@ public class LoginController {
     @Autowired
     JWTService jwtService;
 
+    @Autowired
+    AdminRepo adminRepo;
 
-    @PostMapping("api/login")
+    @Autowired
+    UserRepo userRepo;
+
+    @Autowired
+    ManagerRepo managerRepo;
+
+    @PostMapping("api/public/login")
     public ResponseEntity<Object> login(@RequestBody LoginForm loginForm) throws Exception {
         if(userService.login(loginForm)){
             return ResponseEntity.ok(MyResponse.loginSuccess("user",jwtService.getToken(loginForm.getPhone())));
@@ -36,6 +48,16 @@ public class LoginController {
             return ResponseEntity.ok(MyResponse.loginSuccess("admin",jwtService.getToken(loginForm.getPhone())));
         }
         return ResponseEntity.ok(MyResponse.fail("wrong phone or password"));
+    }
+    @GetMapping("api/public/logout")
+    public ResponseEntity<Object> logout(@RequestHeader String token){
+        String phone = jwtService.decode(token);
+        if(userRepo.findByPhone(phone) != null
+                || managerRepo.findByPhone(phone) != null
+                || adminRepo.findByPhone(phone) != null){
+            return ResponseEntity.ok(MyResponse.success(true));
+        }
+        return ResponseEntity.ok(MyResponse.success(false));
     }
 
 }

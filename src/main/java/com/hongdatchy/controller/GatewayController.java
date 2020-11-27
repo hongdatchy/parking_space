@@ -17,24 +17,37 @@ public class GatewayController {
     @Autowired
     JWTService jwtService;
 
-    @PostMapping("api/gateway")
+    @PostMapping("api/ad/gateway/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody Gateway gateway){
         return ResponseEntity.ok(MyResponse.success(gatewayService.createAndUpdate(gateway)));
     }
 
-    @GetMapping("api/gateway/find_all")
+    @GetMapping("api/ad/gateway/find_all")
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(gatewayService.findAll()));
     }
 
-    @DeleteMapping("api/gateway/delete/{id}")
+    @DeleteMapping("api/ad/gateway/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(gatewayService.delete(id)));
     }
 
-    @GetMapping(value = {"api/manager/gateway"})
-    public ResponseEntity<Object> findSome(@RequestHeader String token){
+    @GetMapping(value = {"api/mn/gateway/find_all"})
+    public ResponseEntity<Object> managerFind(@RequestHeader String token){
         String phone = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(gatewayService.managerFind(phone)));
     }
+
+    @PostMapping("api/mn/gateway/update")
+    public ResponseEntity<Object> managerUpdate(@RequestBody Gateway gateway, @RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(gatewayService.managerUpdate(gateway, phone)));
+    }
+
+    @DeleteMapping("api/mn/gateway/delete/{id}")
+    public ResponseEntity<Object> manageDelete(@PathVariable int id, @RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(gatewayService.managerDelete(id, phone)));
+    }
+
 }

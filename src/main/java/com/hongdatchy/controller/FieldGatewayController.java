@@ -15,12 +15,12 @@ public class FieldGatewayController {
     @Autowired
     FieldGatewayService fieldGatewayService;
 
-    @PostMapping("api/fieldGateway")
+    @PostMapping("api/ad/fieldGateway/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody FieldGatewayPayload fieldGatewayPayload){
         return ResponseEntity.ok(MyResponse.success(fieldGatewayService.createAndUpdate(fieldGatewayPayload)));
     }
 
-    @GetMapping("api/fieldGateway/find_all")
+    @GetMapping("api/ad/fieldGateway/find_all")
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(fieldGatewayService.findAll()));
     }

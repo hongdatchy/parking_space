@@ -17,4 +17,6 @@ public interface FieldRepo{
 
     Field managerUpdate(Field field, Manager manager);
 
+    boolean managerDelete(int id, Manager manager);
+
 }

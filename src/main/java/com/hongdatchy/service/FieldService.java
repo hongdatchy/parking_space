@@ -17,4 +17,6 @@ public interface FieldService {
     List<Field> managerFind(String phone);
 
     Field managerUpdate(Field field, String phone);
+
+    boolean managerDelete(int id, String phone);
 }

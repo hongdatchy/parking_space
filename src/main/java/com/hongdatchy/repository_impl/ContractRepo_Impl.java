@@ -22,9 +22,12 @@ public class ContractRepo_Impl implements ContractRepo {
     @Override
     public Contract createAndUpdate(Contract contract) {
         Slot slot = entityManager.find(Slot.class, contract.getSlotId());
-        if(contract.getTimeInBook().compareTo(contract.getTimeOutBook()) >= 0 || slot.getStatus()){
+        if(contract.getTimeInBook().compareTo(contract.getTimeOutBook()) >= 0
+                || slot == null
+                || slot.getStatus()){
             return null;
         }
+        slot.setStatus(true);
         entityManager.merge(slot);
         return entityManager.merge(contract);
     }

@@ -21,9 +21,4 @@ public class AdminService_Impl implements AdminService {
         return adminRepo.login(loginForm);
     }
 
-    @Override
-    public boolean logout(String token) {
-        blackListRepo.create(token);
-        return true;
-    }
 }

@@ -66,14 +66,27 @@ public class FieldRepo_Impl implements FieldRepo {
         if(field == null || entityManager.find(Field.class, field.getId()) == null){
             return null;
         }
-        boolean check = false;
+        return check(field, manager) ? entityManager.merge(field) : null;
+    }
+
+    @Override
+    public boolean managerDelete(int id, Manager manager) {
+        Field field = entityManager.find(Field.class, id);
+        if (field == null) {
+            return false;
+        }else if(check(field, manager)){
+            entityManager.remove(field);
+            return true;
+        }
+        return false;
+    }
+
+    boolean check(Field field, Manager manager){
         List<Field> fields = managerFind(manager);
         for (Field f: fields){
-            if(f.getId() == field.getId()){
-                check = true;
-            }
+            if(f.getId() == field.getId()) return true;
         }
-        return check ? entityManager.merge(field) : null;
+        return false;
     }
 
 }

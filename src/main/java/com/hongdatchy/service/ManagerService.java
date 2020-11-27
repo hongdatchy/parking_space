@@ -16,6 +16,4 @@ public interface ManagerService {
 
     boolean login(LoginForm loginForm);
 
-    boolean logout(String token);
-
 }

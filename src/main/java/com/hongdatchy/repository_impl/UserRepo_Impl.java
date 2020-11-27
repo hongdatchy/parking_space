@@ -1,9 +1,12 @@
 package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.*;
+import com.hongdatchy.entities.payload.BookPayload;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
+import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.InvoiceRepo;
+import com.hongdatchy.repository.SlotRepo;
 import com.hongdatchy.repository.UserRepo;
 import com.hongdatchy.security.SHA256Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +29,12 @@ public class UserRepo_Impl implements UserRepo {
 
     @Autowired
     InvoiceRepo invoiceRepo;
+
+    @Autowired
+    SlotRepo slotRepo;
+
+    @Autowired
+    ContractRepo contractRepo;
 
     @Override
     public boolean login(LoginForm loginForm) {
@@ -70,10 +80,6 @@ public class UserRepo_Impl implements UserRepo {
         }
         return null;
     }
-
-
-
-
 
     @Override
     public boolean checkPhoneExisted(String phone){
@@ -123,6 +129,38 @@ public class UserRepo_Impl implements UserRepo {
     @Override
     public List<User> findAll() {
         return entityManager.createQuery("select x from User x").getResultList();
+    }
+
+    @Override
+    public boolean book(List<BookPayload> bookPayloads, User user) {
+        Invoice invoice = invoiceRepo.createAndUpdate(
+                Invoice.builder()
+                        .id(null)
+                        .userId(user.getId())
+                        .build()
+        );
+        Contract newContract;
+        List<Integer> id =new ArrayList<>();
+        for (BookPayload bookPayload: bookPayloads) {
+             newContract =contractRepo.createAndUpdate(Contract.builder()
+                    .timeInBook(bookPayload.getTimeInBook())
+                    .timeOutBook(bookPayload.getTimeOutBook())
+                    .timeCarOut(null)
+                    .timeCarIn(null)
+                    .slotId(bookPayload.getSlotId())
+                    .invoiceId(invoice.getId())
+                    .id(null)
+                    .build());
+            id.add(newContract.getId());
+            if(newContract == null){
+                invoiceRepo.delete(invoice.getId());
+                for(int i=0; i< id.size(); i++){
+                    contractRepo.delete(id.get(i));
+                }
+                return false;
+            }
+        }
+        return true;
     }
 
 }

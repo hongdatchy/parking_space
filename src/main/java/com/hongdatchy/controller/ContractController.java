@@ -15,17 +15,17 @@ public class ContractController {
     @Autowired
     ContractService contractService;
 
-    @PostMapping("api/contract")
+    @PostMapping("api/ad/contract/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody ContractPayload contractPayload){
         return ResponseEntity.ok(MyResponse.success(contractService.createAndUpdate(contractPayload)));
     }
 
-    @GetMapping("api/contract/find_all")
+    @GetMapping("api/ad/contract/find_all")
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(contractService.findAll()));
     }
 
-    @DeleteMapping("api/contract/delete/{id}")
+    @DeleteMapping("api/ad/contract/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id){
         return ResponseEntity.ok(MyResponse.success(contractService.delete(id)));
     }

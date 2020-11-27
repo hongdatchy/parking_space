@@ -1,6 +1,7 @@
 package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.User;
+import com.hongdatchy.entities.payload.BookPayload;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
 import com.hongdatchy.entities.payload.UserPayload;
@@ -33,12 +34,6 @@ public class UserService_Impl implements UserService {
     }
 
     @Override
-    public boolean logout(String token) {
-        blackListRepo.create(token);
-        return true;
-    }
-
-    @Override
     public User createAndUpdate(UserPayload userPayload) {
         return userRepo.createAndUpdate(payload2Data(userPayload));
     }
@@ -51,6 +46,15 @@ public class UserService_Impl implements UserService {
     @Override
     public List<User> findAll() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public boolean book(List<BookPayload> bookPayloads, String phone) {
+        User user = userRepo.findByPhone(phone);
+        if (user == null){
+            return false;
+        }
+        return userRepo.book(bookPayloads, user);
     }
 
     public User payload2Data(UserPayload userPayload){

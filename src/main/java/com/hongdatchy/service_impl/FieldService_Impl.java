@@ -43,13 +43,28 @@ public class FieldService_Impl implements FieldService {
     @Override
     public List<Field> managerFind(String phone) {
         Manager manager = managerRepo.findByPhone(phone);
+        if(manager == null){
+            return null;
+        }
         return fieldRepo.managerFind(manager);
     }
 
     @Override
     public Field managerUpdate(Field field, String phone) {
         Manager manager = managerRepo.findByPhone(phone);
+        if(manager == null){
+            return null;
+        }
         return fieldRepo.managerUpdate(field, manager);
+    }
+
+    @Override
+    public boolean managerDelete(int id, String phone) {
+        Manager manager = managerRepo.findByPhone(phone);
+        if(manager == null){
+            return false;
+        }
+        return fieldRepo.managerDelete(id, manager);
     }
 
     public FieldJson data2Json(Field field) {
