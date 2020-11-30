@@ -29,17 +29,21 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Override
     public Detector createAndUpdate(Detector detector) {
-        if(detector.getId() == null || entityManager.find(Detector.class, detector.getId()) == null){
-            List<Detector> detectors = findBySlotId(detector.getSlotId());
-            if(detectors.size() != 0){
-                return null;
-            }
-        }else{
-            Detector oldDetector = entityManager.find(Detector.class, detector.getId());
-            if(oldDetector.getSlotId() == detector.getSlotId()){
-                // if slotId of detector not change -> keep stable lastTimeSetup
-                detector.setLastTimeSetup(oldDetector.getLastTimeSetup());
-            }
+//        if(detector.getId() == null || entityManager.find(Detector.class, detector.getId()) == null){
+//            List<Detector> detectors = findBySlotId(detector.getSlotId());
+//            if(detectors.size() != 0){
+//                return null;
+//            }
+//        }else{
+//            Detector oldDetector = entityManager.find(Detector.class, detector.getId());
+//            if(oldDetector.getSlotId() == detector.getSlotId()){
+//                // if slotId of detector not change -> keep stable lastTimeSetup
+//                detector.setLastTimeSetup(oldDetector.getLastTimeSetup());
+//            }
+//        }
+        List<Detector> detectors = findBySlotId(detector.getSlotId());
+        if(detectors.size() != 0){
+            return null;
         }
         return entityManager.merge(detector);
     }
@@ -63,7 +67,7 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Override
     public List<Detector> findBySlotId(int id) {
-        Query query = entityManager.createQuery("select d from Detector d where d.slotId = :id");
+        Query query = entityManager.createQuery("select d from Detector d where d.id = :id");
         query.setParameter("id", id);
         return query.getResultList();
     }
@@ -98,6 +102,12 @@ public class DetectorRepo_Impl implements DetectorRepo {
         return false;
     }
 
+    @Override
+    public Detector findById(int id) {
+        return entityManager.find(Detector.class, id);
+    }
+
+
     boolean check(Detector detector, Manager manager){
         List<Detector> detectors = managerFind(manager);
         for(Detector d: detectors){
@@ -105,4 +115,5 @@ public class DetectorRepo_Impl implements DetectorRepo {
         }
         return false;
     }
+
 }

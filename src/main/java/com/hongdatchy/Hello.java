@@ -1,14 +1,24 @@
 package com.hongdatchy;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.hongdatchy.repository.DetectorRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Controller
+import javax.annotation.PostConstruct;
+
+@Component
 public class Hello {
 
-    @GetMapping("")
-    public String hello(){
-        return "hello";
+    @Autowired
+    private DetectorRepo detectorRepo;
+
+    private static DetectorRepo a;
+    @PostConstruct
+    private void initStaticDao () {
+        a = this.detectorRepo;
+    }
+    public static void main(String[] args) {
+        System.out.println(a.findAll());
     }
 
 }

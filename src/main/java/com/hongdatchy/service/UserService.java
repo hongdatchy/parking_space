@@ -1,10 +1,7 @@
 package com.hongdatchy.service;
 
 import com.hongdatchy.entities.data.User;
-import com.hongdatchy.entities.payload.BookPayload;
-import com.hongdatchy.entities.payload.LoginForm;
-import com.hongdatchy.entities.payload.RegisterForm;
-import com.hongdatchy.entities.payload.UserPayload;
+import com.hongdatchy.entities.payload.*;
 
 import java.util.List;
 
@@ -21,4 +18,6 @@ public interface UserService {
     List<User> findAll();
 
     boolean book(List<BookPayload> bookPayloads, String phone);
+
+    public boolean changePass(ChangePassForm changePassForm, String phone);
 }

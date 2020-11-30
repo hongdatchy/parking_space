@@ -1,10 +1,7 @@
 package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.User;
-import com.hongdatchy.entities.payload.BookPayload;
-import com.hongdatchy.entities.payload.LoginForm;
-import com.hongdatchy.entities.payload.RegisterForm;
-import com.hongdatchy.entities.payload.UserPayload;
+import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.BlackListRepo;
 import com.hongdatchy.repository.UserRepo;
 import com.hongdatchy.service.UserService;
@@ -51,11 +48,15 @@ public class UserService_Impl implements UserService {
     @Override
     public boolean book(List<BookPayload> bookPayloads, String phone) {
         User user = userRepo.findByPhone(phone);
-        if (user == null){
-            return false;
-        }
-        return userRepo.book(bookPayloads, user);
+        return user != null && userRepo.book(bookPayloads, user);
     }
+
+    @Override
+    public boolean changePass(ChangePassForm changePassForm, String phone) {
+        User user = userRepo.findByPhone(phone);
+        return user != null && userRepo.changePass(changePassForm, user);
+    }
+
 
     public User payload2Data(UserPayload userPayload){
         return User.builder()

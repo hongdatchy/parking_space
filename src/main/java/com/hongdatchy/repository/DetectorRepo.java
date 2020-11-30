@@ -21,4 +21,6 @@ public interface DetectorRepo {
     Detector managerCreateAndUpdate(Detector detector, Manager manager);
 
     boolean managerDelete(int id, Manager manager);
+
+    Detector findById(int id);
 }

@@ -2,6 +2,7 @@ package com.hongdatchy.repository;
 
 import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.payload.BookPayload;
+import com.hongdatchy.entities.payload.ChangePassForm;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
 
@@ -25,4 +26,5 @@ public interface UserRepo {
 
     boolean book(List<BookPayload> bookPayloads, User user);
 
+    boolean changePass(ChangePassForm changePassForm, User user);
 }

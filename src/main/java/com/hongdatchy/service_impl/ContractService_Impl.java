@@ -7,7 +7,6 @@ import com.hongdatchy.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +17,7 @@ public class ContractService_Impl implements ContractService {
 
     @Override
     public Contract createAndUpdate(ContractPayload contractPayload) {
+
         return contractRepo.createAndUpdate(payload2data(contractPayload));
     }
 

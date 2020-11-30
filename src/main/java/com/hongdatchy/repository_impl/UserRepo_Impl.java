@@ -2,6 +2,7 @@ package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.*;
 import com.hongdatchy.entities.payload.BookPayload;
+import com.hongdatchy.entities.payload.ChangePassForm;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
 import com.hongdatchy.repository.ContractRepo;
@@ -139,10 +140,10 @@ public class UserRepo_Impl implements UserRepo {
                         .userId(user.getId())
                         .build()
         );
-        Contract newContract;
+
         List<Integer> id =new ArrayList<>();
         for (BookPayload bookPayload: bookPayloads) {
-             newContract =contractRepo.createAndUpdate(Contract.builder()
+            Contract newContract =contractRepo.createAndUpdate(Contract.builder()
                     .timeInBook(bookPayload.getTimeInBook())
                     .timeOutBook(bookPayload.getTimeOutBook())
                     .timeCarOut(null)
@@ -151,15 +152,27 @@ public class UserRepo_Impl implements UserRepo {
                     .invoiceId(invoice.getId())
                     .id(null)
                     .build());
-            id.add(newContract.getId());
             if(newContract == null){
                 invoiceRepo.delete(invoice.getId());
-                for(int i=0; i< id.size(); i++){
-                    contractRepo.delete(id.get(i));
+                for (Integer integer : id) {
+                    contractRepo.delete(integer);
                 }
                 return false;
+            }else{
+                id.add(newContract.getId());
             }
         }
+        return true;
+    }
+
+    @Override
+    public boolean changePass(ChangePassForm changePassForm, User user) {
+        if(!changePassForm.getPassword().equals(changePassForm.getRePassword())
+        || !SHA256Service.getSHA256(changePassForm.getOldPassword()).equals(user.getPassword())){
+            return false;
+        }
+        user.setPassword(SHA256Service.getSHA256(changePassForm.getPassword()));
+        entityManager.merge(user);
         return true;
     }
 

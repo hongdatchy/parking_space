@@ -1,14 +1,12 @@
 package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.Detector;
-import com.hongdatchy.entities.data.Gateway;
 import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.payload.DetectorPayload;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.FieldRepo;
 import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.service.DetectorService;
-import com.hongdatchy.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +27,7 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public Detector createAndUpdate(DetectorPayload detectorPayload) {
+        System.out.println(payLoad2Data(detectorPayload));
         return detectorRepo.createAndUpdate(payLoad2Data(detectorPayload));
     }
 

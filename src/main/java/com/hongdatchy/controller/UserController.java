@@ -2,6 +2,7 @@ package com.hongdatchy.controller;
 
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.BookPayload;
+import com.hongdatchy.entities.payload.ChangePassForm;
 import com.hongdatchy.entities.payload.RegisterForm;
 import com.hongdatchy.entities.payload.UserPayload;
 import com.hongdatchy.security.JWTService;
@@ -51,6 +52,12 @@ public class UserController {
     public ResponseEntity<Object> book(@RequestBody List<BookPayload> bookPayloads, @RequestHeader String token){
         String phone = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(userService.book(bookPayloads, phone)));
+    }
+
+    @PostMapping("api/us/changePass")
+    public ResponseEntity<Object> changePass(@RequestBody ChangePassForm changePassForm, @RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, phone)));
     }
 
 }

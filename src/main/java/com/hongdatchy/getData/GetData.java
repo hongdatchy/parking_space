@@ -4,24 +4,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.StringReader;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.Detector;
+import com.hongdatchy.entities.data.Slot;
+import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.DetectorRepo;
+import com.hongdatchy.repository.SlotRepo;
+import com.hongdatchy.repository_impl.DetectorRepo_Impl;
+import com.hongdatchy.repository_impl.FieldGatewayRepo_Impl;
+import com.hongdatchy.repository_impl.SlotRepo_Impl;
+import com.hongdatchy.service.DetectorService;
+import com.hongdatchy.service_impl.DetectorService_Impl;
+import lombok.Data;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -37,7 +51,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-
+@Component
 public class GetData {
 
     private static String originator = "admin:admin";
@@ -60,9 +74,23 @@ public class GetData {
     private static JSONObject ae;
     private static JSONObject sub;
 
-
     @Autowired
-    DetectorRepo detectorRepo;
+    private DetectorRepo detectorRepo;
+    @Autowired
+    private SlotRepo slotRepo;
+    @Autowired
+    private ContractRepo contractRepo;
+
+    private static DetectorRepo detectorRepoStatic;
+    private static SlotRepo slotRepoStatic;
+    private static ContractRepo contractRepoStatic;
+
+    @PostConstruct
+    private void initStatic(){
+        detectorRepoStatic = this.detectorRepo;
+        slotRepoStatic = this.slotRepo;
+        contractRepoStatic = this.contractRepo;
+    }
 
     public static void main(String[] args) throws JSONException {
 
@@ -138,139 +166,196 @@ public class GetData {
 
         return strParent;
     }
-
+    static int count =0;
     static class MyHandler implements HttpHandler {
 
-    public void handle(HttpExchange httpExchange) {
+        HashMap<String, String> map = new HashMap<>();
+        public void handle(HttpExchange httpExchange) {
 
-        try {
-            InputStream in = httpExchange.getRequestBody();
+//            System.out.println(detectorRepoStatic.findAll());
+            try {
+                InputStream in = httpExchange.getRequestBody();
 
-            String requestBody = "";
-            int i;
-            char c;
-            while ((i = in.read()) != -1) {
-                c = (char) i;
-                requestBody = (String) (requestBody + c);
-            }
+                String requestBody = "";
+                int i;
+                char c;
+                while ((i = in.read()) != -1) {
+                    c = (char) i;
+                    requestBody = (String) (requestBody + c);
+                }
 
-            JSONObject json = new JSONObject(requestBody);
+                JSONObject json = new JSONObject(requestBody);
 
-            if (json.getJSONObject("m2m:sgn").has("m2m:vrq")) {
-            }
+                if (json.getJSONObject("m2m:sgn").has("m2m:vrq")) {
 
-            else if (json.getJSONObject("m2m:sgn").getJSONObject("m2m:nev")
-                    .getJSONObject("m2m:rep").has("m2m:ae")) {
+                } else if (json.getJSONObject("m2m:sgn").getJSONObject("m2m:nev").getJSONObject("m2m:rep").has("m2m:ae")) {
 
-                // read in to ae
-                JSONObject rep = json.getJSONObject("m2m:sgn")
-                        .getJSONObject("m2m:nev").getJSONObject("m2m:rep")
-                        .getJSONObject("m2m:ae");
+                    // read in to ae
+                    JSONObject rep = json.getJSONObject("m2m:sgn")
+                            .getJSONObject("m2m:nev").getJSONObject("m2m:rep")
+                            .getJSONObject("m2m:ae");
 
-                int ty = rep.getInt("ty");
-                // System.out.println("LOL Sure AE. Resource type: " + ty);
+                    int ty = rep.getInt("ty");
+                    // System.out.println("LOL Sure AE. Resource type: " + ty);
 
-                if (ty == 2) {
-                    // ty = 2 => print info new AE
-                    String aeName = rep.getString("rn");
-                    System.out
-                            .println("\n[EVENT] New AE has been registred: "
-                                    + aeName);
-                    System.out.println("\n[ACTION] Wait 3 seconds");
-                    Thread.sleep(3000);
-                    System.out.println("\n[ACTION] Sub to container in AE "
-                            + aeName);
-                    String parentCnt = targetCse + "/" + aeName;
+                    if (ty == 2) {
+                        // ty = 2 => print info new AE
+                        String aeName = rep.getString("rn");
+                        System.out
+                                .println("\n[EVENT] New AE has been registred: "
+                                        + aeName);
+                        System.out.println("\n[ACTION] Wait 3 seconds");
+                        Thread.sleep(3000);
+                        System.out.println("\n[ACTION] Sub to container in AE "
+                                + aeName);
+                        String parentCnt = targetCse + "/" + aeName;
+                        subCnt(parentCnt);
+
+                    }
+                } else if (json.getJSONObject("m2m:sgn").getJSONObject("m2m:nev")
+                        .getJSONObject("m2m:rep").has("m2m:cnt")) {
+                    JSONObject rep = json.getJSONObject("m2m:sgn")
+                            .getJSONObject("m2m:nev").getJSONObject("m2m:rep")
+                            .getJSONObject("m2m:cnt");
+                    String cntName = rep.getString("rn");
+                    String parent = getParent(rep.getString("ol"), cntName);
+                    System.out.println("\n[EVENT] New CNT has been registred: "
+                            + cntName + " in " + parent);
+                    String parentCnt = targetCse + "/" + "LORAGW/DETECTORS/"
+                            + cntName;
+
+                    System.out.println("[ACTION] Discover all containers in "
+                            + csePoa + "/~/" + parentCnt);
                     subCnt(parentCnt);
+                } else {
+                    JSONObject rep = json.getJSONObject("m2m:sgn")
+                            .getJSONObject("m2m:nev").getJSONObject("m2m:rep")
+                            .getJSONObject("m2m:cin");
+
+                    int ty = rep.getInt("ty");
+                    if (ty == 4) {
+
+                        System.out
+                                .println(" ---- SOP : Start processing message -----");
+
+                        String ciName = rep.getString("rn");
+                        String content = rep.getString("con");
+
+                        System.out.println("\n[EVENT] New Content Instance "
+                                + ciName + " has been created in "
+                                + rep.getString("pi"));
+                        System.out.println("[INFO] Content: " + content);
+
+                        //Reading obj xml to get information.
+                        Document doc = convertStringToXMLDocument(content);
+                        doc.getDocumentElement().normalize();
+                        NodeList strList = doc.getElementsByTagName("str");
+    //                    System.out.println(strList);
+
+                        for (int ii = 0; ii < strList.getLength(); ii++) {
+                            Node node = strList.item(ii);
+                            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                                Element str = (Element) node;
+
+                                System.out.println(str.getAttribute("name")
+                                        + "=" + str.getAttribute("val"));
+                                map.put(str.getAttribute("name"), str.getAttribute("val"));
+                            }
+                        }
+
+                        Element Int = (Element) doc.getElementsByTagName("int")
+                                .item(0);
+                        if (Int != null) {
+                            System.out.println(Int.getAttribute("name") + " = "
+                                    + Int.getAttribute("val"));
+                            map.put(Int.getAttribute("name"), Int.getAttribute("val"));
+                        }
+                        System.out
+                                .println(" ---- EOP : End of reading a message ty=4 -----");
+                    }
 
                 }
-            }
-
-            else if (json.getJSONObject("m2m:sgn").getJSONObject("m2m:nev")
-                    .getJSONObject("m2m:rep").has("m2m:cnt")) {
-                JSONObject rep = json.getJSONObject("m2m:sgn")
-                        .getJSONObject("m2m:nev").getJSONObject("m2m:rep")
-                        .getJSONObject("m2m:cnt");
-                String cntName = rep.getString("rn");
-                String parent = getParent(rep.getString("ol"), cntName);
-                System.out.println("\n[EVENT] New CNT has been registred: "
-                        + cntName + " in " + parent);
-                String parentCnt = targetCse + "/" + "LORAGW/DETECTORS/"
-                        + cntName;
-
-                System.out.println("[ACTION] Discover all containers in "
-                        + csePoa + "/~/" + parentCnt);
-                subCnt(parentCnt);
-            }
-
-            else {
-                JSONObject rep = json.getJSONObject("m2m:sgn")
-                        .getJSONObject("m2m:nev").getJSONObject("m2m:rep")
-                        .getJSONObject("m2m:cin");
-
-                int ty = rep.getInt("ty");
-                if (ty == 4) {
-
-                    System.out
-                            .println(" ---- SOP : Start processing message -----");
-
-                    String ciName = rep.getString("rn");
-                    String content = rep.getString("con");
-
-                    System.out.println("\n[EVENT] New Content Instance "
-                            + ciName + " has been created in "
-                            + rep.getString("pi"));
-                    System.out.println("[INFO] Content: " + content);
-
-                    //Reading obj xml to get information.
-                    Document doc = convertStringToXMLDocument(content);
-                    doc.getDocumentElement().normalize();
-                    NodeList strList = doc.getElementsByTagName("str");
-
-                    for (int ii = 0; ii < strList.getLength(); ii++) {
-                        Node node = strList.item(ii);
-                        if (node.getNodeType() == Node.ELEMENT_NODE) {
-                            Element str = (Element) node;
-
-                            System.out.println(str.getAttribute("name")
-                                    + "=" + str.getAttribute("val"));
-                            Detector detector = Detector.builder()
-                                    .id(null)
-                                    .slotId(1)
-                                    .build();
-//                                switch (str.getAttribute("name")){
-//                                    case "ID":
-//                                        System.out.println("");
-
-//                                }
+                List<String> l = new ArrayList<>(map.keySet());
+                System.out.println(l);
+                count ++;
+                if(l.size() != 0){
+                    if(count%2 ==0){
+                        String time = map.get("Time");
+                        int year = Integer.parseInt(time.substring(0,4));
+//                        month in calendar of java must - 1
+                        int month = Integer.parseInt(time.substring(4,6)) -1 ;
+                        int day = Integer.parseInt(time.substring(6,8));
+                        int hour = Integer.parseInt(time.substring(8,10));
+                        int minute = Integer.parseInt(time.substring(10,12));
+                        int second = Integer.parseInt(time.substring(12,14));
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.YEAR, year);
+                        cal.set(Calendar.MONTH, month);
+                        cal.set(Calendar.DAY_OF_MONTH, day);
+                        cal.set(Calendar.HOUR_OF_DAY, hour);
+                        cal.set(Calendar.MINUTE, minute);
+                        cal.set(Calendar.SECOND, second);
+                        cal.set(Calendar.MILLISECOND, 0);
+                        Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
+                        Detector detector = Detector.builder()
+                                .id(Integer.parseInt(map.get("ID")))
+                                .addressDetector(map.get("Node Address"))
+                                .lastTimeSetup(oldDetector == null
+                                        || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
+                                        ? cal.getTime() : oldDetector.getLastTimeSetup())
+                                .lastTimeUpdate(cal.getTime())
+                                .batteryLevel(map.get("Battery Level"))
+                                .operatingMode("Mode 1")
+                                .slotId(Integer.parseInt(map.get("Location")))
+                                .loracomLevel("Loracom lever 1")
+                                .gatewayId(1)
+                                .build();
+//                        detector
+                        System.out.println(detector);
+                        detectorRepoStatic.createAndUpdate(detector);
+//                        slot
+                        if(oldDetector != null){
+                            Slot slot = slotRepoStatic.findById(detector.getSlotId());
+                            slot.setStatus(map.get("State").equals("1"));
+                            slotRepoStatic.createAndUpdate(slot);
+//                        contract
+                            List<Contract> contracts = contractRepoStatic.findBySlotId(slot.getId()).stream()
+                                    .filter(contract ->
+                                            detector.getLastTimeUpdate().compareTo(contract.getTimeInBook()) > 0
+                                                    && detector.getLastTimeUpdate().compareTo(contract.getTimeOutBook()) < 0
+                                    )
+                                    .collect(Collectors.toList());
+                            if(contracts.size() == 1){
+                                if(slot.getStatus()){
+                                    contracts.get(0).setTimeCarIn(detector.getLastTimeUpdate());
+                                }else{
+                                    contracts.get(0).setTimeCarOut(detector.getLastTimeUpdate());
+                                }
+                                contractRepoStatic.updateTimeInOut(contracts.get(0));
+                            }else{
+                                if(slot.getStatus()){
+                                    System.out.println("thong bao co xe VAO bao do xe trai phep");
+                                }else{
+                                    System.out.println("thong bao co xe RA muon");
+                                }
+                            }
                         }
                     }
-
-                    Element Int = (Element) doc.getElementsByTagName("int")
-                            .item(0);
-                    if (Int != null) {
-                        System.out.println(Int.getAttribute("name") + " = "
-                                + Int.getAttribute("val"));
-                    }
-
-
-                    System.out
-                            .println(" ---- EOP : End of reading a message ty=4 -----");
                 }
+
+                String responseBudy = "";
+                byte[] out = responseBudy.getBytes("UTF-8");
+                httpExchange.sendResponseHeaders(200, out.length);
+                OutputStream os = httpExchange.getResponseBody();
+                os.write(out);
+                os.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            String responseBudy = "";
-            byte[] out = responseBudy.getBytes("UTF-8");
-            httpExchange.sendResponseHeaders(200, out.length);
-            OutputStream os = httpExchange.getResponseBody();
-            os.write(out);
-            os.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
-}
 
     private static Document convertStringToXMLDocument(String xmlString) {
         // Parser that produces DOM object trees from XML content

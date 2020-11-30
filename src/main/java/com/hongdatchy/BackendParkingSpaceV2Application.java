@@ -46,12 +46,12 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("*** Start server ***");
-//        GetData initGetData = new GetData();
-//        initGetData.main(args);
+//        Hello.main(args);
+        GetData.main(args);
         while (true){
             List<Contract> contracts = contractRepo.findAll().stream()
                     .filter(contract -> contract.getTimeOutBook().getTime() - new Date().getTime()<=0
-                    && contract.getTimeOutBook().getTime() - new Date().getTime() >= -Integer.valueOf(timeRefreshDataSlot))
+                    && contract.getTimeOutBook().getTime() - new Date().getTime() >= -Integer.parseInt(timeRefreshDataSlot))
                     .collect(Collectors.toList());
             System.out.println("List expired contract:\n"+contracts);
             if(contracts.size() != 0){
@@ -61,7 +61,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                     slotRepo.createAndUpdate(slot);
                 }
             }
-            Thread.sleep(Integer.valueOf(timeRefreshDataSlot));
+            Thread.sleep(Integer.parseInt(timeRefreshDataSlot));
         }
 
     }

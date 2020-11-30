@@ -12,4 +12,8 @@ public interface ContractRepo {
 
     List<Contract> findAll();
 
+    List<Contract>  findBySlotId(int slotId);
+
+    Contract updateTimeInOut(Contract contract);
+
 }
