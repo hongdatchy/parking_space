@@ -3,7 +3,10 @@ package com.hongdatchy.repository_impl;
 import com.hongdatchy.entities.data.Field;
 import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.data.ManagerField;
+import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.repository.FieldRepo;
+import com.hongdatchy.repository.SlotRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,9 @@ public class FieldRepo_Impl implements FieldRepo {
     @PersistenceContext
     EntityManager entityManager;
 
+    @Autowired
+    SlotRepo slotRepo;
+
     @Override
     public Field createAndUpdate(Field field) {
         return entityManager.merge(field);
@@ -35,6 +41,9 @@ public class FieldRepo_Impl implements FieldRepo {
             entityManager.createQuery("delete from ManagerField x where x.fieldId =:id")
                     .setParameter("id", id).executeUpdate();
 
+            List<Slot> slots = entityManager.createQuery("select x from Slot x where x.fieldId =:id")
+                    .setParameter("id", id).getResultList();
+            for(Slot slot : slots) slotRepo.delete(slot.getId());
             entityManager.remove(field);
             return true;
         }else {
