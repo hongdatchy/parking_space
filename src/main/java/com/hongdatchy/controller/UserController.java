@@ -1,10 +1,7 @@
 package com.hongdatchy.controller;
 
 import com.hongdatchy.entities.json.MyResponse;
-import com.hongdatchy.entities.payload.BookPayload;
-import com.hongdatchy.entities.payload.ChangePassForm;
-import com.hongdatchy.entities.payload.RegisterForm;
-import com.hongdatchy.entities.payload.UserPayload;
+import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +19,12 @@ public class UserController {
     @Autowired
     JWTService jwtService;
 
-    @PostMapping("api/public/register/create_and_update")
+    @PostMapping("api/public/register")
     public ResponseEntity<Object> register(@RequestBody RegisterForm registerForm){
         if(!registerForm.getPassword().equals(registerForm.getRePassword())){
             return ResponseEntity.ok(MyResponse.fail("password is not equal with rePassword"));
         }
-        if(!userService.register(registerForm)){
-            return ResponseEntity.ok(MyResponse.fail("phone number already exist"));
-        }
-        return ResponseEntity.ok(MyResponse.success(true));
+        return ResponseEntity.ok(MyResponse.success(userService.register(registerForm)));
     }
 
     @PostMapping("api/ad/user/create_and_update")
@@ -58,6 +52,11 @@ public class UserController {
     public ResponseEntity<Object> changePass(@RequestBody ChangePassForm changePassForm, @RequestHeader String token){
         String phone = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, phone)));
+    }
+
+    @PostMapping("api/public/verify")
+    public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
+        return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getMail(), verifyPayload.getCode())));
     }
 
 }

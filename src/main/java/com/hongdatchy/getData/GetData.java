@@ -296,6 +296,12 @@ public class GetData {
                         cal.set(Calendar.MINUTE, minute);
                         cal.set(Calendar.SECOND, second);
                         cal.set(Calendar.MILLISECOND, 0);
+//                        fake field cho detector
+                        int fieldId = 1;
+                        List<Slot> slots = slotRepoStatic.findAll()
+                                .stream()
+                                .filter(slot -> slot.getFieldId() ==fieldId)
+                                .collect(Collectors.toList());
                         Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
                         Detector detector = Detector.builder()
                                 .id(Integer.parseInt(map.get("ID")))
@@ -306,7 +312,7 @@ public class GetData {
                                 .lastTimeUpdate(cal.getTime())
                                 .batteryLevel(map.get("Battery Level"))
                                 .operatingMode("Mode 1")
-                                .slotId(Integer.parseInt(map.get("Location")))
+                                .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
                                 .loracomLevel("Loracom lever 1")
                                 .gatewayId(1)
                                 .build();

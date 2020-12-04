@@ -18,7 +18,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -45,9 +47,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("*** Start server ***");
+        System.out.println("******************** Start server ********************");
 //        Hello.main(args);
-        GetData.main(args);
+//        GetData.main(args);
         while (true){
             List<Contract> contracts = contractRepo.findAll().stream()
                     .filter(contract -> contract.getTimeOutBook().getTime() - new Date().getTime()<=0

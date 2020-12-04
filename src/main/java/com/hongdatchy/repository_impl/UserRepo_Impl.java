@@ -5,11 +5,9 @@ import com.hongdatchy.entities.payload.BookPayload;
 import com.hongdatchy.entities.payload.ChangePassForm;
 import com.hongdatchy.entities.payload.LoginForm;
 import com.hongdatchy.entities.payload.RegisterForm;
-import com.hongdatchy.repository.ContractRepo;
-import com.hongdatchy.repository.InvoiceRepo;
-import com.hongdatchy.repository.SlotRepo;
-import com.hongdatchy.repository.UserRepo;
+import com.hongdatchy.repository.*;
 import com.hongdatchy.security.SHA256Service;
+import com.hongdatchy.service.SendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
 @Repository
@@ -36,6 +32,9 @@ public class UserRepo_Impl implements UserRepo {
 
     @Autowired
     ContractRepo contractRepo;
+
+    @Autowired
+    SendMailService sendMailService;
 
     @Override
     public boolean login(LoginForm loginForm) {
@@ -54,21 +53,42 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public boolean register(RegisterForm registerForm) {
-        if(!checkPhoneExisted(registerForm.getPhone())){
-            User newUser = entityManager.merge(User.builder()
-                    .id(null)
-                    .phone(registerForm.getPhone())
-                    .password(SHA256Service.getSHA256(registerForm.getPassword()))
-                    .equipment(registerForm.getEquipment())
-                    .idNumber(registerForm.getIdNumber())
-                    .address(registerForm.getAddress())
-                    .tag(registerForm.getTag())
-                    .lastTimeAccess(new Date())
-                    .build());
-            entityManager.merge(newUser);
-            return true;
+        String code = getRandomCode();
+        String extension = registerForm.getPhone().substring(registerForm.getPhone().lastIndexOf("@"));
+        if(!extension.equals("@gmail.com")){
+            return false;
         }
-        return false;
+        boolean b = sendMailService.sendMail(registerForm.getPhone()
+                        , "welcome to parking space system"
+                        , "To verify your account, please enter this code to register page: " + code);
+
+        if(b) entityManager.merge(VerifyTable.builder()
+                .address(registerForm.getAddress())
+                .code(code)
+                .equipment(registerForm.getEquipment())
+                .idNumber(registerForm.getIdNumber())
+                .lastTimeAccess(new Date())
+                .mail(registerForm.getPhone())
+                .pass(SHA256Service.getSHA256(registerForm.getPassword()))
+                .tag(registerForm.getTag())
+                .build());
+        return b;
+
+//        if(!checkPhoneExisted(registerForm.getPhone())){
+//            User newUser = entityManager.merge(User.builder()
+//                    .id(null)
+//                    .phone(registerForm.getPhone())
+//                    .password(SHA256Service.getSHA256(registerForm.getPassword()))
+//                    .equipment(registerForm.getEquipment())
+//                    .idNumber(registerForm.getIdNumber())
+//                    .address(registerForm.getAddress())
+//                    .tag(registerForm.getTag())
+//                    .lastTimeAccess(new Date())
+//                    .build());
+//            entityManager.merge(newUser);
+//            return true;
+//        }
+
     }
 
     @Override
@@ -176,4 +196,34 @@ public class UserRepo_Impl implements UserRepo {
         return true;
     }
 
+    @Override
+    public boolean verifyAccount(String mail, String code) {
+        VerifyTable verifyTable = entityManager.find(VerifyTable.class, mail);
+        if(verifyTable == null || !verifyTable.getCode().equals(code)){
+            return false;
+        }
+        List<User> oldUser = entityManager.createQuery("select x from User x where x.phone = :mail")
+                .setParameter("mail", mail).getResultList();
+        if(oldUser.size() == 0){
+            entityManager.merge(User.builder()
+                    .id(null)
+                    .phone(verifyTable.getMail())
+                    .password(verifyTable.getPass())
+                    .equipment(verifyTable.getEquipment())
+                    .idNumber(verifyTable.getIdNumber())
+                    .address(verifyTable.getAddress())
+                    .tag(verifyTable.getTag())
+                    .lastTimeAccess(verifyTable.getLastTimeAccess())
+                    .build());
+        }
+        return true;
+    }
+
+    public String getRandomCode(){
+        String rs="";
+        for (int i=0; i< 6; i++){
+            rs += String.valueOf((int) (Math.random() * 10));
+        }
+        return rs;
+    }
 }
