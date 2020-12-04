@@ -46,14 +46,16 @@ public class SlotService_Impl implements SlotService {
 
     public SlotJson data2Json(Slot slot){
         List<Detector> detectors = detectorRepo.findBySlotId(slot.getId());
-        return SlotJson.builder()
+//        System.out.println(detectors.size() != 0 ? detectors.get(0).getLastTimeSetup(): null);
+        SlotJson slotJson = SlotJson.builder()
                 .id(slot.getId())
                 .AddressDetector(detectors.size() != 0 ? detectors.get(0).getAddressDetector() : null)
                 .AddressGateway(detectors.size() != 0 ? gatewayRepo.findById(detectors.get(0).getGatewayId()).getAddressGateway(): null)
                 .fieldId(slot.getFieldId())
-                .lastTimeSetup(detectors.size() != 0 ? detectors.get(0).getLastTimeSetup(): null)
-                .lastTimeUpdate(detectors.size() != 0 ? detectors.get(0).getLastTimeUpdate(): null)
+                .lastTimeSetup(detectors.size() != 0 ? String.valueOf(detectors.get(0).getLastTimeSetup()): null)
+                .lastTimeUpdate(detectors.size() != 0 ? String.valueOf(detectors.get(0).getLastTimeUpdate()): null)
                 .status(slot.getStatus())
                 .build();
+        return slotJson;
     }
 }

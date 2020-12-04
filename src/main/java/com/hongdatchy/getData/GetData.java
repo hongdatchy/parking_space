@@ -92,7 +92,7 @@ public class GetData {
         contractRepoStatic = this.contractRepo;
     }
 
-    public static void main(String[] args) throws JSONException {
+    public static void main(String[] args) throws JSONException, InterruptedException {
 
         HttpServer server = null;
         try {
@@ -139,18 +139,19 @@ public class GetData {
 
     }
 
-    static void subCnt(String parentCnt) throws JSONException {
+    static void subCnt(String parentCnt) throws JSONException, InterruptedException {
         HttpResponse httpResponse = RestHttpClient.get(originator, csePoa
                 + "/~/" + parentCnt + "?fu=1&ty=3");
         JSONObject result = new JSONObject(httpResponse.getBody());
         JSONArray uril_arr = result.getJSONArray("m2m:uril");
         for (Object urlCnt : uril_arr) {
       //  for (int i=0; i < uril_arr.length(); i++) {
-            System.out.println("\n[doSubCnt] Sub to uri container " + uril_arr);
+            System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
             RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
                    sub.toString(), 23);
 //            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
 //                    sub.toString(), 23);
+            Thread.sleep(2000);
         }
     }
 
@@ -298,6 +299,7 @@ public class GetData {
                         cal.set(Calendar.MILLISECOND, 0);
 //                        fake field cho detector
                         int fieldId = 1;
+
                         List<Slot> slots = slotRepoStatic.findAll()
                                 .stream()
                                 .filter(slot -> slot.getFieldId() ==fieldId)
@@ -305,7 +307,7 @@ public class GetData {
                         Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
                         Detector detector = Detector.builder()
                                 .id(Integer.parseInt(map.get("ID")))
-                                .addressDetector(map.get("Node Address"))
+                                .addressDetector(map.get("Node Address") == null ? "255.255.0.x" : map.get("Node Address"))
                                 .lastTimeSetup(oldDetector == null
                                         || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
                                         ? cal.getTime() : oldDetector.getLastTimeSetup())

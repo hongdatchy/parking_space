@@ -67,7 +67,7 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Override
     public List<Detector> findBySlotId(int id) {
-        Query query = entityManager.createQuery("select d from Detector d where d.id = :id");
+        Query query = entityManager.createQuery("select d from Detector d where d.slotId = :id");
         query.setParameter("id", id);
         return query.getResultList();
     }

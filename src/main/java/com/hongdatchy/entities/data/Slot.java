@@ -17,6 +17,7 @@ import java.util.Date;
 public class Slot {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

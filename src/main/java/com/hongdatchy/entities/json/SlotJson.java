@@ -14,7 +14,7 @@ public class SlotJson {
     private Boolean status; // false la free, true la busy
     private String AddressGateway;
     private String AddressDetector;
-    private Date lastTimeUpdate;
-    private Date lastTimeSetup;
+    private String lastTimeUpdate;
+    private String lastTimeSetup;
 
 }
