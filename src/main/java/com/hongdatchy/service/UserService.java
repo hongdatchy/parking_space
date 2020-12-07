@@ -21,5 +21,5 @@ public interface UserService {
 
     public boolean changePass(ChangePassForm changePassForm, String phone);
 
-    public boolean verifyAccount(String mail, String code);
+//    public boolean verifyAccount(String mail, String code);
 }

@@ -57,10 +57,10 @@ public class UserService_Impl implements UserService {
         return user != null && userRepo.changePass(changePassForm, user);
     }
 
-    @Override
-    public boolean verifyAccount(String mail, String code) {
-        return userRepo.verifyAccount(mail, code);
-    }
+//    @Override
+//    public boolean verifyAccount(String mail, String code) {
+//        return userRepo.verifyAccount(mail, code);
+//    }
 
     public User payload2Data(UserPayload userPayload){
         return User.builder()

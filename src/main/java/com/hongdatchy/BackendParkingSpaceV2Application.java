@@ -17,6 +17,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.PreDestroy;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(BackendParkingSpaceV2Application.class, args);
+
     }
 
     @Bean
@@ -45,11 +47,14 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Value("${timeRefreshDataSlot}")
     String timeRefreshDataSlot;
 
+    @Autowired
+    private InitData initData;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-//        Hello.main(args);
-//        GetData.main(args);
+
+        GetData.main(args);
         while (true){
             List<Contract> contracts = contractRepo.findAll().stream()
                     .filter(contract -> contract.getTimeOutBook().getTime() - new Date().getTime()<=0

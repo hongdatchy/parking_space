@@ -53,41 +53,42 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public boolean register(RegisterForm registerForm) {
-        String code = getRandomCode();
-        String extension = registerForm.getPhone().substring(registerForm.getPhone().lastIndexOf("@"));
-        if(!extension.equals("@gmail.com")){
-            return false;
-        }
-        boolean b = sendMailService.sendMail(registerForm.getPhone()
-                        , "welcome to parking space system"
-                        , "To verify your account, please enter this code to register page: " + code);
-
-        if(b) entityManager.merge(VerifyTable.builder()
-                .address(registerForm.getAddress())
-                .code(code)
-                .equipment(registerForm.getEquipment())
-                .idNumber(registerForm.getIdNumber())
-                .lastTimeAccess(new Date())
-                .mail(registerForm.getPhone())
-                .pass(SHA256Service.getSHA256(registerForm.getPassword()))
-                .tag(registerForm.getTag())
-                .build());
-        return b;
-
-//        if(!checkPhoneExisted(registerForm.getPhone())){
-//            User newUser = entityManager.merge(User.builder()
-//                    .id(null)
-//                    .phone(registerForm.getPhone())
-//                    .password(SHA256Service.getSHA256(registerForm.getPassword()))
-//                    .equipment(registerForm.getEquipment())
-//                    .idNumber(registerForm.getIdNumber())
-//                    .address(registerForm.getAddress())
-//                    .tag(registerForm.getTag())
-//                    .lastTimeAccess(new Date())
-//                    .build());
-//            entityManager.merge(newUser);
-//            return true;
+//        String code = getRandomCode();
+//        String extension = registerForm.getPhone().substring(registerForm.getPhone().lastIndexOf("@"));
+//        if(!extension.equals("@gmail.com")){
+//            return false;
 //        }
+//        boolean b = sendMailService.sendMail(registerForm.getPhone()
+//                        , "welcome to parking space system"
+//                        , "To verify your account, please enter this code to register page: " + code);
+//
+//        if(b) entityManager.merge(VerifyTable.builder()
+//                .address(registerForm.getAddress())
+//                .code(code)
+//                .equipment(registerForm.getEquipment())
+//                .idNumber(registerForm.getIdNumber())
+//                .lastTimeAccess(new Date())
+//                .mail(registerForm.getPhone())
+//                .pass(SHA256Service.getSHA256(registerForm.getPassword()))
+//                .tag(registerForm.getTag())
+//                .build());
+//        return b;
+
+        if(!checkPhoneExisted(registerForm.getPhone())){
+            User newUser = entityManager.merge(User.builder()
+                    .id(null)
+                    .phone(registerForm.getPhone())
+                    .password(SHA256Service.getSHA256(registerForm.getPassword()))
+                    .equipment(registerForm.getEquipment())
+                    .idNumber(registerForm.getIdNumber())
+                    .address(registerForm.getAddress())
+                    .tag(registerForm.getTag())
+                    .lastTimeAccess(new Date())
+                    .build());
+            entityManager.merge(newUser);
+            return true;
+        }
+        return false;
 
     }
 
@@ -196,28 +197,27 @@ public class UserRepo_Impl implements UserRepo {
         return true;
     }
 
-    @Override
-    public boolean verifyAccount(String mail, String code) {
-        VerifyTable verifyTable = entityManager.find(VerifyTable.class, mail);
-        if(verifyTable == null || !verifyTable.getCode().equals(code)){
-            return false;
-        }
-        List<User> oldUser = entityManager.createQuery("select x from User x where x.phone = :mail")
-                .setParameter("mail", mail).getResultList();
-        if(oldUser.size() == 0){
-            entityManager.merge(User.builder()
-                    .id(null)
-                    .phone(verifyTable.getMail())
-                    .password(verifyTable.getPass())
-                    .equipment(verifyTable.getEquipment())
-                    .idNumber(verifyTable.getIdNumber())
-                    .address(verifyTable.getAddress())
-                    .tag(verifyTable.getTag())
-                    .lastTimeAccess(verifyTable.getLastTimeAccess())
-                    .build());
-        }
-        return true;
-    }
+//    @Override
+//    public boolean verifyAccount(String mail, String code) {
+//        VerifyTable verifyTable = entityManager.find(VerifyTable.class, mail);
+//        if(verifyTable == null || !verifyTable.getCode().equals(code)){
+//            return false;
+//        }
+//
+//        if(!checkPhoneExisted(mail)){
+//            entityManager.merge(User.builder()
+//                    .id(null)
+//                    .phone(verifyTable.getMail())
+//                    .password(verifyTable.getPass())
+//                    .equipment(verifyTable.getEquipment())
+//                    .idNumber(verifyTable.getIdNumber())
+//                    .address(verifyTable.getAddress())
+//                    .tag(verifyTable.getTag())
+//                    .lastTimeAccess(verifyTable.getLastTimeAccess())
+//                    .build());
+//        }
+//        return true;
+//    }
 
     public String getRandomCode(){
         String rs="";

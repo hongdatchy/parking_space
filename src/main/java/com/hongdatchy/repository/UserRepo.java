@@ -28,5 +28,5 @@ public interface UserRepo {
 
     boolean changePass(ChangePassForm changePassForm, User user);
 
-    boolean verifyAccount(String mail, String code);
+//    boolean verifyAccount(String mail, String code);
 }

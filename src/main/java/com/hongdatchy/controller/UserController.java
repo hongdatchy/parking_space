@@ -54,9 +54,9 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, phone)));
     }
 
-    @PostMapping("api/public/verify")
-    public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
-        return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getMail(), verifyPayload.getCode())));
-    }
+//    @PostMapping("api/public/verify")
+//    public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
+//        return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getMail(), verifyPayload.getCode())));
+//    }
 
 }
