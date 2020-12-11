@@ -23,9 +23,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.Detector;
+import com.hongdatchy.entities.data.MyPackage;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.DetectorRepo;
+import com.hongdatchy.repository.PackageRepo;
 import com.hongdatchy.repository.SlotRepo;
 import com.hongdatchy.repository_impl.DetectorRepo_Impl;
 import com.hongdatchy.repository_impl.FieldGatewayRepo_Impl;
@@ -81,15 +83,20 @@ public class GetData {
     @Autowired
     private ContractRepo contractRepo;
 
+    @Autowired
+    private PackageRepo packageRepo;
+
     private static DetectorRepo detectorRepoStatic;
     private static SlotRepo slotRepoStatic;
     private static ContractRepo contractRepoStatic;
+    private static PackageRepo packageRepoStatic;
 
     @PostConstruct
     private void initStatic(){
         detectorRepoStatic = this.detectorRepo;
         slotRepoStatic = this.slotRepo;
         contractRepoStatic = this.contractRepo;
+        packageRepoStatic = this.packageRepo;
     }
 
     public static void main(String[] args) throws JSONException, InterruptedException {
@@ -146,12 +153,17 @@ public class GetData {
         JSONArray uril_arr = result.getJSONArray("m2m:uril");
         for (Object urlCnt : uril_arr) {
       //  for (int i=0; i < uril_arr.length(); i++) {
-            System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
-            RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
-                   sub.toString(), 23);
+//            System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
+//            RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
+//                   sub.toString(), 23);
+            if(((String) urlCnt).indexOf("DATA_LORA")==-1){
+                System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
+                RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
+                        sub.toString(), 23);
+            }
 //            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
 //                    sub.toString(), 23);
-            Thread.sleep(2000);
+//            Thread.sleep(2000);
         }
     }
 
@@ -277,77 +289,90 @@ public class GetData {
 
                 }
                 List<String> l = new ArrayList<>(map.keySet());
-                System.out.println(l);
-                count ++;
-                if(l.size() != 0){
-                    if(count%2 ==0){
-                        String time = map.get("Time");
-                        int year = Integer.parseInt(time.substring(0,4));
-//                        month in calendar of java must - 1
-                        int month = Integer.parseInt(time.substring(4,6)) -1 ;
-                        int day = Integer.parseInt(time.substring(6,8));
-                        int hour = Integer.parseInt(time.substring(8,10));
-                        int minute = Integer.parseInt(time.substring(10,12));
-                        int second = Integer.parseInt(time.substring(12,14));
-                        Calendar cal = Calendar.getInstance();
-                        cal.set(Calendar.YEAR, year);
-                        cal.set(Calendar.MONTH, month);
-                        cal.set(Calendar.DAY_OF_MONTH, day);
-                        cal.set(Calendar.HOUR_OF_DAY, hour);
-                        cal.set(Calendar.MINUTE, minute);
-                        cal.set(Calendar.SECOND, second);
-                        cal.set(Calendar.MILLISECOND, 0);
-//                        fake field cho detector
-                        int fieldId = 1;
+//                System.out.println(l);
 
-                        List<Slot> slots = slotRepoStatic.findAll()
-                                .stream()
-                                .filter(slot -> slot.getFieldId() ==fieldId)
-                                .collect(Collectors.toList());
-                        Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
-                        Detector detector = Detector.builder()
-                                .id(Integer.parseInt(map.get("ID")))
-                                .addressDetector(map.get("Node Address") == null ? "255.255.0.x" : map.get("Node Address"))
-                                .lastTimeSetup(oldDetector == null
-                                        || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
-                                        ? cal.getTime() : oldDetector.getLastTimeSetup())
-                                .lastTimeUpdate(cal.getTime())
-                                .batteryLevel(map.get("Battery Level"))
-                                .operatingMode("Mode 1")
-                                .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
-                                .loracomLevel("Loracom lever 1")
-                                .gatewayId(1)
-                                .build();
+                if(l.size() == 8){
+
+                    System.out.println(
+                            packageRepoStatic.create(
+                                    MyPackage.builder()
+                                            .id(map.get("ID"))
+                                            .batteryLevel(map.get("Battery Level"))
+                                            .communicationLevel(map.get("Communication Level"))
+                                            .location(map.get("Location"))
+                                            .nodeAddress(map.get("Node Address"))
+                                            .packetNumber(Integer.parseInt(map.get("Packet Number")))
+                                            .state(map.get("State").equals("1"))
+                                            .time(map.get("Time"))
+                                            .build()
+                            )
+                    );
+                    String time = map.get("Time");
+                    int year = Integer.parseInt(time.substring(0,4));
+//                        month in calendar of java must - 1
+                    int month = Integer.parseInt(time.substring(4,6)) -1 ;
+                    int day = Integer.parseInt(time.substring(6,8));
+                    int hour = Integer.parseInt(time.substring(8,10));
+                    int minute = Integer.parseInt(time.substring(10,12));
+                    int second = Integer.parseInt(time.substring(12,14));
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, month);
+                    cal.set(Calendar.DAY_OF_MONTH, day);
+                    cal.set(Calendar.HOUR_OF_DAY, hour);
+                    cal.set(Calendar.MINUTE, minute);
+                    cal.set(Calendar.SECOND, second);
+                    cal.set(Calendar.MILLISECOND, 0);
+//                        fake field cho detector
+                    int fieldId = 1;
+
+                    List<Slot> slots = slotRepoStatic.findAll()
+                            .stream()
+                            .filter(slot -> slot.getFieldId() ==fieldId)
+                            .collect(Collectors.toList());
+                    Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
+                    Detector detector = Detector.builder()
+                            .id(Integer.parseInt(map.get("ID")))
+                            .addressDetector(map.get("Node Address") == null ? "255.255.0.x" : map.get("Node Address"))
+                            .lastTimeSetup(oldDetector == null
+                                    || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
+                                    ? cal.getTime() : oldDetector.getLastTimeSetup())
+                            .lastTimeUpdate(cal.getTime())
+                            .batteryLevel(map.get("Battery Level"))
+                            .operatingMode("Mode 1")
+                            .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
+                            .loracomLevel("Loracom lever 1")
+                            .gatewayId(1)
+                            .build();
 //                        detector
-                        System.out.println(detector);
-                        detectorRepoStatic.createAndUpdate(detector);
+                    System.out.println(detector);
+                    detectorRepoStatic.createAndUpdate(detector);
 //                        slot
-                        if(oldDetector != null){
-                            Slot slot = slotRepoStatic.findById(detector.getSlotId());
-                            slot.setStatus(map.get("State").equals("1"));
-                            slotRepoStatic.createAndUpdate(slot);
+                    if(oldDetector != null){
+                        Slot slot = slotRepoStatic.findById(detector.getSlotId());
+                        slot.setStatus(map.get("State").equals("1"));
+                        slotRepoStatic.createAndUpdate(slot);
 //                        contract
-                            List<Contract> contracts = contractRepoStatic.findBySlotId(slot.getId()).stream()
-                                    .filter(contract ->
-                                            detector.getLastTimeUpdate().compareTo(contract.getTimeInBook()) > 0
-                                                    && detector.getLastTimeUpdate().compareTo(contract.getTimeOutBook()) < 0
-                                    )
-                                    .collect(Collectors.toList());
-                            if(contracts.size() == 1){
-                                if(slot.getStatus()){
-                                    contracts.get(0).setTimeCarIn(detector.getLastTimeUpdate());
-                                }else{
-                                    contracts.get(0).setTimeCarOut(detector.getLastTimeUpdate());
-                                }
-                                contractRepoStatic.updateTimeInOut(contracts.get(0));
-                            }else{
-                                if(slot.getStatus()){
-                                    System.out.println("thong bao co xe VAO bao do xe trai phep");
-                                }else{
-                                    System.out.println("thong bao co xe RA muon");
-                                }
-                            }
-                        }
+//                        List<Contract> contracts = contractRepoStatic.findBySlotId(slot.getId()).stream()
+//                                .filter(contract ->
+//                                        detector.getLastTimeUpdate().compareTo(contract.getTimeInBook()) > 0
+//                                                && detector.getLastTimeUpdate().compareTo(contract.getTimeOutBook()) < 0
+//                                )
+//                                .collect(Collectors.toList());
+//                        if(contracts.size() == 1){
+//                            if(slot.getStatus()){
+//                                contracts.get(0).setTimeCarIn(detector.getLastTimeUpdate());
+//                            }else{
+//                                contracts.get(0).setTimeCarOut(detector.getLastTimeUpdate());
+//                            }
+//                            contractRepoStatic.updateTimeInOut(contracts.get(0));
+//                        }else{
+//                            if(slot.getStatus()){
+//                                System.out.println("thong bao co xe VAO bao do xe trai phep");
+//                            }else{
+//                                System.out.println("thong bao co xe RA muon");
+//                            }
+//                        }
                     }
                 }
 

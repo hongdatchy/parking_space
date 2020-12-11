@@ -2,10 +2,10 @@ package com.hongdatchy.entities.payload;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class BookPayload {
-    private Integer slotId;
-    private Date timeInBook;
-    private Date timeOutBook;
+    private Integer fieldId;
+    List<TimePayload> timePayloads;
 }

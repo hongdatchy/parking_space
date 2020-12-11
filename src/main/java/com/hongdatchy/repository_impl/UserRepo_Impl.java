@@ -1,10 +1,7 @@
 package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.*;
-import com.hongdatchy.entities.payload.BookPayload;
-import com.hongdatchy.entities.payload.ChangePassForm;
-import com.hongdatchy.entities.payload.LoginForm;
-import com.hongdatchy.entities.payload.RegisterForm;
+import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.*;
 import com.hongdatchy.security.SHA256Service;
 import com.hongdatchy.service.SendMailService;
@@ -163,23 +160,26 @@ public class UserRepo_Impl implements UserRepo {
 
         List<Integer> id =new ArrayList<>();
         for (BookPayload bookPayload: bookPayloads) {
-            Contract newContract =contractRepo.createAndUpdate(Contract.builder()
-                    .timeInBook(bookPayload.getTimeInBook())
-                    .timeOutBook(bookPayload.getTimeOutBook())
-                    .timeCarOut(null)
-                    .timeCarIn(null)
-                    .slotId(bookPayload.getSlotId())
-                    .invoiceId(invoice.getId())
-                    .id(null)
-                    .build());
-            if(newContract == null){
-                invoiceRepo.delete(invoice.getId());
-                for (Integer integer : id) {
-                    contractRepo.delete(integer);
+            for (TimePayload timePayload:bookPayload.getTimePayloads()) {
+                Integer slotId = slotRepo.getIdSlotFree(bookPayload.getFieldId());
+                if(slotId != null){
+                    Contract contract = contractRepo.createAndUpdate(Contract.builder()
+                            .timeInBook(timePayload.getTimeInBook())
+                            .timeOutBook(timePayload.getTimeOutBook())
+                            .timeCarOut(null)
+                            .timeCarIn(null)
+                            .slotId(slotId)
+                            .invoiceId(invoice.getId())
+                            .id(null)
+                            .build());
+                    id.add(contract.getId());
+                } else{
+                    invoiceRepo.delete(invoice.getId());
+                    for (Integer integer : id) {
+                        contractRepo.delete(integer);
+                    }
+                    return false;
                 }
-                return false;
-            }else{
-                id.add(newContract.getId());
             }
         }
         return true;

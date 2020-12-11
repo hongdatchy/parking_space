@@ -48,4 +48,13 @@ public class SlotRepo_Impl implements SlotRepo {
     public Slot findById(int id){
         return entityManager.find(Slot.class, id);
     }
+
+    @Override
+    public Integer getIdSlotFree(int fieldId) {
+        List<Slot> slots= entityManager.
+                createQuery("select x from Slot x where x.status= false and x.fieldId =:fieldId")
+                .setParameter("fieldId", fieldId)
+                .getResultList();
+        return slots.size()==0 ? null : slots.get(0).getId();
+    }
 }

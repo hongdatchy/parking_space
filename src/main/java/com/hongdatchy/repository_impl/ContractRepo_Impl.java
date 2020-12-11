@@ -29,14 +29,14 @@ public class ContractRepo_Impl implements ContractRepo {
     public Contract createAndUpdate(Contract contract) {
         Slot slot = slotRepo.findById(contract.getSlotId());
         if(contract.getTimeInBook().compareTo(contract.getTimeOutBook()) >= 0
-                || contract.getTimeInBook().compareTo(new Date()) < 0
-                || slot == null
-                || slot.getStatus()){
+                || contract.getTimeInBook().compareTo(new Date()) < 0){
             return null;
         }
         slot.setStatus(true);
         entityManager.merge(slot);
         return entityManager.merge(contract);
+//        || slot == null
+//                || slot.getStatus()
     }
 
     @Override

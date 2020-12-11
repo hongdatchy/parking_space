@@ -107,7 +107,6 @@ public class DetectorRepo_Impl implements DetectorRepo {
         return entityManager.find(Detector.class, id);
     }
 
-
     boolean check(Detector detector, Manager manager){
         List<Detector> detectors = managerFind(manager);
         for(Detector d: detectors){

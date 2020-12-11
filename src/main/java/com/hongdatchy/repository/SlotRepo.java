@@ -12,6 +12,7 @@ public interface SlotRepo {
 
     List<Slot> findAll();
 
-    public Slot findById(int id);
+    Slot findById(int id);
 
+    Integer getIdSlotFree(int fieldID);
 }

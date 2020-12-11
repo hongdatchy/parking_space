@@ -65,7 +65,11 @@ public class GatewayService_Impl implements GatewayService {
         return GatewayJson.builder()
             .id(gateway.getId())
             .address(gateway.getAddressGateway())
-            .totalDetector(detectorRepo.findAll().size())
+            .totalDetector(detectorRepo.findAll()
+                    .stream()
+                    .filter(detector -> detector.getGatewayId().equals(gateway.getId()))
+                    .collect(Collectors.toList())
+                    .size())
             .build();
     }
 }
