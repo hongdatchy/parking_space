@@ -6,27 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "contract")
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class Contract {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Contract  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "slot_id", nullable = false)
-    private Integer slotId;
+    @Column(name = "field_id", nullable = false)
+    private Integer fieldId;
 
-    @Column(name = "invoice_id", nullable = false)
-    private Integer invoiceId;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
     @Column(name = "time_car_in")
     private Date timeCarIn;
@@ -39,6 +38,5 @@ public class Contract {
 
     @Column(name = "time_out_book", nullable = false)
     private Date timeOutBook;
-
 
 }

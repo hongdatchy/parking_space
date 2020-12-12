@@ -38,14 +38,12 @@ public class ManagerRepo_Impl implements ManagerRepo {
     public boolean delete(int id) {
         Manager manager = entityManager.find(Manager.class, id);
         if(manager != null){
-            Query query = entityManager.createQuery("delete from ManagerField x where x.fieldId =:id");
-            query.setParameter("id", id).executeUpdate();
-
+            entityManager.createQuery("delete from ManagerField x where x.managerId =:id")
+            .setParameter("id", id).executeUpdate();
             entityManager.remove(manager);
             return true;
-        }else {
-            return false;
         }
+        return false;
     }
 
     @Override

@@ -29,22 +29,6 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Override
     public Detector createAndUpdate(Detector detector) {
-//        if(detector.getId() == null || entityManager.find(Detector.class, detector.getId()) == null){
-//            List<Detector> detectors = findBySlotId(detector.getSlotId());
-//            if(detectors.size() != 0){
-//                return null;
-//            }
-//        }else{
-//            Detector oldDetector = entityManager.find(Detector.class, detector.getId());
-//            if(oldDetector.getSlotId() == detector.getSlotId()){
-//                // if slotId of detector not change -> keep stable lastTimeSetup
-//                detector.setLastTimeSetup(oldDetector.getLastTimeSetup());
-//            }
-//        }
-        List<Detector> detectors = findBySlotId(detector.getSlotId());
-        if(detectors.size() != 0){
-            return null;
-        }
         return entityManager.merge(detector);
     }
 
@@ -77,11 +61,8 @@ public class DetectorRepo_Impl implements DetectorRepo {
         List<Gateway> gateways = gatewayRepo.managerFind(manager);
         List<Detector> detectors = new ArrayList<>();
         for(Gateway gateway: gateways){
-            detectors = (List<Detector>) Stream.concat(
-                    detectors.stream(),
-                    entityManager.createQuery("select x from Detector x where x.gatewayId =:id")
-                    .setParameter("id", gateway.getId()).getResultList().stream())
-                    .collect(Collectors.toList());
+            detectors.addAll(entityManager.createQuery("select x from Detector x where x.gatewayId =:id")
+                    .setParameter("id", gateway.getId()).getResultList());
         }
         return detectors;
     }

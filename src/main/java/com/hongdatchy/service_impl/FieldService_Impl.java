@@ -3,13 +3,16 @@ package com.hongdatchy.service_impl;
 import com.hongdatchy.entities.data.Field;
 import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.json.FieldJson;
+import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.FieldRepo;
 import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.repository.SlotRepo;
 import com.hongdatchy.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,12 @@ public class FieldService_Impl implements FieldService {
     @Autowired
     ManagerRepo managerRepo;
 
+    @Autowired
+    ContractRepo contractRepo;
+
+    @Value("${timeExpiredContract}")
+    String timeExpiredContract;
+
     @Override
     public FieldJson createAndUpdate(Field field) {
         return data2Json(fieldRepo.createAndUpdate(field));
@@ -37,7 +46,7 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public List<FieldJson> findAll() {
-        return fieldRepo.findAll().stream().map(field -> data2Json(field)).collect(Collectors.toList());
+        return fieldRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
     }
 
     @Override
@@ -66,15 +75,19 @@ public class FieldService_Impl implements FieldService {
         }
         return fieldRepo.managerDelete(id, manager);
     }
-
+    @Override
     public FieldJson data2Json(Field field) {
         return FieldJson.builder()
                 .id(field.getId())
-                .busySlot(slotRepo.findAll().stream().filter(slot -> slot.getStatus() && slot.getFieldId() == field.getId())
-                        .collect(Collectors.toList()).size())
+                .totalBook((int) contractRepo.findAll().stream()
+                        .filter(contract -> new Date().getTime() - contract.getTimeInBook().getTime() < Integer.parseInt(timeExpiredContract)
+                                && contract.getFieldId().equals(field.getId())
+                                && contract.getTimeCarIn() == null).count())
+                .busySlot((int) slotRepo.findAll().stream()
+                        .filter(slot -> slot.getStatus() && slot.getFieldId().equals(field.getId())).count())
                 .position(field.getPosition())
-                .totalSlot(slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == field.getId())
-                        .collect(Collectors.toList()).size())
+                .totalSlot((int) slotRepo.findAll().stream()
+                        .filter(slot -> slot.getFieldId().equals(field.getId())).count())
                 .build();
     }
 

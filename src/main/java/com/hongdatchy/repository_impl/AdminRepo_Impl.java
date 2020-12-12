@@ -21,9 +21,8 @@ public class AdminRepo_Impl implements AdminRepo {
 
     @Override
     public boolean login(LoginForm loginForm) {
-        Query query = entityManager
-                .createQuery("select a from Admin a where a.phone= :phone and a.pass = :password");
-        List<Admin> admins = query
+        List<Admin> admins = entityManager
+                .createQuery("select a from Admin a where a.phone= :phone and a.pass = :password")
                 .setParameter("phone", loginForm.getPhone())
                 .setParameter("password", SHA256Service.getSHA256(loginForm.getPassword()))
                 .getResultList();
@@ -31,9 +30,9 @@ public class AdminRepo_Impl implements AdminRepo {
     }
     @Override
     public Admin findByPhone(String phone) {
-        Query query = entityManager
-                .createQuery("select a from Admin a where a.phone= :phone");
-        List<Admin> admins = query.setParameter("phone", phone).getResultList();
+        List<Admin> admins = entityManager
+                .createQuery("select a from Admin a where a.phone= :phone").setParameter("phone", phone)
+                .getResultList();
         if(admins.size() == 1){
             return admins.get(0);
         }

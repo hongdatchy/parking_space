@@ -1,12 +1,9 @@
 package com.hongdatchy.service_impl;
 
-import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.data.ManagerField;
 import com.hongdatchy.entities.payload.ManagerFieldPayload;
 import com.hongdatchy.repository.ManagerFieldRepo;
-import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.service.ManagerFieldService;
-import com.hongdatchy.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +15,6 @@ public class ManagerFieldService_Impl implements ManagerFieldService {
 
     @Autowired
     ManagerFieldRepo managerFieldRepo;
-
 
     @Override
     public ManagerField createAndUpdate(ManagerFieldPayload managerFieldPayload) {

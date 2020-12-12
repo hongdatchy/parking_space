@@ -27,16 +27,7 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public Contract createAndUpdate(Contract contract) {
-        Slot slot = slotRepo.findById(contract.getSlotId());
-        if(contract.getTimeInBook().compareTo(contract.getTimeOutBook()) >= 0
-                || contract.getTimeInBook().compareTo(new Date()) < 0){
-            return null;
-        }
-        slot.setStatus(true);
-        entityManager.merge(slot);
         return entityManager.merge(contract);
-//        || slot == null
-//                || slot.getStatus()
     }
 
     @Override
@@ -45,26 +36,13 @@ public class ContractRepo_Impl implements ContractRepo {
         if(contract != null){
             entityManager.remove(contract);
             return true;
-        }else {
-            return false;
         }
+        return false;
     }
 
     @Override
     public List<Contract> findAll() {
         return  entityManager.createQuery("select g from Contract g").getResultList();
-    }
-
-    @Override
-    public List<Contract> findBySlotId(int id) {
-        return entityManager.createQuery("select x from Contract x where x.slotId = :slotId")
-                .setParameter("slotId", id)
-                .getResultList();
-    }
-
-    @Override
-    public Contract updateTimeInOut(Contract contract) {
-        return entityManager.merge(contract);
     }
 
 }

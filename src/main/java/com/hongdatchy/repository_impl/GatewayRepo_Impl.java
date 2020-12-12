@@ -1,7 +1,6 @@
 package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.Field;
-import com.hongdatchy.entities.data.FieldGateway;
 import com.hongdatchy.entities.data.Gateway;
 import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.repository.FieldRepo;
@@ -35,11 +34,8 @@ public class GatewayRepo_Impl implements GatewayRepo {
     public boolean delete(int id) {
         Gateway gateway = entityManager.find(Gateway.class, id);
         if(gateway != null){
-            Query query = entityManager.createQuery("delete from Detector x where x.gatewayId =:id");
-            query.setParameter("id", id).executeUpdate();
-
-            Query query2 = entityManager.createQuery("delete from FieldGateway x where x.gatewayId =:id");
-            query2.setParameter("id", id).executeUpdate();
+            entityManager.createQuery("delete from Detector x where x.gatewayId =:id")
+            .setParameter("id", id).executeUpdate();
 
             entityManager.remove(gateway);
             return true;
@@ -64,13 +60,9 @@ public class GatewayRepo_Impl implements GatewayRepo {
         List<Field> fields = fieldRepo.managerFind(manager);
         List<Gateway> gateways = new ArrayList<>();
         for (Field field: fields) {
-            List<FieldGateway> fieldGateways = entityManager
-                    .createQuery("select x from FieldGateway x where x.fieldId =:id")
-                    .setParameter("id", field.getId())
-                    .getResultList();
-            for (FieldGateway fieldGateway: fieldGateways) {
-                gateways.add(entityManager.find(Gateway.class,fieldGateway.getGatewayId()));
-            }
+            List<Gateway> g = entityManager.createQuery("select x from Gateway x where x.fieldId = :id")
+                    .setParameter("id", field.getId()).getResultList();
+            gateways.addAll(g);
         }
         return gateways;
     }

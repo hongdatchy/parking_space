@@ -17,7 +17,6 @@ public class ContractService_Impl implements ContractService {
 
     @Override
     public Contract createAndUpdate(ContractPayload contractPayload) {
-
         return contractRepo.createAndUpdate(payload2data(contractPayload));
     }
 
@@ -34,8 +33,8 @@ public class ContractService_Impl implements ContractService {
     public Contract payload2data(ContractPayload contractPayload){
         return Contract.builder()
                 .id(contractPayload.getId())
-                .invoiceId(contractPayload.getInvoiceId())
-                .slotId(contractPayload.getSlotId())
+                .fieldId(contractPayload.getFieldId())
+                .userId(contractPayload.getUserId())
                 .timeCarIn(null)
                 .timeCarOut(null)
                 .timeOutBook(contractPayload.getTimeOutBook())

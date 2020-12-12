@@ -24,9 +24,8 @@ public interface UserRepo {
 
     List<User> findAll();
 
-    boolean book(List<BookPayload> bookPayloads, User user);
+    boolean book(BookPayload bookPayload, User user);
 
     boolean changePass(ChangePassForm changePassForm, User user);
 
-    boolean verifyAccount(String mail, String code);
 }

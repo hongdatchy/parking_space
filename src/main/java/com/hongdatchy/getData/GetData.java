@@ -10,18 +10,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.StringReader;
 import java.util.stream.Collectors;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.MyPackage;
 import com.hongdatchy.entities.data.Slot;
@@ -29,22 +23,13 @@ import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.PackageRepo;
 import com.hongdatchy.repository.SlotRepo;
-import com.hongdatchy.repository_impl.DetectorRepo_Impl;
-import com.hongdatchy.repository_impl.FieldGatewayRepo_Impl;
-import com.hongdatchy.repository_impl.SlotRepo_Impl;
-import com.hongdatchy.service.DetectorService;
-import com.hongdatchy.service_impl.DetectorService_Impl;
-import lombok.Data;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-import org.apache.http.impl.io.SocketOutputBuffer;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -163,7 +148,7 @@ public class GetData {
             }
 //            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
 //                    sub.toString(), 23);
-//            Thread.sleep(2000);
+            Thread.sleep(2000);
         }
     }
 
@@ -326,8 +311,7 @@ public class GetData {
 //                        fake field cho detector
                     int fieldId = 1;
 
-                    List<Slot> slots = slotRepoStatic.findAll()
-                            .stream()
+                    List<Slot> slots = slotRepoStatic.findAll().stream()
                             .filter(slot -> slot.getFieldId() ==fieldId)
                             .collect(Collectors.toList());
                     Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
@@ -352,27 +336,6 @@ public class GetData {
                         Slot slot = slotRepoStatic.findById(detector.getSlotId());
                         slot.setStatus(map.get("State").equals("1"));
                         slotRepoStatic.createAndUpdate(slot);
-//                        contract
-//                        List<Contract> contracts = contractRepoStatic.findBySlotId(slot.getId()).stream()
-//                                .filter(contract ->
-//                                        detector.getLastTimeUpdate().compareTo(contract.getTimeInBook()) > 0
-//                                                && detector.getLastTimeUpdate().compareTo(contract.getTimeOutBook()) < 0
-//                                )
-//                                .collect(Collectors.toList());
-//                        if(contracts.size() == 1){
-//                            if(slot.getStatus()){
-//                                contracts.get(0).setTimeCarIn(detector.getLastTimeUpdate());
-//                            }else{
-//                                contracts.get(0).setTimeCarOut(detector.getLastTimeUpdate());
-//                            }
-//                            contractRepoStatic.updateTimeInOut(contracts.get(0));
-//                        }else{
-//                            if(slot.getStatus()){
-//                                System.out.println("thong bao co xe VAO bao do xe trai phep");
-//                            }else{
-//                                System.out.println("thong bao co xe RA muon");
-//                            }
-//                        }
                     }
                 }
 

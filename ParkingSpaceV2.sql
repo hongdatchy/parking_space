@@ -7,20 +7,11 @@ CREATE TABLE field(
 
 CREATE TABLE gateway(
 	id int NOT NULL AUTO_INCREMENT,
+	field_id int not null,
     address_gateway varchar(20) not null,
     primary key (id),
-    UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE field_gateway(
-	id int NOT NULL AUTO_INCREMENT,
-    field_id int not null,
-    gateway_id int not null,
-    last_time_setup datetime not null,
-    primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE slot(
@@ -56,9 +47,19 @@ CREATE TABLE user(
     last_time_access datetime,
     equipment varchar(20) not null,
     address varchar(120) not null,
-    tag int not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE tag(
+	id int NOT NULL AUTO_INCREMENT,
+    user_id int not null,
+	time_car_in datetime,
+    time_car_out datetime,
+    primary key (id),
+    UNIQUE KEY `id_UNIQUE` (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager(
@@ -71,26 +72,18 @@ CREATE TABLE manager(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE invoice(
-	id int NOT NULL AUTO_INCREMENT,
-    user_id int not null,
-    primary key (id),
-    UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE contract(
 	id int NOT NULL AUTO_INCREMENT,
-    slot_id int not null,
-    invoice_id int not null,
+    field_id int not null,
+    user_id int not null,
     time_car_in datetime,
     time_car_out datetime,
     time_in_book datetime not null,
     time_out_book datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`),
-    CONSTRAINT FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager_field(
@@ -119,15 +112,14 @@ CREATE TABLE black_list(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE verify_table(
-	mail int NOT NULL,
-    pass varchar(255) not null,
-    id_number int not null,
-    code varchar(20) not null,
-    last_time_access datetime,
-    equipment varchar(20) not null,
-    address varchar(120) not null,
-    tag int not null,
-    primary key (mail),
-    UNIQUE KEY `id_UNIQUE` (`mail`)
+CREATE TABLE package(
+	packet_number int not null,
+    id varchar(10) not null,
+	battery_level varchar(20) not null,
+    node_address varchar(20) not null,
+    state bit(1) not null,
+    communication_level varchar(20) not null,
+    time varchar(20) not null,
+	location varchar(20) not null,
+    primary key (packet_number)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

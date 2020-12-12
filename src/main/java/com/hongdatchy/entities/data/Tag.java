@@ -1,20 +1,14 @@
 package com.hongdatchy.entities.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "invoice")
+@Table(name = "tag")
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Invoice {
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +17,11 @@ public class Invoice {
 
     @Column(name = "user_id", nullable = false)
     private Integer userId;
+
+    @Column(name = "time_car_in")
+    private Timestamp timeCarIn;
+
+    @Column(name = "time_car_out")
+    private Timestamp timeCarOut;
 
 }

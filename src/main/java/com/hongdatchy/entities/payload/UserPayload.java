@@ -11,6 +11,5 @@ public class UserPayload {
     private String phone;
     private String equipment;
     private String address;
-    private Integer tag;
 
 }

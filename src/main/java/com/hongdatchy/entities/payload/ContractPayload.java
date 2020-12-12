@@ -8,8 +8,8 @@ import java.util.Date;
 public class ContractPayload {
 
     private Integer id;
-    private Integer slotId;
-    private Integer invoiceId;
+    private Integer userId;
+    private Integer fieldId;
     private Date timeInBook;
     private Date timeOutBook;
 

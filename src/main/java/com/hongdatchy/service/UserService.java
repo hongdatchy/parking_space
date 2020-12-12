@@ -17,9 +17,8 @@ public interface UserService {
 
     List<User> findAll();
 
-    boolean book(List<BookPayload> bookPayloads, String phone);
+    boolean book(BookPayload bookPayload, String phone);
 
     public boolean changePass(ChangePassForm changePassForm, String phone);
 
-    public boolean verifyAccount(String mail, String code);
 }

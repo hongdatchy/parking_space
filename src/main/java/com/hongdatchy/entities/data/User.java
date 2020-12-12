@@ -39,7 +39,5 @@ public class User {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "tag", nullable = false)
-    private Integer tag;
 
 }

@@ -19,4 +19,6 @@ public interface FieldService {
     Field managerUpdate(Field field, String phone);
 
     boolean managerDelete(int id, String phone);
+
+    FieldJson data2Json(Field field);
 }

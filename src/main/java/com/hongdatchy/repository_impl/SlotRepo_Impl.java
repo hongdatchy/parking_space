@@ -26,11 +26,8 @@ public class SlotRepo_Impl implements SlotRepo {
     public boolean delete(int id) {
         Slot slot = entityManager.find(Slot.class, id);
         if(slot != null){
-            Query query = entityManager.createQuery("delete from Detector x where x.slotId =:id");
-            query.setParameter("id", id).executeUpdate();
-
-            Query query2 = entityManager.createQuery("delete from Contract x where x.slotId =:id");
-            query2.setParameter("id", id).executeUpdate();
+            entityManager.createQuery("delete from Detector x where x.slotId =:id")
+            .setParameter("id", id).executeUpdate();
 
             entityManager.remove(slot);
             return true;

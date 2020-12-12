@@ -7,5 +7,6 @@ import java.util.List;
 @Data
 public class BookPayload {
     private Integer fieldId;
-    List<TimePayload> timePayloads;
+    private Date timeInBook;
+    private Date timeOutBook;
 }

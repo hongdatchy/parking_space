@@ -1,14 +1,16 @@
 package com.hongdatchy.service_impl;
 
+import com.hongdatchy.entities.data.Field;
 import com.hongdatchy.entities.data.User;
+import com.hongdatchy.entities.json.FieldJson;
 import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.BlackListRepo;
 import com.hongdatchy.repository.UserRepo;
+import com.hongdatchy.service.FieldService;
 import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +21,9 @@ public class UserService_Impl implements UserService {
 
     @Autowired
     BlackListRepo blackListRepo;
+
+    @Autowired
+    FieldService fieldService;
 
     @Override
     public boolean login(LoginForm loginForm) {
@@ -46,9 +51,13 @@ public class UserService_Impl implements UserService {
     }
 
     @Override
-    public boolean book(List<BookPayload> bookPayloads, String phone) {
+    public boolean book(BookPayload bookPayload, String phone) {
         User user = userRepo.findByPhone(phone);
-        return user != null && userRepo.book(bookPayloads, user);
+        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),""));
+        if(fieldJson.getTotalSlot() < fieldJson.getBusySlot() + fieldJson.getTotalBook()){
+            return false;
+        }
+        return user != null && userRepo.book(bookPayload, user);
     }
 
     @Override
@@ -57,16 +66,10 @@ public class UserService_Impl implements UserService {
         return user != null && userRepo.changePass(changePassForm, user);
     }
 
-    @Override
-    public boolean verifyAccount(String mail, String code) {
-        return userRepo.verifyAccount(mail, code);
-    }
-
     public User payload2Data(UserPayload userPayload){
         return User.builder()
                 .id(userPayload.getId())
                 .address(userPayload.getAddress())
-                .tag(userPayload.getTag())
                 .idNumber(userPayload.getIdNumber())
                 .equipment(userPayload.getEquipment())
                 .phone(userPayload.getPhone())

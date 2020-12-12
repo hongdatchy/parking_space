@@ -18,6 +18,9 @@ public class Gateway {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "field_id", nullable = false)
+    private Integer fieldId;
+
     @Column(name = "address_gateway", nullable = false)
     private String addressGateway;
 

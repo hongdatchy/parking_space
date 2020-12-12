@@ -1,8 +1,5 @@
 package com.hongdatchy;
 
-import com.hongdatchy.entities.data.Contract;
-import com.hongdatchy.entities.data.Slot;
-import com.hongdatchy.getData.GetData;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.SlotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 @EnableSwagger2
@@ -45,26 +37,13 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Value("${timeRefreshDataSlot}")
     String timeRefreshDataSlot;
 
+    @Value("${timeExpiredContract}")
+    String timeExpiredContract;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-//        Hello.main(args);
 //        GetData.main(args);
-        while (true){
-            List<Contract> contracts = contractRepo.findAll().stream()
-                    .filter(contract -> contract.getTimeOutBook().getTime() - new Date().getTime()<=0
-                    && contract.getTimeOutBook().getTime() - new Date().getTime() >= -Integer.parseInt(timeRefreshDataSlot))
-                    .collect(Collectors.toList());
-            System.out.println("List expired contract:\n"+contracts);
-            if(contracts.size() != 0){
-                for (Contract contract: contracts) {
-                    Slot slot = slotRepo.findById(contract.getSlotId());
-                    slot.setStatus(false);
-                    slotRepo.createAndUpdate(slot);
-                }
-            }
-            Thread.sleep(Integer.parseInt(timeRefreshDataSlot));
-        }
 
     }
 }

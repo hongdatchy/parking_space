@@ -43,9 +43,9 @@ public class UserController {
     }
 
     @PostMapping("api/us/book")
-    public ResponseEntity<Object> book(@RequestBody List<BookPayload> bookPayloads, @RequestHeader String token){
+    public ResponseEntity<Object> book(@RequestBody BookPayload bookPayload, @RequestHeader String token){
         String phone = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(userService.book(bookPayloads, phone)));
+        return ResponseEntity.ok(MyResponse.success(userService.book(bookPayload, phone)));
     }
 
     @PostMapping("api/us/changePass")
@@ -54,9 +54,5 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, phone)));
     }
 
-    @PostMapping("api/public/verify")
-    public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
-        return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getMail(), verifyPayload.getCode())));
-    }
 
 }

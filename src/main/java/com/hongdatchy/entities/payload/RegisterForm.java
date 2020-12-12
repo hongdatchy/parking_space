@@ -10,7 +10,6 @@ public class RegisterForm {
     private String rePassword;
     private Integer idNumber;
     private String equipment;
-    private Integer tag;
     private String address;
 
 }

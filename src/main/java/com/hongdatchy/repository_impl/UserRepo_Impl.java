@@ -21,8 +21,6 @@ public class UserRepo_Impl implements UserRepo {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Autowired
-    InvoiceRepo invoiceRepo;
 
     @Autowired
     SlotRepo slotRepo;
@@ -50,42 +48,20 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public boolean register(RegisterForm registerForm) {
-        String code = getRandomCode();
-        String extension = registerForm.getPhone().substring(registerForm.getPhone().lastIndexOf("@"));
-        if(!extension.equals("@gmail.com")){
-            return false;
+
+        if(!checkPhoneExisted(registerForm.getPhone())){
+            entityManager.merge(User.builder()
+                    .id(null)
+                    .phone(registerForm.getPhone())
+                    .password(SHA256Service.getSHA256(registerForm.getPassword()))
+                    .equipment(registerForm.getEquipment())
+                    .idNumber(registerForm.getIdNumber())
+                    .address(registerForm.getAddress())
+                    .lastTimeAccess(new Date())
+                    .build());
+            return true;
         }
-        boolean b = sendMailService.sendMail(registerForm.getPhone()
-                        , "welcome to parking space system"
-                        , "To verify your account, please enter this code to register page: " + code);
-
-        if(b) entityManager.merge(VerifyTable.builder()
-                .address(registerForm.getAddress())
-                .code(code)
-                .equipment(registerForm.getEquipment())
-                .idNumber(registerForm.getIdNumber())
-                .lastTimeAccess(new Date())
-                .mail(registerForm.getPhone())
-                .pass(SHA256Service.getSHA256(registerForm.getPassword()))
-                .tag(registerForm.getTag())
-                .build());
-        return b;
-
-//        if(!checkPhoneExisted(registerForm.getPhone())){
-//            User newUser = entityManager.merge(User.builder()
-//                    .id(null)
-//                    .phone(registerForm.getPhone())
-//                    .password(SHA256Service.getSHA256(registerForm.getPassword()))
-//                    .equipment(registerForm.getEquipment())
-//                    .idNumber(registerForm.getIdNumber())
-//                    .address(registerForm.getAddress())
-//                    .tag(registerForm.getTag())
-//                    .lastTimeAccess(new Date())
-//                    .build());
-//            entityManager.merge(newUser);
-//            return true;
-//        }
-
+        return false;
     }
 
     @Override
@@ -131,17 +107,14 @@ public class UserRepo_Impl implements UserRepo {
     public boolean delete(int id) {
         User user = entityManager.find(User.class, id);
         if(user != null){
-            Query query = entityManager.createQuery("select x FROM Invoice x where x.userId =:id");
-            query.setParameter("id", user.getId());
-            List<Invoice> invoices = query.getResultList();
-            for (Invoice invoice: invoices) {
-                invoiceRepo.delete(invoice.getId());
-            }
+            entityManager.createQuery("select x from Contract x where x.userId =:id")
+                    .setParameter("id", user.getId());
+            entityManager.createQuery("select x from Tag x where x.userId =:id")
+                    .setParameter("id", user.getId());
             entityManager.remove(user);
             return true;
-        }else {
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -150,39 +123,17 @@ public class UserRepo_Impl implements UserRepo {
     }
 
     @Override
-    public boolean book(List<BookPayload> bookPayloads, User user) {
-        Invoice invoice = invoiceRepo.createAndUpdate(
-                Invoice.builder()
-                        .id(null)
-                        .userId(user.getId())
-                        .build()
-        );
-
-        List<Integer> id =new ArrayList<>();
-        for (BookPayload bookPayload: bookPayloads) {
-            for (TimePayload timePayload:bookPayload.getTimePayloads()) {
-                Integer slotId = slotRepo.getIdSlotFree(bookPayload.getFieldId());
-                if(slotId != null){
-                    Contract contract = contractRepo.createAndUpdate(Contract.builder()
-                            .timeInBook(timePayload.getTimeInBook())
-                            .timeOutBook(timePayload.getTimeOutBook())
-                            .timeCarOut(null)
-                            .timeCarIn(null)
-                            .slotId(slotId)
-                            .invoiceId(invoice.getId())
-                            .id(null)
-                            .build());
-                    id.add(contract.getId());
-                } else{
-                    invoiceRepo.delete(invoice.getId());
-                    for (Integer integer : id) {
-                        contractRepo.delete(integer);
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
+    public boolean book(BookPayload bookPayload, User user) {
+        Contract contract = contractRepo.createAndUpdate(Contract.builder()
+                .fieldId(bookPayload.getFieldId())
+                .id(null)
+                .timeInBook(bookPayload.getTimeInBook())
+                .timeOutBook(bookPayload.getTimeOutBook())
+                .timeCarIn(null)
+                .timeCarOut(null)
+                .userId(user.getId())
+                .build());
+        return contract != null;
     }
 
     @Override
@@ -196,34 +147,7 @@ public class UserRepo_Impl implements UserRepo {
         return true;
     }
 
-    @Override
-    public boolean verifyAccount(String mail, String code) {
-        VerifyTable verifyTable = entityManager.find(VerifyTable.class, mail);
-        if(verifyTable == null || !verifyTable.getCode().equals(code)){
-            return false;
-        }
-        List<User> oldUser = entityManager.createQuery("select x from User x where x.phone = :mail")
-                .setParameter("mail", mail).getResultList();
-        if(oldUser.size() == 0){
-            entityManager.merge(User.builder()
-                    .id(null)
-                    .phone(verifyTable.getMail())
-                    .password(verifyTable.getPass())
-                    .equipment(verifyTable.getEquipment())
-                    .idNumber(verifyTable.getIdNumber())
-                    .address(verifyTable.getAddress())
-                    .tag(verifyTable.getTag())
-                    .lastTimeAccess(verifyTable.getLastTimeAccess())
-                    .build());
-        }
-        return true;
-    }
 
-    public String getRandomCode(){
-        String rs="";
-        for (int i=0; i< 6; i++){
-            rs += String.valueOf((int) (Math.random() * 10));
-        }
-        return rs;
-    }
+
+
 }
