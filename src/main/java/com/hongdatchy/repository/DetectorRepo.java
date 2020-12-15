@@ -23,4 +23,6 @@ public interface DetectorRepo {
     boolean managerDelete(int id, Manager manager);
 
     Detector findById(int id);
+
+    Detector managerFindById(int id, Manager manager);
 }

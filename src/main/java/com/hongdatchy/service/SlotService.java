@@ -13,4 +13,5 @@ public interface SlotService {
 
     List<SlotJson> findAll();
 
+    SlotJson findById(int id);
 }

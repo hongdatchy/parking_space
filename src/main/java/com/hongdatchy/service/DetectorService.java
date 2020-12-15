@@ -18,4 +18,8 @@ public interface DetectorService {
     Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone);
 
     boolean managerDelete(int id, String phone);
+
+    Detector findById(int id);
+
+    Detector managerFindById(int id, String phone);
 }

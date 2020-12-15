@@ -53,4 +53,15 @@ public class DetectorController {
 //        String phone = jwtService.decode(token);
 //        return ResponseEntity.ok(MyResponse.success(detectorService.managerDelete(id, phone)));
 //    }
+
+    @GetMapping("api/ad/detector/find_by_id/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Integer id){
+        return ResponseEntity.ok(MyResponse.success(detectorService.findById(id)));
+    }
+
+    @GetMapping(value = {"api/mn/detector/find_by_id/{id}"})
+    public ResponseEntity<Object> managerFindById(@PathVariable Integer id,@RequestHeader String token){
+        String phone = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(detectorService.managerFindById(id, phone)));
+    }
 }

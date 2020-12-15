@@ -45,15 +45,13 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Override
     public List<Detector> findAll() {
-        Query query = entityManager.createQuery("select d from Detector d");
-        return query.getResultList();
+        return entityManager.createQuery("select d from Detector d").getResultList();
     }
 
     @Override
     public List<Detector> findBySlotId(int id) {
-        Query query = entityManager.createQuery("select d from Detector d where d.slotId = :id");
-        query.setParameter("id", id);
-        return query.getResultList();
+        return entityManager.createQuery("select d from Detector d where d.slotId = :id")
+        .setParameter("id", id).getResultList();
     }
 
     @Override
@@ -88,12 +86,20 @@ public class DetectorRepo_Impl implements DetectorRepo {
         return entityManager.find(Detector.class, id);
     }
 
+    @Override
+    public Detector managerFindById(int id, Manager manager) {
+        Detector detector = entityManager.find(Detector.class, id);
+        return check(detector, manager) ? detector : null;
+    }
+
     boolean check(Detector detector, Manager manager){
         List<Detector> detectors = managerFind(manager);
         for(Detector d: detectors){
-            if(d.getId() == detector.getId()) return true;
+            if(d.getId().equals(detector.getId())) return true;
         }
         return false;
     }
+
+
 
 }

@@ -59,6 +59,17 @@ public class DetectorService_Impl implements DetectorService {
         return detectorRepo.managerDelete(id, manager);
     }
 
+    @Override
+    public Detector findById(int id) {
+        return detectorRepo.findById(id);
+    }
+
+    @Override
+    public Detector managerFindById(int id, String phone) {
+        Manager manager = managerRepo.findByPhone(phone);
+        return detectorRepo.managerFindById(id, manager);
+    }
+
     public Detector payLoad2Data(DetectorPayload detectorPayload){
         return Detector.builder()
                 .id(detectorPayload.getId())

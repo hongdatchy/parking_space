@@ -41,6 +41,12 @@ public class SlotService_Impl implements SlotService {
         return slotRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
     }
 
+    @Override
+    public SlotJson findById(int id) {
+        Slot slot = slotRepo.findById(id);
+        return slot == null ? null : data2Json(slotRepo.findById(id));
+    }
+
     public SlotJson data2Json(Slot slot){
         List<Detector> detectors = detectorRepo.findBySlotId(slot.getId());
         return SlotJson.builder()

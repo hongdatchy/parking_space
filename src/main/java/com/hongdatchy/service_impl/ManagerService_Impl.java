@@ -47,7 +47,7 @@ public class ManagerService_Impl implements ManagerService {
                 .phone(managerPayload.getPhone())
                 .acp(managerPayload.getAcp())
                 .pass(managerPayload.getPass())
-                .lastTimeAccess(new Date())
+                .lastTimeAccess(null)
                 .build();
     }
 }

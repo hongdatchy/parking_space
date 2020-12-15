@@ -28,4 +28,9 @@ public class SlotController {
         return ResponseEntity.ok(MyResponse.success(slotService.delete(id)));
     }
 
+    @GetMapping(value = {"api/public/slot/find_by_id/{id}"})
+    public ResponseEntity<Object> findById(@PathVariable Integer id){
+        return ResponseEntity.ok(MyResponse.success(slotService.findById(id)));
+    }
+
 }

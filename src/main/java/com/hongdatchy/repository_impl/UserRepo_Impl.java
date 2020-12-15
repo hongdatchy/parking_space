@@ -20,8 +20,6 @@ public class UserRepo_Impl implements UserRepo {
 
     @PersistenceContext
     EntityManager entityManager;
-
-
     @Autowired
     SlotRepo slotRepo;
 
@@ -33,9 +31,8 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public boolean login(LoginForm loginForm) {
-        Query query = entityManager
-                .createQuery("select u from User u where u.phone= :phone and u.password = :password");
-        List<User> users = query
+        List<User> users = entityManager
+                .createQuery("select u from User u where u.phone= :phone and u.password = :password")
                 .setParameter("phone", loginForm.getPhone())
                 .setParameter("password", SHA256Service.getSHA256(loginForm.getPassword()))
                 .getResultList();
