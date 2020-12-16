@@ -164,7 +164,7 @@ public class GetData {
 
         return strParent;
     }
-    static int count =0;
+
     static class MyHandler implements HttpHandler {
 
         HashMap<String, String> map = new HashMap<>();
@@ -274,7 +274,7 @@ public class GetData {
 
                 }
                 List<String> l = new ArrayList<>(map.keySet());
-//                System.out.println(l);
+                System.out.println(l);
 
                 if(l.size() == 8){
 
@@ -325,7 +325,7 @@ public class GetData {
                             .batteryLevel(map.get("Battery Level"))
                             .operatingMode("Mode 1")
                             .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
-                            .loracomLevel("Loracom lever 1")
+                            .loracomLevel(map.get("Communication Level"))
                             .gatewayId(1)
                             .build();
 //                        detector

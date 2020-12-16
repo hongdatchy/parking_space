@@ -44,6 +44,6 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-//        GetData.main(args);
+        GetData.main(args);
     }
 }
