@@ -70,6 +70,7 @@ public class GatewayService_Impl implements GatewayService {
                     .filter(detector -> detector.getGatewayId().equals(gateway.getId()))
                     .collect(Collectors.toList())
                     .size())
+            .fieldId(gateway.getFieldId())
             .build();
     }
 }

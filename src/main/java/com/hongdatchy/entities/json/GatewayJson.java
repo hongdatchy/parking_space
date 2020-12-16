@@ -8,6 +8,7 @@ import lombok.Data;
 public class GatewayJson {
 
     private int id;
+    private int fieldId;
     private String address;
     private int totalDetector;
 
