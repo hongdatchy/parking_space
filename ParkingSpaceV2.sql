@@ -29,8 +29,7 @@ CREATE TABLE detector(
     slot_id int not null,
     gateway_id int not null,
     battery_level varchar(20) not null,
-    loracom_level varchar(20) not null,
-    operating_mode varchar(20) not null,
+    communication_level varchar(20) not null,
     last_time_update datetime not null,
     last_time_setup datetime not null,
     primary key (id),
@@ -50,7 +49,6 @@ CREATE TABLE user(
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 CREATE TABLE tag(
 	id int NOT NULL AUTO_INCREMENT,
@@ -113,13 +111,15 @@ CREATE TABLE black_list(
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE package(
-	packet_number int not null,
-    id varchar(10) not null,
+	id int not null AUTO_INCREMENT,
+	packet_number varchar(20) not null,
+    id_node varchar(20) not null,
 	battery_level varchar(20) not null,
     node_address varchar(20) not null,
     state bit(1) not null,
     communication_level varchar(20) not null,
     time varchar(20) not null,
 	location varchar(20) not null,
-    primary key (packet_number)
+    primary key (id),
+    UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
