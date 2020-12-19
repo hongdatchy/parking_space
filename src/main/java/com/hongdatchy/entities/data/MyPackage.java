@@ -16,15 +16,18 @@ import javax.persistence.*;
 public class MyPackage {
 
     @Id
-    @Column(name = "packet_number", nullable = false)
-    private Integer packetNumber;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String id;
+    private Integer id;
+
+    @Column(name = "packet_number", nullable = false)
+    private String packetNumber;
+
+    @Column(name = "id_node", nullable = false)
+    private String idNode;
 
     @Column(name = "battery_level", nullable = false)
     private String batteryLevel;
-
 
     @Column(name = "node_address", nullable = false)
     private String nodeAddress;

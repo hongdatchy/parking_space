@@ -49,8 +49,9 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
-        return detectorRepo.managerCreateAndUpdate(payLoad2Data(detectorPayload), manager);
+//        Manager manager = managerRepo.findByPhone(phone);
+//        return detectorRepo.managerCreateAndUpdate(payLoad2Data(detectorPayload), manager);
+        return null;
     }
 
     @Override
@@ -71,16 +72,17 @@ public class DetectorService_Impl implements DetectorService {
     }
 
     public Detector payLoad2Data(DetectorPayload detectorPayload){
-        return Detector.builder()
-                .id(detectorPayload.getId())
-                .addressDetector(detectorPayload.getAddressDetector())
-                .batteryLevel(detectorPayload.getBatteryLevel())
-                .gatewayId(detectorPayload.getGatewayId())
-                .lastTimeSetup(new Date())
-                .lastTimeUpdate(new Date())
-                .loracomLevel(detectorPayload.getLoracomLevel())
-                .operatingMode(detectorPayload.getOperatingMode())
-                .slotId(detectorPayload.getSlotId())
-                .build();
+//        return Detector.builder()
+//                .id(detectorPayload.getId())
+//                .addressDetector(detectorPayload.getAddressDetector())
+//                .batteryLevel(detectorPayload.getBatteryLevel())
+//                .gatewayId(detectorPayload.getGatewayId())
+//                .lastTimeSetup(new Date())
+//                .lastTimeUpdate(new Date())
+//                .communication_level(detectorPayload.getLoracomLevel())
+//                .operatingMode(detectorPayload.getOperatingMode())
+//                .slotId(detectorPayload.getSlotId())
+//                .build();
+        return null;
     }
 }

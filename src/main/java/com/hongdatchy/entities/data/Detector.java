@@ -32,11 +32,8 @@ public class Detector {
     @Column(name = "battery_level", nullable = false)
     private String batteryLevel;
 
-    @Column(name = "loracom_level", nullable = false)
-    private String loracomLevel;
-
-    @Column(name = "operating_mode", nullable = false)
-    private String operatingMode;
+    @Column(name = "communication_level", nullable = false)
+    private String communication_level;
 
     @Column(name = "last_time_update", nullable = false)
     private Date lastTimeUpdate;

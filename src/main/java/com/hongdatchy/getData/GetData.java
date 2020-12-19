@@ -66,21 +66,17 @@ public class GetData {
     @Autowired
     private SlotRepo slotRepo;
     @Autowired
-    private ContractRepo contractRepo;
-
-    @Autowired
     private PackageRepo packageRepo;
 
     private static DetectorRepo detectorRepoStatic;
     private static SlotRepo slotRepoStatic;
-    private static ContractRepo contractRepoStatic;
+
     private static PackageRepo packageRepoStatic;
 
     @PostConstruct
     private void initStatic(){
         detectorRepoStatic = this.detectorRepo;
         slotRepoStatic = this.slotRepo;
-        contractRepoStatic = this.contractRepo;
         packageRepoStatic = this.packageRepo;
     }
 
@@ -137,7 +133,7 @@ public class GetData {
         JSONObject result = new JSONObject(httpResponse.getBody());
         JSONArray uril_arr = result.getJSONArray("m2m:uril");
         for (Object urlCnt : uril_arr) {
-      //  for (int i=0; i < uril_arr.length(); i++) {
+            //  for (int i=0; i < uril_arr.length(); i++) {
 //            System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
 //            RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
 //                   sub.toString(), 23);
@@ -148,7 +144,7 @@ public class GetData {
             }
 //            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
 //                    sub.toString(), 23);
-            Thread.sleep(2000);
+//            Thread.sleep(2000);
         }
     }
 
@@ -167,10 +163,9 @@ public class GetData {
 
     static class MyHandler implements HttpHandler {
 
-        HashMap<String, String> map = new HashMap<>();
         public void handle(HttpExchange httpExchange) {
+            HashMap<String, String> map = new HashMap<>();
 
-//            System.out.println(detectorRepoStatic.findAll());
             try {
                 InputStream in = httpExchange.getRequestBody();
 
@@ -248,7 +243,7 @@ public class GetData {
                         Document doc = convertStringToXMLDocument(content);
                         doc.getDocumentElement().normalize();
                         NodeList strList = doc.getElementsByTagName("str");
-    //                    System.out.println(strList);
+                        //                    System.out.println(strList);
 
                         for (int ii = 0; ii < strList.getLength(); ii++) {
                             Node node = strList.item(ii);
@@ -273,74 +268,11 @@ public class GetData {
                     }
 
                 }
-                List<String> l = new ArrayList<>(map.keySet());
-                System.out.println(l);
 
-                if(l.size() == 8){
+                process(map);
 
-                    System.out.println(
-                            packageRepoStatic.create(
-                                    MyPackage.builder()
-                                            .id(map.get("ID"))
-                                            .batteryLevel(map.get("Battery Level"))
-                                            .communicationLevel(map.get("Communication Level"))
-                                            .location(map.get("Location"))
-                                            .nodeAddress(map.get("Node Address"))
-                                            .packetNumber(Integer.parseInt(map.get("Packet Number")))
-                                            .state(map.get("State").equals("1"))
-                                            .time(map.get("Time"))
-                                            .build()
-                            )
-                    );
-                    String time = map.get("Time");
-                    int year = Integer.parseInt(time.substring(0,4));
-//                        month in calendar of java must - 1
-                    int month = Integer.parseInt(time.substring(4,6)) -1 ;
-                    int day = Integer.parseInt(time.substring(6,8));
-                    int hour = Integer.parseInt(time.substring(8,10));
-                    int minute = Integer.parseInt(time.substring(10,12));
-                    int second = Integer.parseInt(time.substring(12,14));
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, year);
-                    cal.set(Calendar.MONTH, month);
-                    cal.set(Calendar.DAY_OF_MONTH, day);
-                    cal.set(Calendar.HOUR_OF_DAY, hour);
-                    cal.set(Calendar.MINUTE, minute);
-                    cal.set(Calendar.SECOND, second);
-                    cal.set(Calendar.MILLISECOND, 0);
-//                        fake field cho detector
-                    int fieldId = 1;
-
-                    List<Slot> slots = slotRepoStatic.findAll().stream()
-                            .filter(slot -> slot.getFieldId() ==fieldId)
-                            .collect(Collectors.toList());
-                    Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
-                    Detector detector = Detector.builder()
-                            .id(Integer.parseInt(map.get("ID")))
-                            .addressDetector(map.get("Node Address") == null ? "255.255.0.x" : map.get("Node Address"))
-                            .lastTimeSetup(oldDetector == null
-                                    || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
-                                    ? cal.getTime() : oldDetector.getLastTimeSetup())
-                            .lastTimeUpdate(cal.getTime())
-                            .batteryLevel(map.get("Battery Level"))
-                            .operatingMode("Mode 1")
-                            .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
-                            .loracomLevel(map.get("Communication Level"))
-                            .gatewayId(1)
-                            .build();
-//                        detector
-                    System.out.println(detector);
-                    detectorRepoStatic.createAndUpdate(detector);
-//                        slot
-                    if(oldDetector != null){
-                        Slot slot = slotRepoStatic.findById(detector.getSlotId());
-                        slot.setStatus(map.get("State").equals("1"));
-                        slotRepoStatic.createAndUpdate(slot);
-                    }
-                }
-
-                String responseBudy = "";
-                byte[] out = responseBudy.getBytes("UTF-8");
+                String responseBody = "";
+                byte[] out = responseBody.getBytes("UTF-8");
                 httpExchange.sendResponseHeaders(200, out.length);
                 OutputStream os = httpExchange.getResponseBody();
                 os.write(out);
@@ -351,6 +283,72 @@ public class GetData {
             }
         }
 
+    }
+
+    private static void process(HashMap<String, String> map){
+        List<String> l = new ArrayList<>(map.keySet());
+        System.out.println(l);
+        if(l.size() == 8){
+            System.out.println(
+                    packageRepoStatic.create(
+                            MyPackage.builder()
+                                    .id(null)
+                                    .idNode(map.get("ID"))
+                                    .batteryLevel(map.get("Battery Level"))
+                                    .communicationLevel(map.get("Communication Level"))
+                                    .location(map.get("Location"))
+                                    .nodeAddress(map.get("Node Address"))
+                                    .packetNumber(map.get("Packet Number"))
+                                    .state(map.get("State").equals("1"))
+                                    .time(map.get("Time"))
+                                    .build()
+                    )
+            );
+            String time = map.get("Time");
+            int year = Integer.parseInt(time.substring(0,4));
+//                        month in calendar of java must - 1
+            int month = Integer.parseInt(time.substring(4,6)) -1 ;
+            int day = Integer.parseInt(time.substring(6,8));
+            int hour = Integer.parseInt(time.substring(8,10));
+            int minute = Integer.parseInt(time.substring(10,12));
+            int second = Integer.parseInt(time.substring(12,14));
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, year);
+            cal.set(Calendar.MONTH, month);
+            cal.set(Calendar.DAY_OF_MONTH, day);
+            cal.set(Calendar.HOUR_OF_DAY, hour);
+            cal.set(Calendar.MINUTE, minute);
+            cal.set(Calendar.SECOND, second);
+            cal.set(Calendar.MILLISECOND, 0);
+//                        fake field cho detector
+            int fieldId = 1;
+
+            List<Slot> slots = slotRepoStatic.findAll().stream()
+                    .filter(slot -> slot.getFieldId() ==fieldId)
+                    .collect(Collectors.toList());
+            Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
+            Detector detector = Detector.builder()
+                    .id(Integer.parseInt(map.get("ID")))
+                    .addressDetector(map.get("Node Address"))
+                    .lastTimeSetup(oldDetector == null
+                            || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
+                            ? cal.getTime() : oldDetector.getLastTimeSetup())
+                    .lastTimeUpdate(cal.getTime())
+                    .batteryLevel(map.get("Battery Level"))
+                    .communication_level("Communication Level")
+                    .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
+                    .gatewayId(1)
+                    .build();
+//                        detector
+            System.out.println(detector);
+            detectorRepoStatic.createAndUpdate(detector);
+//                        slot
+            if(oldDetector != null){
+                Slot slot = slotRepoStatic.findById(detector.getSlotId());
+                slot.setStatus(map.get("State").equals("1"));
+                slotRepoStatic.createAndUpdate(slot);
+            }
+        }
     }
 
     private static Document convertStringToXMLDocument(String xmlString) {
