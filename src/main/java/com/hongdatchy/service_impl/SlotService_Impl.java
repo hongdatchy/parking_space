@@ -56,7 +56,9 @@ public class SlotService_Impl implements SlotService {
                 .fieldId(slot.getFieldId())
                 .lastTimeSetup(detectors.size() != 0 ? String.valueOf(detectors.get(0).getLastTimeSetup()): null)
                 .lastTimeUpdate(detectors.size() != 0 ? String.valueOf(detectors.get(0).getLastTimeUpdate()): null)
-                .status(slot.getStatus())
+                .statusDetector(slot.getStatusDetector())
+                .statusCam(slot.getStatusCam())
+                .detectorId(detectors.size() != 0 ? detectors.get(0).getId() : null)
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package com.hongdatchy;
 
-import com.hongdatchy.getData.GetData;
+import com.hongdatchy.getData.GetDataDetector;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,6 +28,6 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-        GetData.main(args);
+//        GetDataDetector.main(args);
     }
 }

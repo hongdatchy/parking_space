@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.MyPackage;
 import com.hongdatchy.entities.data.Slot;
-import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.PackageRepo;
 import com.hongdatchy.repository.SlotRepo;
@@ -39,7 +38,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 @Component
-public class GetData {
+public class GetDataDetector {
 
     private static String originator = "admin:admin";
     private static String cseProtocol = "http";
@@ -343,12 +342,12 @@ public class GetData {
             System.out.println(detector);
             detectorRepoStatic.createAndUpdate(detector);
 //                        slot
-            if(oldDetector != null){
-                Slot slot = slotRepoStatic.findById(detector.getSlotId());
-                slot.setStatus(map.get("State").equals("1"));
-                slotRepoStatic.createAndUpdate(slot);
-            }
+
+            Slot slot = slotRepoStatic.findById(detector.getSlotId());
+            slot.setStatusDetector(map.get("State").equals("1"));
+            slotRepoStatic.createAndUpdate(slot);
         }
+
     }
 
     private static Document convertStringToXMLDocument(String xmlString) {

@@ -33,10 +33,10 @@ public class InitData {
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
             gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
             for (int i = 0; i < 200; i++) {
-                slotRepo.createAndUpdate(new Slot(i+1, 1, false));
+                slotRepo.createAndUpdate(new Slot(i+1, 1, null, null));
             }
             for (int i = 0; i < 200; i++) {
-                slotRepo.createAndUpdate(new Slot(i+201, 2, false));
+                slotRepo.createAndUpdate(new Slot(i+201, 2, null, null));
             }
         }
     }

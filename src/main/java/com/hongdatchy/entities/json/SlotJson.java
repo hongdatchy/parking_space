@@ -9,12 +9,14 @@ import java.util.Date;
 @Data
 public class SlotJson {
 
-    private int id;
-    private int fieldId;
-    private Boolean status; // false la free, true la busy
+    private Integer id;
+    private Integer fieldId;
+    private Boolean statusDetector; // false la free, true la busy
+    private Boolean statusCam;
     private String AddressGateway;
     private String AddressDetector;
     private String lastTimeUpdate;
     private String lastTimeSetup;
+    private Integer detectorId;
 
 }

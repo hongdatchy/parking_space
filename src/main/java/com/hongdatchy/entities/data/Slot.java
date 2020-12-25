@@ -24,7 +24,9 @@ public class Slot {
     @Column(name = "field_id", nullable = false)
     private Integer fieldId;
 
-    @Column(name = "status", nullable = false)
-    private Boolean status; // false la free, true la busy
+    @Column(name = "status_cam")
+    private Boolean statusCam;
 
+    @Column(name = "status_detector")
+    private Boolean statusDetector;
 }
