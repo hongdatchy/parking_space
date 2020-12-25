@@ -17,7 +17,8 @@ CREATE TABLE gateway(
 CREATE TABLE slot(
 	id int NOT NULL AUTO_INCREMENT,
     field_id int not null,
-    status bit(1) not null,
+    status_detector bit(1),
+    status_cam bit(1),
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
     CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
