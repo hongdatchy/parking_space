@@ -14,5 +14,4 @@ public interface SlotRepo {
 
     Slot findById(int id);
 
-    Integer getIdSlotFree(int fieldID);
 }

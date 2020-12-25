@@ -1,9 +1,18 @@
 package com.hongdatchy;
 
+import java.io.FileReader;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.getData.GetDataDetector;
+import com.hongdatchy.repository.SlotRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -15,6 +24,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 public class BackendParkingSpaceV2Application implements CommandLineRunner {
+
+    @Autowired
+    SlotRepo slotRepo;
 
     public static void main(String[] args) {
         SpringApplication.run(BackendParkingSpaceV2Application.class, args);
@@ -28,6 +40,49 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-//        GetDataDetector.main(args);
+        GetDataDetector.main(args);
+
+        int oldRow = 0;
+        int i;
+        char c;
+        boolean first = true;
+        while (true){
+            FileReader fr =
+                    new FileReader("C:\\Users\\Microsoft Windows\\OneDrive\\Desktop\\test-backend\\cam.txt");
+            int newRow = 0;
+            String data = "";
+            while ((i=fr.read()) != -1){
+                c = (char) i ;
+                if(c == '\n'){
+                    newRow ++;
+                }
+                data += c;
+            }
+            newRow ++;
+            if(first){
+                first = false;
+                oldRow = newRow;
+            } else if(oldRow != newRow){// có bản tin mới
+                processNewDataCam( data,  oldRow,  newRow);
+                oldRow = newRow;
+            }
+            Thread.sleep(1000);
+        }
+    }
+
+    public void processNewDataCam(String data, int oldRow, int newRow){
+        String[] rows = data.split("\\r?\\n");
+        for (int i = oldRow; i< newRow; i++){
+            String status = rows[i].split(", ")[1];
+            System.out.println(status + "a");
+//            fake field cho slot
+            int fieldId =1;
+            Slot oldSlot = slotRepo.findAll().stream()
+                    .filter(slot -> slot.getFieldId() == fieldId)
+                    .collect(Collectors.toList())
+                    .get(Integer.parseInt(rows[i].split(", ")[0]) -1);
+            oldSlot.setStatusCam(status.equals("1"));
+            slotRepo.createAndUpdate(oldSlot);
+        }
     }
 }

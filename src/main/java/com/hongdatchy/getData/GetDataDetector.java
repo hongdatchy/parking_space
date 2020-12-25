@@ -143,7 +143,7 @@ public class GetDataDetector {
             }
 //            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
 //                    sub.toString(), 23);
-//            Thread.sleep(2000);
+            Thread.sleep(2000);
         }
     }
 
