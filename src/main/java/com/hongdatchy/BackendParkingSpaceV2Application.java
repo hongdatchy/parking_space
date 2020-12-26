@@ -1,8 +1,8 @@
 package com.hongdatchy;
 
 import java.io.File;
-import java.io.FileReader;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.hongdatchy.entities.data.Slot;
@@ -41,48 +41,36 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-        GetDataDetector.main(args);
+//        GetDataDetector.main(args);
+        getDataCam();
 
 
-        int i;
-        char c;
+    }
+    public void getDataCam() throws FileNotFoundException, InterruptedException {
         while (true){
-            int row = 0;
             File file = new File ("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/cam.txt");
             if (!file.exists()) {
                 continue;
             }
-            FileReader fr =
-                    new FileReader("C:\\Users\\Microsoft Windows\\OneDrive\\Desktop\\test-backend\\cam.txt");
-            String data = "";
-            while ((i=fr.read()) != -1){
-                c = (char) i ;
-                if(c == '\n'){
-                    row ++;
-                }
-                data += c;
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                String row = myReader.nextLine();
+                System.out.println(row);
+
+                boolean status = row.split(" ")[1].equals("1");
+//                fake field cho slot
+                int fieldId = 1;
+//                so thu tu sua slot trong field
+                int stt = Integer.parseInt(row.split(" ")[0]) - 1;
+                Slot oldSlot = slotRepo.findAll().stream()
+                        .filter(slot -> slot.getFieldId() == fieldId)
+                        .collect(Collectors.toList())
+                        .get(stt);
+                oldSlot.setStatusCam(status);
+                slotRepo.createAndUpdate(oldSlot);
             }
-            row ++;
-            processNewDataCam(data, row);
-
-            Thread.sleep(1000);
-        }
-    }
-
-    public void processNewDataCam(String data, int row){
-
-        String[] rows = data.split("\\r?\\n");
-        for (int i = 0; i< row; i++){
-            String status = rows[i].split(" ")[1];
-            System.out.println(rows[i]);
-//            fake field cho slot
-            int fieldId =1;
-            Slot oldSlot = slotRepo.findAll().stream()
-                    .filter(slot -> slot.getFieldId() == fieldId)
-                    .collect(Collectors.toList())
-                    .get(Integer.parseInt(rows[i].split(" ")[0]) -1);
-            oldSlot.setStatusCam(status.equals("1"));
-            slotRepo.createAndUpdate(oldSlot);
+            myReader.close();
+            Thread.sleep(5000);
         }
     }
 }
