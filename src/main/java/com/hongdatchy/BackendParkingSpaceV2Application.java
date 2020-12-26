@@ -63,8 +63,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             if(!rows.equals(newRows)) {
                 rows.clear();
                 rows.addAll(newRows);
-                System.out.println("data cam has changed");
+                System.out.println("Data cam has changed");
                 updateDataCam(rows);
+                System.out.println("Data cam has updated successfully");
             }
             myReader.close();
             Thread.sleep(5000);

@@ -28,6 +28,7 @@ public class InitData {
     @PostConstruct
     public void init(){
         if(fieldRepo.findAll().size() == 0){
+            System.out.println("Init data start");
             fieldRepo.createAndUpdate(new Field(1,"d3"));
             fieldRepo.createAndUpdate(new Field(2,"d5"));
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
@@ -38,6 +39,7 @@ public class InitData {
             for (int i = 0; i < 200; i++) {
                 slotRepo.createAndUpdate(new Slot(i+201, 2, null, null));
             }
+            System.out.println("Init data end");
         }
     }
 }
