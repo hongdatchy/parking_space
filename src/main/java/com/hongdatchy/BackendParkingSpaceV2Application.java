@@ -2,6 +2,8 @@ package com.hongdatchy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -41,36 +43,47 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
+
 //        GetDataDetector.main(args);
         getDataCam();
-
-
     }
     public void getDataCam() throws FileNotFoundException, InterruptedException {
+        List<String> rows = new ArrayList<>();
         while (true){
             File file = new File ("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/cam.txt");
             if (!file.exists()) {
                 continue;
             }
             Scanner myReader = new Scanner(file);
+            List<String> newRows = new ArrayList<>();
             while (myReader.hasNextLine()) {
                 String row = myReader.nextLine();
-                System.out.println(row);
-
-                boolean status = row.split(" ")[1].equals("1");
-//                fake field cho slot
-                int fieldId = 1;
-//                so thu tu sua slot trong field
-                int stt = Integer.parseInt(row.split(" ")[0]) - 1;
-                Slot oldSlot = slotRepo.findAll().stream()
-                        .filter(slot -> slot.getFieldId() == fieldId)
-                        .collect(Collectors.toList())
-                        .get(stt);
-                oldSlot.setStatusCam(status);
-                slotRepo.createAndUpdate(oldSlot);
+                newRows.add(row);
+            }
+            if(!rows.equals(newRows)) {
+                rows.clear();
+                rows.addAll(newRows);
+                System.out.println("data cam has changed");
+                updateDataCam(rows);
             }
             myReader.close();
             Thread.sleep(5000);
+        }
+    }
+
+    public void updateDataCam(List<String> rows){
+        for (String row: rows){
+            boolean status = row.split(" ")[1].equals("1");
+//                fake field cho slot
+            int fieldId = 1;
+//                so thu tu sua slot trong field
+            int stt = Integer.parseInt(row.split(" ")[0]) - 1;
+            Slot oldSlot = slotRepo.findAll().stream()
+                    .filter(slot -> slot.getFieldId() == fieldId)
+                    .collect(Collectors.toList())
+                    .get(stt);
+            oldSlot.setStatusCam(status);
+            slotRepo.createAndUpdate(oldSlot);
         }
     }
 }
