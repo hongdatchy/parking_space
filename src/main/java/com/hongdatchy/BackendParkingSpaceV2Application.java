@@ -61,30 +61,26 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                 newRows.add(row);
             }
             if(!rows.equals(newRows)) {
+                System.out.println("Data cam has changed");
                 rows.clear();
                 rows.addAll(newRows);
-                System.out.println("Data cam has changed");
-                updateDataCam(rows);
+                for (String row: rows){
+                    boolean status = row.split(" ")[1].equals("1");
+//                fake field cho slot
+                    int fieldId = 1;
+//                so thu tu sua slot trong field
+                    int stt = Integer.parseInt(row.split(" ")[0]) - 1;
+                    Slot oldSlot = slotRepo.findAll().stream()
+                            .filter(slot -> slot.getFieldId() == fieldId)
+                            .collect(Collectors.toList())
+                            .get(stt);
+                    oldSlot.setStatusCam(status);
+                    slotRepo.createAndUpdate(oldSlot);
+                }
                 System.out.println("Data cam has updated successfully");
             }
             myReader.close();
             Thread.sleep(5000);
-        }
-    }
-
-    public void updateDataCam(List<String> rows){
-        for (String row: rows){
-            boolean status = row.split(" ")[1].equals("1");
-//                fake field cho slot
-            int fieldId = 1;
-//                so thu tu sua slot trong field
-            int stt = Integer.parseInt(row.split(" ")[0]) - 1;
-            Slot oldSlot = slotRepo.findAll().stream()
-                    .filter(slot -> slot.getFieldId() == fieldId)
-                    .collect(Collectors.toList())
-                    .get(stt);
-            oldSlot.setStatusCam(status);
-            slotRepo.createAndUpdate(oldSlot);
         }
     }
 }
