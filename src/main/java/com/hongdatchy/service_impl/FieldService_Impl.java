@@ -85,7 +85,7 @@ public class FieldService_Impl implements FieldService {
                                 && contract.getTimeCarIn() == null).count())
                 .busySlot((int) slotRepo.findAll().stream()
                         .filter(slot -> (slot.getStatusDetector() != null && slot.getStatusDetector())
-                                && (slot.getStatusCam() != null && slot.getStatusCam())
+                                || (slot.getStatusCam() != null && slot.getStatusCam())
                                 && slot.getFieldId().equals(field.getId())).count())
                 .position(field.getPosition())
                 .totalSlot((int) slotRepo.findAll().stream()
