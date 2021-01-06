@@ -2,11 +2,14 @@ package com.hongdatchy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.getData.GetDataDetector;
 import com.hongdatchy.repository.SlotRepo;
@@ -31,6 +34,10 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Autowired
     SlotRepo slotRepo;
 
+    List<String> rows = new ArrayList<>();
+
+    List<Slot> slots = new ArrayList<>();
+
     public static void main(String[] args) {
         SpringApplication.run(BackendParkingSpaceV2Application.class, args);
     }
@@ -45,42 +52,65 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         System.out.println("******************** Start server ********************");
 
 //        GetDataDetector.main(args);
-        getDataCam();
+
+        update();
     }
-    public void getDataCam() throws FileNotFoundException, InterruptedException {
-        List<String> rows = new ArrayList<>();
+
+    public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
         while (true){
-            File file = new File ("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/cam.txt");
-            if (!file.exists()) {
-                continue;
+            if(!getDataCam()){
+                System.out.println("file data cam does not exist");
             }
-            Scanner myReader = new Scanner(file);
-            List<String> newRows = new ArrayList<>();
-            while (myReader.hasNextLine()) {
-                String row = myReader.nextLine();
-                newRows.add(row);
-            }
-            if(!rows.equals(newRows)) {
-                System.out.println("Data cam has changed");
-                rows.clear();
-                rows.addAll(newRows);
-                for (String row: rows){
-                    boolean status = row.split(" ")[1].equals("1");
-//                fake field cho slot
-                    int fieldId = 1;
-//                so thu tu sua slot trong field
-                    int stt = Integer.parseInt(row.split(" ")[0]) - 1;
-                    Slot oldSlot = slotRepo.findAll().stream()
-                            .filter(slot -> slot.getFieldId() == fieldId)
-                            .collect(Collectors.toList())
-                            .get(stt);
-                    oldSlot.setStatusCam(status);
-                    slotRepo.createAndUpdate(oldSlot);
-                }
-                System.out.println("Data cam has updated successfully");
-            }
-            myReader.close();
+            writeDataDetector();
             Thread.sleep(5000);
+        }
+    }
+
+    public boolean getDataCam() throws FileNotFoundException {
+        File file = new File ("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/cam.txt");
+        if (!file.exists()) {
+            return false;
+        }
+
+        Scanner myReader = new Scanner(file);
+        List<String> newRows = new ArrayList<>();
+        while (myReader.hasNextLine()) {
+            String row = myReader.nextLine();
+            newRows.add(row);
+        }
+        if(!rows.equals(newRows)) {
+            System.out.println("Data cam has changed");
+            rows.clear();
+            rows.addAll(newRows);
+            for (String row: rows){
+                boolean status = row.split(" ")[1].equals("1");
+//                fake field cho slot
+                int fieldId = 1;
+//                so thu tu sua slot trong field
+                int stt = Integer.parseInt(row.split(" ")[0]) - 1;
+                Slot oldSlot = slotRepo.findAll().stream()
+                        .filter(slot -> slot.getFieldId() == fieldId)
+                        .collect(Collectors.toList())
+                        .get(stt);
+                oldSlot.setStatusCam(status);
+                slotRepo.createAndUpdate(oldSlot);
+            }
+            System.out.println("Data cam has updated successfully");
+        }
+        myReader.close();
+        return true;
+    }
+
+    public void writeDataDetector() throws InterruptedException, FileNotFoundException, UnsupportedEncodingException {
+        List<Slot> newSlots = slotRepo.findAll();
+        if(!slots.equals(newSlots)){
+            PrintWriter writer = new PrintWriter("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/detector.txt", "UTF-8");
+            for (Slot slot : newSlots){
+                writer.println(slot.getId() + "\t" + slot.getStatusDetector());
+            }
+            writer.close();
+            slots.clear();
+            slots.addAll(newSlots);
         }
     }
 }
