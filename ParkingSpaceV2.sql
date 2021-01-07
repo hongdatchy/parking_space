@@ -124,3 +124,13 @@ CREATE TABLE package(
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE data_cam_and_detector(
+	id int not null AUTO_INCREMENT,
+	slot_id int not null,
+    status_detector bit(1),
+    status_cam bit(1),
+    time datetime not null,
+    primary key (id),
+    UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
