@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import com.hongdatchy.entities.data.DataCamAndDetector;
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.getData.GetDataDetector;
+import com.hongdatchy.getData.GetTime;
+import com.hongdatchy.repository.DataCamAndDetectorRepo;
 import com.hongdatchy.repository.SlotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -34,6 +37,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Autowired
     SlotRepo slotRepo;
 
+    @Autowired
+    DataCamAndDetectorRepo dataCamAndDetectorRepo;
+
     List<String> rows = new ArrayList<>();
 
     List<Slot> slots = new ArrayList<>();
@@ -51,7 +57,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
 
-//        GetDataDetector.main(args);
+        GetDataDetector.main(args);
 
         update();
     }
@@ -82,18 +88,24 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             System.out.println("Data cam has changed");
             rows.clear();
             rows.addAll(newRows);
-            for (String row: rows){
-                boolean status = row.split(" ")[1].equals("1");
+            for (int i = 1; i< rows.size(); i++){
+                boolean status = rows.get(i).split(" ")[1].equals("1");
 //                fake field cho slot
                 int fieldId = 1;
 //                so thu tu sua slot trong field
-                int stt = Integer.parseInt(row.split(" ")[0]) - 1;
+                int stt = Integer.parseInt(rows.get(i).split(" ")[0]) - 1;
                 Slot oldSlot = slotRepo.findAll().stream()
                         .filter(slot -> slot.getFieldId() == fieldId)
                         .collect(Collectors.toList())
                         .get(stt);
                 oldSlot.setStatusCam(status);
                 slotRepo.createAndUpdate(oldSlot);
+                //            dataCamAndDetector
+                dataCamAndDetectorRepo.createAndUpdate(DataCamAndDetector.builder()
+                        .statusCam(status)
+                        .slotId(stt)
+                        .time(GetTime.getTime(rows.get(0)))
+                        .build());
             }
             System.out.println("Data cam has updated successfully");
         }

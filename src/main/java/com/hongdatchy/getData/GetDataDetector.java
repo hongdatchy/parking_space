@@ -16,9 +16,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 import java.util.stream.Collectors;
 
+import com.hongdatchy.entities.data.DataCamAndDetector;
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.MyPackage;
 import com.hongdatchy.entities.data.Slot;
+import com.hongdatchy.repository.DataCamAndDetectorRepo;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.PackageRepo;
 import com.hongdatchy.repository.SlotRepo;
@@ -67,9 +69,12 @@ public class GetDataDetector {
     @Autowired
     private PackageRepo packageRepo;
 
+    @Autowired
+    private DataCamAndDetectorRepo dataCamAndDetectorRepo;
+
     private static DetectorRepo detectorRepoStatic;
     private static SlotRepo slotRepoStatic;
-
+    private static DataCamAndDetectorRepo dataCamAndDetectorRepoStatic;
     private static PackageRepo packageRepoStatic;
 
     @PostConstruct
@@ -77,6 +82,7 @@ public class GetDataDetector {
         detectorRepoStatic = this.detectorRepo;
         slotRepoStatic = this.slotRepo;
         packageRepoStatic = this.packageRepo;
+        dataCamAndDetectorRepoStatic = this.dataCamAndDetectorRepo;
     }
 
     public static void main(String[] args) throws JSONException, InterruptedException {
@@ -143,7 +149,7 @@ public class GetDataDetector {
             }
 //            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
 //                    sub.toString(), 23);
-            Thread.sleep(2000);
+//            Thread.sleep(2000);
         }
     }
 
@@ -304,35 +310,22 @@ public class GetDataDetector {
                     )
             );
             String time = map.get("Time");
-            int year = Integer.parseInt(time.substring(0,4));
-//                        month in calendar of java must - 1
-            int month = Integer.parseInt(time.substring(4,6)) -1 ;
-            int day = Integer.parseInt(time.substring(6,8));
-            int hour = Integer.parseInt(time.substring(8,10));
-            int minute = Integer.parseInt(time.substring(10,12));
-            int second = Integer.parseInt(time.substring(12,14));
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, year);
-            cal.set(Calendar.MONTH, month);
-            cal.set(Calendar.DAY_OF_MONTH, day);
-            cal.set(Calendar.HOUR_OF_DAY, hour);
-            cal.set(Calendar.MINUTE, minute);
-            cal.set(Calendar.SECOND, second);
-            cal.set(Calendar.MILLISECOND, 0);
+
 //                        fake field cho detector
             int fieldId = 1;
 
             List<Slot> slots = slotRepoStatic.findAll().stream()
-                    .filter(slot -> slot.getFieldId() ==fieldId)
+                    .filter(slot -> slot.getFieldId() == fieldId)
                     .collect(Collectors.toList());
+
             Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
             Detector detector = Detector.builder()
                     .id(Integer.parseInt(map.get("ID")))
                     .addressDetector(map.get("Node Address"))
                     .lastTimeSetup(oldDetector == null
                             || oldDetector.getSlotId() != Integer.parseInt(map.get("Location"))
-                            ? cal.getTime() : oldDetector.getLastTimeSetup())
-                    .lastTimeUpdate(cal.getTime())
+                            ? GetTime.getTime(time) : oldDetector.getLastTimeSetup())
+                    .lastTimeUpdate(GetTime.getTime(time))
                     .batteryLevel(map.get("Battery Level"))
                     .communication_level("Communication Level")
                     .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
@@ -346,6 +339,14 @@ public class GetDataDetector {
             Slot slot = slotRepoStatic.findById(detector.getSlotId());
             slot.setStatusDetector(map.get("State").equals("1"));
             slotRepoStatic.createAndUpdate(slot);
+
+//            dataCamAndDetector
+            dataCamAndDetectorRepoStatic.createAndUpdate(DataCamAndDetector.builder()
+                    .id(null)
+                    .slotId(slot.getId())
+                    .statusDetector(slot.getStatusDetector())
+                    .time(GetTime.getTime(time))
+                    .build());
         }
 
     }

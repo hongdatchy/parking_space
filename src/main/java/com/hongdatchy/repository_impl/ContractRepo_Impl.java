@@ -1,8 +1,7 @@
 package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.Contract;
-import com.hongdatchy.entities.data.Gateway;
-import com.hongdatchy.entities.data.Slot;
+
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.SlotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.Date;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
