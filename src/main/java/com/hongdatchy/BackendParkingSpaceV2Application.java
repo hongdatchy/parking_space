@@ -10,7 +10,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.hongdatchy.entities.data.DataCamAndDetector;
-import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.getData.GetDataDetector;
 import com.hongdatchy.getData.GetTime;
@@ -57,7 +56,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
 
-        GetDataDetector.main(args);
+//        GetDataDetector.main(args);
 
         update();
     }
@@ -113,12 +112,12 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         return true;
     }
 
-    public void writeDataDetector() throws InterruptedException, FileNotFoundException, UnsupportedEncodingException {
+    public void writeDataDetector() throws  FileNotFoundException, UnsupportedEncodingException {
         List<Slot> newSlots = slotRepo.findAll();
         if(!slots.equals(newSlots)){
             PrintWriter writer = new PrintWriter("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/detector.txt", "UTF-8");
             for (Slot slot : newSlots){
-                writer.println(slot.getId() + "\t" + slot.getStatusDetector());
+                writer.println(slot.getId() + " " + (slot.getStatusDetector() == null ? "null" : slot.getStatusDetector() ? "1": "0"));
             }
             writer.close();
             slots.clear();
