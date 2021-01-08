@@ -56,7 +56,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
 
-//        GetDataDetector.main(args);
+        GetDataDetector.main(args);
 
         update();
     }
