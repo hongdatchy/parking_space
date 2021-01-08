@@ -117,7 +117,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         if(!slots.equals(newSlots)){
             PrintWriter writer = new PrintWriter("C:/Users/Microsoft Windows/OneDrive/Desktop/test-backend/detector.txt", "UTF-8");
             for (Slot slot : newSlots){
-                writer.println(slot.getId() + " " + (slot.getStatusDetector() == null ? "null" : slot.getStatusDetector() ? "1": "0"));
+                writer.println(slot.getId() + " " + (slot.getStatusDetector() == null ? "2" : slot.getStatusDetector() ? "1": "0"));
             }
             writer.close();
             slots.clear();
