@@ -27,7 +27,7 @@ public class ManagerRepo_Impl implements ManagerRepo {
 
     @Override
     public Manager createAndUpdate(Manager manager) {
-        if(userRepo.checkPhoneExisted(manager.getPhone())){
+        if(userRepo.checkEmailExisted(manager.getEmail())){
             return null;
         }
         manager.setPass(SHA256Service.getSHA256(manager.getPass()));
@@ -54,8 +54,8 @@ public class ManagerRepo_Impl implements ManagerRepo {
     @Override
     public boolean login(LoginForm loginForm) {
         List<Manager> managers = entityManager
-                .createQuery("select m from Manager m where m.phone= :phone and m.pass = :password")
-                .setParameter("phone", loginForm.getPhone())
+                .createQuery("select m from Manager m where m.email= :email and m.pass = :password")
+                .setParameter("email", loginForm.getEmail())
                 .setParameter("password", SHA256Service.getSHA256(loginForm.getPassword()))
                 .getResultList();
         if(managers.size() != 0){
@@ -66,9 +66,9 @@ public class ManagerRepo_Impl implements ManagerRepo {
     }
 
     @Override
-    public Manager findByPhone(String phone) {
+    public Manager findByEmail(String email) {
         List<Manager> managers = entityManager
-                .createQuery("select m from Manager m where m.phone= :phone").setParameter("phone", phone).getResultList();
+                .createQuery("select m from Manager m where m.email= :email").setParameter("email", email).getResultList();
         if(managers.size() == 1){
             return managers.get(0);
         }

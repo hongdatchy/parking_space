@@ -29,8 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public FilterRegistrationBean<JWTFilterUser> jwtFilterUser() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JWTFilterUser(userRepo,jwtService, blackListRepo));
-//        registrationBean.addUrlPatterns("/api/us/*");
-        registrationBean.addUrlPatterns("/nhskjhsks");
+        registrationBean.addUrlPatterns("/api/us/*");
         return registrationBean;
     }
 
@@ -38,8 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public FilterRegistrationBean<JWTFilterManager> jwtFilterManger() {
         FilterRegistrationBean<JWTFilterManager> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JWTFilterManager(managerRepo,jwtService, blackListRepo));
-//        registrationBean.addUrlPatterns("/api/mn/*");
-        registrationBean.addUrlPatterns("/nhskjhsks");
+        registrationBean.addUrlPatterns("/api/mn/*");
         return registrationBean;
     }
 
@@ -47,8 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public FilterRegistrationBean<JWTFilterAdmin> jwtFilterAdmin() {
         FilterRegistrationBean<JWTFilterAdmin> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JWTFilterAdmin(adminRepo,jwtService, blackListRepo));
-//        registrationBean.addUrlPatterns("/api/ad/*");
-        registrationBean.addUrlPatterns("/nhskjhsks");
+        registrationBean.addUrlPatterns("/api/ad/*");
         return registrationBean;
     }
 

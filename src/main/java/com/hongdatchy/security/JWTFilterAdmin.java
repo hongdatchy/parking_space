@@ -24,7 +24,7 @@ public class JWTFilterAdmin implements Filter {
         String token = request.getHeader("token");
         if (token != null) {
             String phone = jwtService.decode(token);
-            if (phone != null && adminRepo.findByPhone(phone) != null && blackListRepo.findByToken(token).size() ==0){
+            if (phone != null && adminRepo.findByEmail(phone) != null && blackListRepo.findByToken(token).size() ==0){
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 response.setStatus(401);

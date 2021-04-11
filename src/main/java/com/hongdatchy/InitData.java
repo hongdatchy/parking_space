@@ -29,8 +29,8 @@ public class InitData {
     public void init(){
         if(fieldRepo.findAll().size() == 0){
             System.out.println("Init data start");
-            fieldRepo.createAndUpdate(new Field(1,"d3"));
-            fieldRepo.createAndUpdate(new Field(2,"d5"));
+            fieldRepo.createAndUpdate(new Field(1,"C9", "lat, long", "số 1 đại cồ việt"));
+            fieldRepo.createAndUpdate(new Field(2,"C3", "lat, long", "số 1 đại cồ việt"));
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
             gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
             for (int i = 0; i < 200; i++) {

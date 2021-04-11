@@ -1,6 +1,8 @@
 CREATE TABLE field(
 	id int NOT NULL AUTO_INCREMENT,
+    name varchar(120) not null,
     position varchar(120) not null,
+    address varchar(120) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -41,9 +43,9 @@ CREATE TABLE detector(
 
 CREATE TABLE user(
 	id int NOT NULL AUTO_INCREMENT,
-    pass varchar(255) not null,
+    pass varchar(256) not null,
     id_number int not null,
-    phone varchar(20) not null,
+    email varchar(20) not null,
     last_time_access datetime,
     equipment varchar(20) not null,
     address varchar(120) not null,
@@ -63,7 +65,7 @@ CREATE TABLE tag(
 
 CREATE TABLE manager(
 	id int NOT NULL AUTO_INCREMENT,
-    phone varchar(20) not null,
+    email varchar(20) not null,
     pass varchar(256) not null,
     last_time_access datetime,
     acp bit(1) not null,
@@ -98,7 +100,7 @@ CREATE TABLE manager_field(
 
 CREATE TABLE admin(
 	id int NOT NULL AUTO_INCREMENT,
-    phone varchar(20) not null,
+    email varchar(20) not null,
     pass varchar(256) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
@@ -106,7 +108,7 @@ CREATE TABLE admin(
 
 CREATE TABLE black_list(
 	id int NOT NULL AUTO_INCREMENT,
-    token varchar(255) not null,
+    token varchar(256) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -131,6 +133,19 @@ CREATE TABLE data_cam_and_detector(
     status_detector bit(1),
     status_cam bit(1),
     time datetime not null,
+    primary key (id),
+    UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE verify_table(
+	id int NOT NULL AUTO_INCREMENT,
+	email varchar(20) NOT NULL,
+    pass varchar(256) not null,
+    id_number int not null,
+    code varchar(20) not null,
+    last_time_access datetime,
+    equipment varchar(20) not null,
+    address varchar(120) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

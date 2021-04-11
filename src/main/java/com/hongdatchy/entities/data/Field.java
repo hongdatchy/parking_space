@@ -18,7 +18,12 @@ public class Field  {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "position", nullable = false)
     private String position;
 
+    @Column(name = "address", nullable = false)
+    private String address;
 }

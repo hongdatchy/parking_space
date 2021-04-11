@@ -51,9 +51,9 @@ public class UserService_Impl implements UserService {
     }
 
     @Override
-    public boolean book(BookPayload bookPayload, String phone) {
-        User user = userRepo.findByPhone(phone);
-        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),""));
+    public boolean book(BookPayload bookPayload, String email) {
+        User user = userRepo.findByEmail(email);
+        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","",""));
         if(fieldJson.getTotalSlot() < fieldJson.getBusySlot() + fieldJson.getTotalBook()){
             return false;
         }
@@ -62,7 +62,7 @@ public class UserService_Impl implements UserService {
 
     @Override
     public boolean changePass(ChangePassForm changePassForm, String phone) {
-        User user = userRepo.findByPhone(phone);
+        User user = userRepo.findByEmail(phone);
         return user != null && userRepo.changePass(changePassForm, user);
     }
 
@@ -72,9 +72,14 @@ public class UserService_Impl implements UserService {
                 .address(userPayload.getAddress())
                 .idNumber(userPayload.getIdNumber())
                 .equipment(userPayload.getEquipment())
-                .phone(userPayload.getPhone())
+                .email(userPayload.getEmail())
                 .password(userPayload.getPassword())
                 .lastTimeAccess(null)
                 .build();
+    }
+
+    @Override
+    public boolean verifyAccount(String mail, String code) {
+        return userRepo.verifyAccount(mail, code);
     }
 }

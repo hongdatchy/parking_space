@@ -15,6 +15,7 @@ import com.hongdatchy.getData.GetDataDetector;
 import com.hongdatchy.getData.GetTime;
 import com.hongdatchy.repository.DataCamAndDetectorRepo;
 import com.hongdatchy.repository.SlotRepo;
+import com.hongdatchy.service_impl.GoogleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -37,6 +38,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     SlotRepo slotRepo;
 
     @Autowired
+    GoogleService googleService;
+
+    @Autowired
     DataCamAndDetectorRepo dataCamAndDetectorRepo;
 
     List<String> rows = new ArrayList<>();
@@ -55,10 +59,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-
-        GetDataDetector.main(args);
-
-        update();
+//        GetDataDetector.main(args);
+//
+//        update();
     }
 
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {

@@ -51,7 +51,7 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public List<Field> managerFind(String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         if(manager == null){
             return null;
         }
@@ -60,7 +60,7 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public Field managerUpdate(Field field, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         if(manager == null){
             return null;
         }
@@ -69,7 +69,7 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public boolean managerDelete(int id, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         if(manager == null){
             return false;
         }
@@ -88,6 +88,8 @@ public class FieldService_Impl implements FieldService {
                                 || (slot.getStatusCam() != null && slot.getStatusCam())
                                 && slot.getFieldId().equals(field.getId())).count())
                 .position(field.getPosition())
+                .address(field.getAddress())
+                .name(field.getName())
                 .totalSlot((int) slotRepo.findAll().stream()
                         .filter(slot -> slot.getFieldId().equals(field.getId())).count())
                 .build();

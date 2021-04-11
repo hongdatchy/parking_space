@@ -16,6 +16,10 @@ import java.util.List;
 @Service
 public class DetectorService_Impl implements DetectorService {
 
+
+//    note: chỉ dùng 1 vài hàm find trong này thôi, vì thêm sửa xoá detector không phải thông qua api,
+//    mà là do getDataDetector làm
+
     @Autowired
     DetectorRepo detectorRepo;
 
@@ -27,13 +31,14 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public Detector createAndUpdate(DetectorPayload detectorPayload) {
-        System.out.println(payLoad2Data(detectorPayload));
-        return detectorRepo.createAndUpdate(payLoad2Data(detectorPayload));
+//        return detectorRepo.createAndUpdate(payLoad2Data(detectorPayload));
+        return null;
     }
 
     @Override
     public boolean delete(int id) {
-        return detectorRepo.delete(id);
+//        return detectorRepo.delete(id);
+        return false;
     }
 
     @Override
@@ -43,21 +48,22 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public List<Detector> managerFind(String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         return detectorRepo.managerFind(manager);
     }
 
     @Override
-    public Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone) {
-//        Manager manager = managerRepo.findByPhone(phone);
+    public Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String email) {
+//        Manager manager = managerRepo.findByEmail(email);
 //        return detectorRepo.managerCreateAndUpdate(payLoad2Data(detectorPayload), manager);
         return null;
     }
 
     @Override
     public boolean managerDelete(int id, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
-        return detectorRepo.managerDelete(id, manager);
+//        Manager manager = managerRepo.findByEmail(phone);
+//        return detectorRepo.managerDelete(id, manager);
+        return false;
     }
 
     @Override
@@ -67,7 +73,7 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public Detector managerFindById(int id, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         return detectorRepo.managerFindById(id, manager);
     }
 

@@ -8,7 +8,7 @@ public class UserPayload {
     private Integer id;
     private String password;
     private Integer idNumber;
-    private String phone;
+    private String email;
     private String equipment;
     private String address;
 

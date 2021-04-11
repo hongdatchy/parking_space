@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface UserRepo {
 
-    boolean checkPhoneExisted(String phone);
+    boolean checkEmailExisted(String email);
 
     boolean login(LoginForm loginForm);
 
     boolean register(RegisterForm registerForm);
 
-    User findByPhone(String phone);
+    User findByEmail(String email);
 
     User createAndUpdate(User user);
 
@@ -27,5 +27,7 @@ public interface UserRepo {
     boolean book(BookPayload bookPayload, User user);
 
     boolean changePass(ChangePassForm changePassForm, User user);
+
+    boolean verifyAccount(String mail, String code);
 
 }

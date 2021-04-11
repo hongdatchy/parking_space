@@ -27,8 +27,8 @@ public class User {
     @Column(name = "id_number", nullable = false)
     private Integer idNumber;
 
-    @Column(name = "phone", nullable = false)
-    private String phone;
+    @Column(name = "email", nullable = false)
+    private String email;
 
     @Column(name = "last_time_access")
     private Date lastTimeAccess;
@@ -38,6 +38,5 @@ public class User {
 
     @Column(name = "address", nullable = false)
     private String address;
-
 
 }

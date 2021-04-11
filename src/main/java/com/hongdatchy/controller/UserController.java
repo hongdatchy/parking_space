@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class UserController {
 
@@ -54,5 +52,9 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, phone)));
     }
 
+    @PostMapping("api/public/verify")
+    public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
+        return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getEmail(), verifyPayload.getCode())));
+    }
 
 }

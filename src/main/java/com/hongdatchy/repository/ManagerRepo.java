@@ -17,5 +17,5 @@ public interface ManagerRepo {
 
     boolean login(LoginForm loginForm);
 
-    Manager findByPhone(String phone);
+    Manager findByEmail(String email);
 }

@@ -44,7 +44,7 @@ public class ManagerService_Impl implements ManagerService {
     public Manager payload2data(ManagerPayload managerPayload){
         return Manager.builder()
                 .id(managerPayload.getId())
-                .phone(managerPayload.getPhone())
+                .email(managerPayload.getEmail())
                 .acp(managerPayload.getAcp())
                 .pass(managerPayload.getPass())
                 .lastTimeAccess(null)

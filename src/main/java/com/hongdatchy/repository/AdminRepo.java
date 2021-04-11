@@ -6,5 +6,5 @@ import com.hongdatchy.entities.payload.LoginForm;
 
 public interface AdminRepo {
     boolean login(LoginForm loginForm);
-    Admin findByPhone(String phone);
+    Admin findByEmail(String email);
 }

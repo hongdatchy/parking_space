@@ -41,23 +41,22 @@ public class LoginAndLogoutController {
     @PostMapping("api/public/login")
     public ResponseEntity<Object> login(@RequestBody LoginForm loginForm) throws Exception {
         if(userService.login(loginForm)){
-            return ResponseEntity.ok(MyResponse.loginSuccess("user",jwtService.getToken(loginForm.getPhone())));
+            return ResponseEntity.ok(MyResponse.loginSuccess("user",jwtService.getToken(loginForm.getEmail())));
         }else if(managerService.login(loginForm)){
-            return ResponseEntity.ok(MyResponse.loginSuccess("manager",jwtService.getToken(loginForm.getPhone())));
+            return ResponseEntity.ok(MyResponse.loginSuccess("manager",jwtService.getToken(loginForm.getEmail())));
         }else if(adminService.login(loginForm)){
-            return ResponseEntity.ok(MyResponse.loginSuccess("admin",jwtService.getToken(loginForm.getPhone())));
+            return ResponseEntity.ok(MyResponse.loginSuccess("admin",jwtService.getToken(loginForm.getEmail())));
         }
         return ResponseEntity.ok(MyResponse.fail("wrong phone or password"));
     }
     @GetMapping("api/public/logout")
     public ResponseEntity<Object> logout(@RequestHeader String token){
         String phone = jwtService.decode(token);
-        if(userRepo.findByPhone(phone) != null
-                || managerRepo.findByPhone(phone) != null
-                || adminRepo.findByPhone(phone) != null){
+        if(userRepo.findByEmail(phone) != null
+                || managerRepo.findByEmail(phone) != null
+                || adminRepo.findByEmail(phone) != null){
             return ResponseEntity.ok(MyResponse.success(true));
         }
         return ResponseEntity.ok(MyResponse.success(false));
     }
-
 }

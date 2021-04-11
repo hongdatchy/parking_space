@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class RegisterForm {
 
-    private String phone;
+    private String email;
     private String password;
     private String rePassword;
     private Integer idNumber;

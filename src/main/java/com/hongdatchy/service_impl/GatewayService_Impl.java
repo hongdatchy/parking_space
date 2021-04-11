@@ -42,21 +42,21 @@ public class GatewayService_Impl implements GatewayService {
 
     @Override
     public List<Gateway> managerFind(String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         if(manager == null) return null;
         return gatewayRepo.managerFind(manager);
     }
 
     @Override
     public Gateway managerUpdate(Gateway gateway, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         if(manager == null) return null;
         return gatewayRepo.managerUpdate(gateway, manager);
     }
 
     @Override
     public boolean managerDelete(int id, String phone) {
-        Manager manager = managerRepo.findByPhone(phone);
+        Manager manager = managerRepo.findByEmail(phone);
         if(manager == null) return false;
         return gatewayRepo.managerDelete(id, manager);
     }
