@@ -1,7 +1,8 @@
 CREATE TABLE field(
 	id int NOT NULL AUTO_INCREMENT,
     name varchar(120) not null,
-    position varchar(120) not null,
+    latitude varchar(120) not null,
+    longitude varchar(120) not null,
     address varchar(120) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
@@ -149,3 +150,5 @@ CREATE TABLE verify_table(
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `parking_space_2021`.`admin` (`id`, `email`, `pass`) VALUES ('1', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
