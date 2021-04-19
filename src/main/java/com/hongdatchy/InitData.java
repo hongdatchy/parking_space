@@ -33,10 +33,10 @@ public class InitData {
             fieldRepo.createAndUpdate(new Field(2,"C3", "lat", "long", "số 1 đại cồ việt"));
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
             gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
-            for (int i = 0; i < 200; i++) {
+            for (int i = 0; i < 50; i++) {
                 slotRepo.createAndUpdate(new Slot(i+1, 1, null, null));
             }
-            for (int i = 0; i < 200; i++) {
+            for (int i = 0; i < 50; i++) {
                 slotRepo.createAndUpdate(new Slot(i+201, 2, null, null));
             }
             System.out.println("Init data end");

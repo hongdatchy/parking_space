@@ -46,7 +46,7 @@ public class UserRepo_Impl implements UserRepo {
     @Override
     public boolean register(RegisterForm registerForm) {
 
-        String code = getRandomCode();
+        String code = getRandomCode();  
         boolean b = sendMailService.sendMail(registerForm.getEmail()
                 , "welcome to parking space system"
                 , "To verify your account, please enter this code to register page: " + code);
