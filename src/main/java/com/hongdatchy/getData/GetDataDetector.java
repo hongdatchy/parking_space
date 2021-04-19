@@ -121,8 +121,8 @@ public class GetDataDetector {
         sub.put("m2m:sub", obj);
         // System.out.println("\n[INFO]"+ "Sub to " + targetCse);
 
-        RestHttpClient.post(originator, csePoa + "/~/" + targetCse,
-                sub.toString(), 23);
+//        RestHttpClient.post(originator, csePoa + "/~/" + targetCse,
+//                sub.toString(), 23);
         // WHY ????? --> notify AE create
 
         // System.out.println("\n[INFO] Discover all containers in " + csePoa +
@@ -134,24 +134,24 @@ public class GetDataDetector {
     }
 
     static void subCnt(String parentCnt) throws JSONException, InterruptedException {
-        HttpResponse httpResponse = RestHttpClient.get(originator, csePoa
-                + "/~/" + parentCnt + "?fu=1&ty=3");
-        JSONObject result = new JSONObject(httpResponse.getBody());
-        JSONArray uril_arr = result.getJSONArray("m2m:uril");
-        for (Object urlCnt : uril_arr) {
-            //  for (int i=0; i < uril_arr.length(); i++) {
-//            System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
-//            RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
-//                   sub.toString(), 23);
-            if(((String) urlCnt).indexOf("DATA_LORA")==-1){
-                System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
-                RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
-                        sub.toString(), 23);
-            }
-//            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
-//                    sub.toString(), 23);
-//            Thread.sleep(2000);
-        }
+//        HttpResponse httpResponse = RestHttpClient.get(originator, csePoa
+//                + "/~/" + parentCnt + "?fu=1&ty=3");
+//        JSONObject result = new JSONObject(httpResponse.getBody());
+//        JSONArray uril_arr = result.getJSONArray("m2m:uril");
+//        for (Object urlCnt : uril_arr) {
+//            //  for (int i=0; i < uril_arr.length(); i++) {
+////            System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
+////            RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
+////                   sub.toString(), 23);
+//            if(((String) urlCnt).indexOf("DATA_LORA")==-1){
+//                System.out.println("\n[doSubCnt] Sub to uri container " + urlCnt);
+//                RestHttpClient.post(originator, csePoa + "/~" + urlCnt,
+//                        sub.toString(), 23);
+//            }
+////            RestHttpClient.post(originator, csePoa + "/~" + uril_arr.getJSONObject(i),
+////                    sub.toString(), 23);
+////            Thread.sleep(2000);
+//        }
     }
 
     static String getParent(String uri, String name) {
@@ -328,7 +328,7 @@ public class GetDataDetector {
                             ? GetTime.getTime(time) : oldDetector.getLastTimeSetup())
                     .lastTimeUpdate(GetTime.getTime(time))
                     .batteryLevel(map.get("Battery Level"))
-                    .communication_level("Communication Level")
+                    .communication_level(map.get("Communication Level"))
                     .slotId(slots.get(Integer.parseInt(map.get("Location"))-1).getId())
                     .gatewayId(1)
                     .build();
