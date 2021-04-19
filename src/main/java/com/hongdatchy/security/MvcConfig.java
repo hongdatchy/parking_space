@@ -10,7 +10,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/api/**") // xác định URI
     .allowedOrigins("*") // Chỉ định các domain, * là tất cả
-    .allowedMethods("PUT", "DELETE", "GET", "POST") // chỉ định các method, * là tất cả
+    .allowedMethods("PUT", "DELETE", "GET", "POST", "*") // chỉ định các method, * là tất cả
     .allowedHeaders("*"); // chỉ định các header cho phép
     }
 }

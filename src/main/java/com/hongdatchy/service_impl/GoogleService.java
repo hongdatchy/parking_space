@@ -58,7 +58,6 @@ public class GoogleService implements SocialService {
         ObjectMapper mapper = new ObjectMapper();
         GooglePojo pojo = mapper.readValue(response, GooglePojo.class); // map với entity
         String email = pojo.getEmail();
-        System.out.println(pojo);
         User user = userRepo.findByEmail(email);
         if (user != null) return user;
         User newUser = User.builder()

@@ -47,10 +47,6 @@ public class UserRepo_Impl implements UserRepo {
     public boolean register(RegisterForm registerForm) {
 
         String code = getRandomCode();
-        String extension = registerForm.getEmail().substring(registerForm.getEmail().lastIndexOf("@"));
-        if(!extension.equals("@gmail.com")){
-            return false;
-        }
         boolean b = sendMailService.sendMail(registerForm.getEmail()
                 , "welcome to parking space system"
                 , "To verify your account, please enter this code to register page: " + code);
