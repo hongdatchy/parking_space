@@ -30,13 +30,25 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "last_time_access")
-    private Date lastTimeAccess;
-
     @Column(name = "equipment", nullable = false)
     private String equipment;
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    @Column(name = "last_time_access", nullable = false)
+    private Date lastTimeAccess;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "sex", nullable = false)
+    private String sex;
+
+    @Column(name = "birth", nullable = false)
+    private Date birth;
 
 }

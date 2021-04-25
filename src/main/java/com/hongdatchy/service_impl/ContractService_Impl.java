@@ -39,6 +39,8 @@ public class ContractService_Impl implements ContractService {
                 .timeCarOut(null)
                 .timeOutBook(contractPayload.getTimeOutBook())
                 .timeInBook(contractPayload.getTimeInBook())
+                .carNumber(contractPayload.getCarNumber())
+                .dtCreate(contractPayload.getDtCreate())
                 .build();
     }
 

@@ -39,4 +39,10 @@ public class Contract  {
     @Column(name = "time_out_book", nullable = false)
     private Date timeOutBook;
 
+    @Column(name = "car_number", nullable = false)
+    private String carNumber;
+
+    @Column(name = "dt_create", nullable = false)
+    private Date dtCreate;
+
 }

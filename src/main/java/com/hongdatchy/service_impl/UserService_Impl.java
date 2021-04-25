@@ -11,6 +11,7 @@ import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -53,8 +54,8 @@ public class UserService_Impl implements UserService {
     @Override
     public boolean book(BookPayload bookPayload, String email) {
         User user = userRepo.findByEmail(email);
-        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","",""));
-        if(fieldJson.getTotalSlot() < fieldJson.getBusySlot() + fieldJson.getTotalBook()){
+        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","","","",new BigDecimal("0.0"), ""));
+        if(fieldJson.getTotalSlot() < fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()){
             return false;
         }
         return user != null && userRepo.book(bookPayload, user);
@@ -75,6 +76,10 @@ public class UserService_Impl implements UserService {
                 .email(userPayload.getEmail())
                 .password(userPayload.getPassword())
                 .lastTimeAccess(null)
+                .phone(userPayload.getPhone())
+                .birth(userPayload.getBirth())
+                .image(userPayload.getImage())
+                .sex(userPayload.getSex())
                 .build();
     }
 

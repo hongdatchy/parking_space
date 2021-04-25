@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "field")
@@ -29,4 +30,20 @@ public class Field  {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "price", nullable = false)
+    private String price;
+
+    @Column(name = "openstatus", nullable = false)
+    private String openstatus;
+
+    @Column(name = "space", nullable = false)
+    private BigDecimal space ;
+
+    @Column(name = "details", nullable = false, columnDefinition = "longtext")
+    private String details;
+
 }

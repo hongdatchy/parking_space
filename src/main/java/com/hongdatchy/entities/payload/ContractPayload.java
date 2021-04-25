@@ -12,5 +12,7 @@ public class ContractPayload {
     private Integer fieldId;
     private Date timeInBook;
     private Date timeOutBook;
+    private String carNumber;
+    private Date dtCreate;
 
 }
