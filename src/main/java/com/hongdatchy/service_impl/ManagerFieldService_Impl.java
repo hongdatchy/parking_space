@@ -7,6 +7,7 @@ import com.hongdatchy.service.ManagerFieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ManagerFieldService_Impl implements ManagerFieldService {
     public ManagerField payload2Data(ManagerFieldPayload managerFieldPayload){
         return ManagerField.builder()
                 .id(managerFieldPayload.getId())
-                .lastTimeSetup(new Date())
+                .lastTimeSetup(new Timestamp(new Date().getTime()))
                 .fieldId(managerFieldPayload.getFieldId())
                 .managerId(managerFieldPayload.getManagerId())
                 .build();

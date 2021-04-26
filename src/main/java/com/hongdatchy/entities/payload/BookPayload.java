@@ -2,11 +2,12 @@ package com.hongdatchy.entities.payload;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 @Data
 public class BookPayload {
     private Integer fieldId;
-    private Date timeInBook;
-    private Date timeOutBook;
+    private Timestamp timeInBook;
+    private Timestamp timeOutBook;
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -28,21 +29,21 @@ public class Contract  {
     private Integer userId;
 
     @Column(name = "time_car_in")
-    private Date timeCarIn;
+    private Timestamp timeCarIn;
 
     @Column(name = "time_car_out")
-    private Date timeCarOut;
+    private Timestamp timeCarOut;
 
     @Column(name = "time_in_book", nullable = false)
-    private Date timeInBook;
+    private Timestamp timeInBook;
 
     @Column(name = "time_out_book", nullable = false)
-    private Date timeOutBook;
+    private Timestamp timeOutBook;
 
     @Column(name = "car_number", nullable = false)
     private String carNumber;
 
     @Column(name = "dt_create", nullable = false)
-    private Date dtCreate;
+    private Timestamp dtCreate;
 
 }

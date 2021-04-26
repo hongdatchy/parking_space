@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "detector")
@@ -36,9 +36,9 @@ public class Detector {
     private String communication_level;
 
     @Column(name = "last_time_update", nullable = false)
-    private Date lastTimeUpdate;
+    private Timestamp lastTimeUpdate;
 
     @Column(name = "last_time_setup", nullable = false)
-    private Date lastTimeSetup;
+    private Timestamp lastTimeSetup;
 
 }

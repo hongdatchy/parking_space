@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class ManagerRepo_Impl implements ManagerRepo {
                 .setParameter("password", SHA256Service.getSHA256(loginForm.getPassword()))
                 .getResultList();
         if(managers.size() != 0){
-            managers.get(0).setLastTimeAccess(new Date());
+            managers.get(0).setLastTimeAccess(new Timestamp(new Date().getTime()));
             return true;
         }
         return false;

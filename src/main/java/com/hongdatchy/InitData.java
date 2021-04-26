@@ -34,17 +34,17 @@ public class InitData {
 
     @PostConstruct
     public void init(){
-        if(fieldRepo.findAll().get(0).getId() != 1){
+        if(slotRepo.findAll().size() != 100){
             System.out.println("Init data start");
             fieldRepo.createAndUpdate(new Field(1,"C9", "lat", "long", "số 1 đại cồ việt", "image", "price", "O", new BigDecimal("0.0"), "details"));
             fieldRepo.createAndUpdate(new Field(2,"Trần Đại Nghĩa", "lat", "long", "số 1 đại cồ việt", "image", "price", "O", new BigDecimal("0.0"), "details"));
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
             gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
             for (int i = 0; i < 50; i++) {
-                slotRepo.createAndUpdate(new Slot(i+1, 1, null, null));
+                slotRepo.createAndUpdate(new Slot(i+1, 1, false, true));
             }
             for (int i = 0; i < 50; i++) {
-                slotRepo.createAndUpdate(new Slot(i+201, 2, null, null));
+                slotRepo.createAndUpdate(new Slot(i+51, 2, false, true));
             }
             System.out.println("Init data end");
         }

@@ -43,6 +43,7 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public List<Detector> findAll() {
+        System.out.println(detectorRepo.findAll());
         return detectorRepo.findAll();
     }
 

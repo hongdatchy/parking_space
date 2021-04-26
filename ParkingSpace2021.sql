@@ -39,8 +39,8 @@ CREATE TABLE detector(
     gateway_id int not null,
     battery_level varchar(20) not null,
     communication_level varchar(20) not null,
-    last_time_update date not null,
-    last_time_setup date not null,
+    last_time_update datetime not null,
+    last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
     CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`),
@@ -55,10 +55,10 @@ CREATE TABLE user(
 	equipment varchar(20) not null,
     address varchar(120) not null,
     phone varchar(45) not null,
-    last_time_access date not null,
+    last_time_access datetime,
 	image varchar(200) default null,
     sex varchar(1) not null,
-    birth date not null,
+    birth datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -66,8 +66,8 @@ CREATE TABLE user(
 CREATE TABLE tag(
 	id int NOT NULL AUTO_INCREMENT,
     user_id int not null,
-	time_car_in date,
-    time_car_out date,
+	time_car_in datetime,
+    time_car_out datetime,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -77,7 +77,7 @@ CREATE TABLE manager(
 	id int NOT NULL AUTO_INCREMENT,
     email varchar(20) not null,
     pass varchar(256) not null,
-    last_time_access date,
+    last_time_access datetime,
     acp bit(1) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
@@ -87,12 +87,12 @@ CREATE TABLE contract(
 	id int NOT NULL AUTO_INCREMENT,
     field_id int not null,
     user_id int not null,
-    time_car_in date,
-    time_car_out date,
-    time_in_book date not null,
-    time_out_book date not null,
+    time_car_in datetime,
+    time_car_out datetime,
+    time_in_book datetime not null,
+    time_out_book datetime not null,
     car_number varchar(45) not null,
-    dt_create date not null,
+    dt_create datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
     CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
@@ -103,7 +103,7 @@ CREATE TABLE manager_field(
 	id int NOT NULL AUTO_INCREMENT,
     field_id int not null,
     manager_id int not null,
-    last_time_setup date not null,
+    last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
 	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
@@ -144,7 +144,7 @@ CREATE TABLE data_cam_and_detector(
 	slot_id int not null,
     status_detector bit(1),
     status_cam bit(1),
-    time date not null,
+    time datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -158,7 +158,7 @@ CREATE TABLE verify_table(
 	equipment varchar(20) not null,
     address varchar(120) not null,
     phone varchar(45) not null,
-    last_time_access date not null,
+    last_time_access datetime,
 	image varchar(200) default null,
     sex varchar(1) not null,
     birth date not null,
@@ -168,6 +168,8 @@ CREATE TABLE verify_table(
 
 INSERT INTO `parking_space_2021`.`admin` (`id`, `email`, `pass`) VALUES ('1', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
+INSERT INTO `field` VALUES ('1', 'C9', '20.960377427559497', '105.79658800934396', "Đại học BKHN", "", '50000', 'O', 50, "Bãi đồ xe C9");
+INSERT INTO `field` VALUES ('2', 'C3', '21.0066272', '105.8416806', "Đại học BKHN", "", '50000', 'O', 40, "Bãi đồ xe C3");
 INSERT INTO `field` VALUES ('3', '17 Phùng Hưng, Hà Đông - Hà Nội', 'Hà Nội', '', '20.960377427559497', '105.79658800934396', '50000', 'O', 15, 'id, image, address, lat, lon, location, price, distance, openstatus, space, details');
 INSERT INTO `field` VALUES ('4', 'Điểm đỗ xe sau toà nhà Viglacera 671 Hoàng Hoa Thám', 'Hà Nội', '', '21.045006923839967', '105.80782829707834', '50000', 'O', 15, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis. Iaculis urna id volutpat lacus laoreet. Mauris vitae ultricies leo integer malesuada. Ac odio tempor orci dapibus ultrices in. Egestas diam in arcu cursus euismod. Dictum fusce ut');
 INSERT INTO `field` VALUES ('5', 'Điểm đỗ xe Nguyễn Đình Chiểu', 'Hà Nội', '', '21.01916918502266', '105.84623814002637', '50000', 'O', 16, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis. Iaculis urna id volutpat lacus laoreet. Mauris vitae ultricies leo integer malesuada. Ac odio tempor orci dapibus ultrices in. Egestas diam in arcu cursus euismod. Dictum fusce ut');
@@ -181,12 +183,17 @@ INSERT INTO `field` VALUES ('12', 'Điểm đỗ xe Quang Trung, Ngã 4 Trần h
 INSERT INTO `field` VALUES ('13', 'Điểm đỗ xe nhà hát lớn, Phố Cổ Tân', 'Hà Nội', '', '21.064494902781068', '105.85787149584964', '50000', 'O', 21, '. Chỉ trông xe đến 10h đêm.');
 INSERT INTO `field` VALUES ('14', 'Điểm đỗ xe Vạn Phúc, Ba Đình', 'Hà Nội', '', '21.060184939684095', '105.81693711119136', '50000', 'O', 42, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis. Iaculis urna id volutpat lacus laoreet. Mauris vitae ultricies leo integer malesuada. Ac odio tempor orci dapibus ultrices in. Egestas diam in arcu cursus euismod. Dictum fusce ut');
 
--- 2 cai ben duoi sai
+INSERT INTO `gateway` VALUES("1","1","255.255.0.0");
+INSERT INTO `gateway` VALUES("2","2","255.255.0.8");
 
--- INSERT INTO `user` VALUES ('1', '0368776688', '36f583dd16f4e1e201eb1e6f6d8e35a2ccb3bbe2658de46b4ffae7b0e9ed872e', '2021-04-05 11:30:05', 'Hà Nội', 'thanh.lv@techplus.com.vn', NULL, 'F', '1997-10-10');
--- INSERT INTO `user` VALUES ('2', '0367887788', '36f583dd16f4e1e201eb1e6f6d8e35a2ccb3bbe2658de46b4ffae7b0e9ed872e', '2021-05-05 12:00:00', 'Hà Nội', 'thanh.lv@techplus.com.vn', NULL, 'F', '1997-10-10');
-
--- INSERT INTO `tbl_dsdatcho` VALUES ('1', 'Điểm đỗ xe Hà Đông', '17 Phùng Hưng, Hà Đông - Hà Nội', 'V', '29D-99999', '2021-04-04 11:30:00', '2021-04-03 11:30:00', '2021-04-05 11:30:00');
--- INSERT INTO `tbl_dsdatcho` VALUES ('2', 'Điểm đỗ xe giáp bát', '17 Phùng Hưng, Hà Đông - Hà Nội', 'Y', '29D-99999', '2021-04-04 11:30:00', '2021-04-04 11:30:00', '2021-04-06 11:30:00');
--- INSERT INTO `tbl_dsdatcho` VALUES ('3', 'Điểm đỗ xe Hoàn Kiếm 2', 'Cửa Đông, Hoàn Kiếm - Hà Nội', 'C', '29D-99999', '2021-04-04 11:30:00', '2021-04-05 11:30:00', '2021-04-07 11:30:00');
--- INSERT INTO `tbl_dsdatcho` VALUES ('4', 'Điểm đỗ xe Hoàn Kiếm', 'Trần Hưng Đạo, Hoàn Kiếm - Hà Nội', 'R', '29D-99999', '2021-04-04 11:30:00', '2021-04-06 11:30:00', '2021-04-08 11:30:00');
+-- phai init data trong be xong ms dc chay cac dong ben duoi
+-- INSERT INTO `detector` VALUES ("0","255.255.0.100","22","1","015","Communication Level","20210422123247","2021-04-22 12:25:54");
+-- INSERT INTO `detector` VALUES ("1","255.255.0.101","23","1","015","Communication Level","20210422123247","2021-04-22 13:25:54");
+-- INSERT INTO `detector` VALUES ("2","255.255.0.102","24","1","015","Communication Level","2021-04-22 14:32:47","2021-04-22 14:25:54");
+-- INSERT INTO `detector` VALUES ("3","255.255.0.103","25","1","015","Communication Level","2021-04-22 15:32:47","2021-04-22 15:25:54");
+-- INSERT INTO `detector` VALUES ("4","255.255.0.104","26","1","015","Communication Level","2021-04-22 16:32:47","2021-04-22 16:25:54");
+-- INSERT INTO `detector` VALUES ("5","255.255.0.105","27","1","015","Communication Level","2021-04-22 17:32:47","2021-04-22 17:25:54");
+-- INSERT INTO `detector` VALUES ("6","255.255.0.106","28","1","015","Communication Level","2021-04-22 18:32:47","2021-04-22 18:25:54");
+-- INSERT INTO `detector` VALUES ("7","255.255.0.107","29","1","015","Communication Level","2021-04-22 19:32:47","2021-04-22 19:25:54");
+-- INSERT INTO `detector` VALUES ("8","255.255.0.108","30","1","015","Communication Level","2021-04-22 20:32:47","2021-04-22 20:25:54");
+-- INSERT INTO `detector` VALUES ("9","255.255.0.109","31","1","015","Communication Level","2021-04-22 21:32:47","2021-04-22 21:25:54");

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.sql.Timestamp;
 import java.util.*;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -37,7 +38,7 @@ public class UserRepo_Impl implements UserRepo {
                 .setParameter("password", SHA256Service.getSHA256(loginForm.getPassword()))
                 .getResultList();
         if(users.size() != 0){
-            users.get(0).setLastTimeAccess(new Date());
+            users.get(0).setLastTimeAccess(new Timestamp(new Date().getTime()));
             return true;
         }
         return false;

@@ -3,6 +3,7 @@ package com.hongdatchy.entities.json;
 import lombok.Builder;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Builder
@@ -15,8 +16,8 @@ public class SlotJson {
     private Boolean statusCam;
     private String AddressGateway;
     private String AddressDetector;
-    private String lastTimeUpdate;
-    private String lastTimeSetup;
+    private Timestamp lastTimeUpdate;
+    private Timestamp lastTimeSetup;
     private Integer detectorId;
 
 }

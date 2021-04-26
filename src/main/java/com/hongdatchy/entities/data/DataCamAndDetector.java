@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -31,6 +32,6 @@ public class DataCamAndDetector {
     private Boolean statusCam;
 
     @Column(name = "time", nullable = false)
-    private Date time;
+    private Timestamp time;
 
 }

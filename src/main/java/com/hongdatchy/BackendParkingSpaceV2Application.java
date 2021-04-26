@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import com.hongdatchy.entities.data.DataCamAndDetector;
@@ -66,9 +67,6 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
-        
-		//GetDataDetector.main(args);
-
         //update();
     }
 

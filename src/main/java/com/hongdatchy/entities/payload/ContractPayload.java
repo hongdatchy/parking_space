@@ -2,6 +2,7 @@ package com.hongdatchy.entities.payload;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -10,9 +11,9 @@ public class ContractPayload {
     private Integer id;
     private Integer userId;
     private Integer fieldId;
-    private Date timeInBook;
-    private Date timeOutBook;
+    private Timestamp timeInBook;
+    private Timestamp timeOutBook;
     private String carNumber;
-    private Date dtCreate;
+    private Timestamp dtCreate;
 
 }

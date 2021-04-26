@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,7 +57,10 @@ public class UserService_Impl implements UserService {
     public boolean book(BookPayload bookPayload, String email) {
         User user = userRepo.findByEmail(email);
         FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","","","",new BigDecimal("0.0"), ""));
-        if(fieldJson.getTotalSlot() < fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()){
+        if(fieldJson.getTotalSlot() < fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
+            || bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
+            || bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() < 1800000// 3 hour
+        ){
             return false;
         }
         return user != null && userRepo.book(bookPayload, user);

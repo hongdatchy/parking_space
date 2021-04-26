@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "verify_table")
@@ -42,8 +43,8 @@ public class VerifyTable {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "last_time_access", nullable = false)
-    private Date lastTimeAccess;
+    @Column(name = "last_time_access")
+    private Timestamp lastTimeAccess;
 
     @Column(name = "image")
     private String image;

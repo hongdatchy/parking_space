@@ -29,6 +29,6 @@ public class ManagerField {
     private Integer managerId;
 
     @Column(name = "last_time_setup", nullable = false)
-    private Date lastTimeSetup;
+    private Timestamp lastTimeSetup;
 
 }

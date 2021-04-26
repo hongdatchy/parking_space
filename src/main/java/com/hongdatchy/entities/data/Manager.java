@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -28,7 +29,7 @@ public class Manager {
     private String pass;
 
     @Column(name = "last_time_access")
-    private Date lastTimeAccess;
+    private Timestamp lastTimeAccess;
 
     @Column(name = "acp", nullable = false)
     private Boolean acp;

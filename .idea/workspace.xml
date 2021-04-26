@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/BackendParkingSpaceV2Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/BackendParkingSpaceV2Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/InitData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/InitData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/ContractController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/DataCamAndDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/DataCamAndDetector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Detector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Detector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/ManagerField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/ManagerField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/VerifyTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/VerifyTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/json/SlotJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/json/SlotJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/BookPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/BookPayload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/ContractPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/ContractPayload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/getData/GetTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/getData/GetTime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/ManagerRepo_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/ManagerRepo_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/UserRepo_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/UserRepo_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/DetectorService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/DetectorService_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/ManagerFieldService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/ManagerFieldService_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/SlotService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/SlotService_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/BackendParkingSpaceV2Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/BackendParkingSpaceV2Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/InitData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/InitData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/ContractController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/ContractController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract$ContractBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract$ContractBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/DataCamAndDetector$DataCamAndDetectorBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/DataCamAndDetector$DataCamAndDetectorBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/DataCamAndDetector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/DataCamAndDetector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Detector$DetectorBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Detector$DetectorBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Detector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Detector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Manager$ManagerBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Manager$ManagerBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/ManagerField$ManagerFieldBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/ManagerField$ManagerFieldBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/ManagerField.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/ManagerField.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/VerifyTable$VerifyTableBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/VerifyTable$VerifyTableBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/VerifyTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/VerifyTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson$SlotJsonBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson$SlotJsonBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/BookPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/BookPayload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/ContractPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/ContractPayload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector$MyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector$MyHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetTime.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ContractRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ContractRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ManagerRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ManagerRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ContractService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ContractService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/DetectorService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/DetectorService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/FieldService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/FieldService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ManagerFieldService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ManagerFieldService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ManagerService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ManagerService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/SlotService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/SlotService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="package-info" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:\IntelliJ IDEA 2019.2.4\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1qz7XHS0uOA19ZZt49Pdr7SY31e" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BackendParkingSpaceV2" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hongdatchy.controller" />
+      <recent name="com.hongdatchy.entities.social" />
+      <recent name="com.hongdatchy.service_impl" />
+      <recent name="com.hongdatchy.service" />
+      <recent name="com.hongdatchy.entities.payload" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BackendParkingSpaceV2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="backendparkingspacev2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.hongdatchy.BackendParkingSpaceV2Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="" />
+      <created>1618070602812</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618070602812</updated>
+      <workItem from="1618070603967" duration="2543000" />
+      <workItem from="1618073176440" duration="3096000" />
+      <workItem from="1618133957636" duration="9064000" />
+      <workItem from="1618147875017" duration="2321000" />
+      <workItem from="1618286865464" duration="6346000" />
+      <workItem from="1618302988577" duration="1646000" />
+      <workItem from="1618323112526" duration="5619000" />
+      <workItem from="1618372766361" duration="3992000" />
+      <workItem from="1618377290763" duration="623000" />
+      <workItem from="1618411328059" duration="708000" />
+      <workItem from="1618413309044" duration="1338000" />
+      <workItem from="1618540048938" duration="7483000" />
+      <workItem from="1618561285366" duration="3803000" />
+      <workItem from="1618582852725" duration="215000" />
+      <workItem from="1618813301853" duration="2959000" />
+      <workItem from="1618819581223" duration="806000" />
+      <workItem from="1618821881374" duration="2010000" />
+      <workItem from="1618905237911" duration="811000" />
+      <workItem from="1618907030895" duration="92000" />
+      <workItem from="1619321485584" duration="9455000" />
+      <workItem from="1619344548626" duration="132000" />
+      <workItem from="1619438848632" duration="4579000" />
+      <workItem from="1619447703777" duration="11857000" />
+    </task>
+    <task id="LOCAL-00001" summary="2021 ConfigVar">
+      <created>1618292984132</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618292984132</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2021 ConfigVar" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 ConfigVar" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618071832253">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1618071832253" />
+    <state x="337" y="293" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1619458885766">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="337" y="293" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.738@0.0.1366.738" timestamp="1619458885766" />
+    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1619446312308">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1619446312308" />
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1618292981993">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1618292981993" />
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1619459580525">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1619459580525" />
+    <state width="1323" height="227" key="GridCell.Tab.0.bottom" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.0.center" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.0.left" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.0.right" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.1.bottom" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.1.center" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.1.left" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.1.right" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.2.bottom" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.2.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.2.center" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.2.center/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.2.left" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.2.left/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="1323" height="227" key="GridCell.Tab.2.right" timestamp="1619460492889">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="227" key="GridCell.Tab.2.right/0.0.1366.738@0.0.1366.738" timestamp="1619460492889" />
+    <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1618071740123">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="196" height="457" key="HiddenNamespacesPopup/0.0.1366.738@0.0.1366.738" timestamp="1618071740123" />
+    <state x="317" y="71" key="JpaSupport:com.ifengxue.plugin.gui.AutoGeneratorSettingsDialog" timestamp="1619446293615">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="317" y="71" key="JpaSupport:com.ifengxue.plugin.gui.AutoGeneratorSettingsDialog/0.0.1366.738@0.0.1366.738" timestamp="1619446293615" />
+    <state x="345" y="81" key="JpaSupport:com.ifengxue.plugin.gui.SelectTablesDialog" timestamp="1619446295103">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="345" y="81" key="JpaSupport:com.ifengxue.plugin.gui.SelectTablesDialog/0.0.1366.738@0.0.1366.738" timestamp="1619446295103" />
+    <state x="213" y="24" key="Maven.ArtifactSearchDialog" timestamp="1618134393878">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="213" y="24" key="Maven.ArtifactSearchDialog/0.0.1366.738@0.0.1366.738" timestamp="1618134393878" />
+    <state x="275" y="102" key="Vcs.Push.Dialog.v2" timestamp="1618293003607">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="102" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1618293003607" />
+    <state x="274" y="30" key="new project wizard" timestamp="1618076780508">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="274" y="30" key="new project wizard/0.0.1366.738@0.0.1366.738" timestamp="1618076780508" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1619340421596">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1619340421596" />
+  </component>
+</project>

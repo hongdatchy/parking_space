@@ -1,10 +1,11 @@
 package com.hongdatchy.getData;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
 public class GetTime {
-    public static Date getTime(String time){
+    public static Timestamp getTime(String time){
         int year = Integer.parseInt(time.substring(0,4));
 //                        month in calendar of java must - 1
         int month = Integer.parseInt(time.substring(4,6)) -1 ;
@@ -20,6 +21,7 @@ public class GetTime {
         cal.set(Calendar.MINUTE, minute);
         cal.set(Calendar.SECOND, second);
         cal.set(Calendar.MILLISECOND, 0);
-        return cal.getTime();
+        Date date = cal.getTime();
+        return new Timestamp(date.getTime());
     }
 }

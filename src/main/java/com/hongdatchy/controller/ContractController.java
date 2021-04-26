@@ -1,5 +1,6 @@
 package com.hongdatchy.controller;
 
+import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.ContractPayload;
 import com.hongdatchy.entities.payload.DetectorPayload;
@@ -17,7 +18,9 @@ public class ContractController {
 
     @PostMapping("api/ad/contract/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody ContractPayload contractPayload){
-        return ResponseEntity.ok(MyResponse.success(contractService.createAndUpdate(contractPayload)));
+        Contract contract = contractService.createAndUpdate(contractPayload);
+        return ResponseEntity.ok().body(MyResponse.success(contract));
+
     }
 
     @GetMapping("api/ad/contract/find_all")
