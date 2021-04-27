@@ -57,13 +57,24 @@ public class UserService_Impl implements UserService {
     public boolean book(BookPayload bookPayload, String email) {
         User user = userRepo.findByEmail(email);
         FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","","","",new BigDecimal("0.0"), ""));
-        if(fieldJson.getTotalSlot() < fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
+        System.out.println(fieldJson.getTotalSlot());
+        System.out.println(fieldJson.getBusySlot());
+        System.out.println(fieldJson.getTotalBook());
+        System.out.println(bookPayload.getTimeInBook().getTime());
+        System.out.println(bookPayload.getTimeOutBook().getTime());
+        System.out.println(new Timestamp(new Date().getTime()).getTime());
+        System.out.println(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook());
+        System.out.println(bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime());
+        System.out.println(bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() > 1800000);
+        if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
             || bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
-            || bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() < 1800000// 3 hour
+            || bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() > 1800000// 3 hour
         ){
-            return false;
+            System.out.println(user);
+            return user != null && userRepo.book(bookPayload, user);
         }
-        return user != null && userRepo.book(bookPayload, user);
+        return false;
+
     }
 
     @Override

@@ -60,6 +60,10 @@ public class UserRepo_Impl implements UserRepo {
                 .lastTimeAccess(null)
                 .email(registerForm.getEmail())
                 .pass(SHA256Service.getSHA256(registerForm.getPassword()))
+                .birth(registerForm.getBirth())
+                .image(registerForm.getImage())
+                .phone(registerForm.getPhone())
+                .sex(registerForm.getSex())
                 .build());
         return b;
     }
@@ -126,9 +130,11 @@ public class UserRepo_Impl implements UserRepo {
     public boolean book(BookPayload bookPayload, User user) {
         Contract contract = contractRepo.createAndUpdate(Contract.builder()
                 .fieldId(bookPayload.getFieldId())
-                .id(null)
+                .id(-1)
                 .timeInBook(bookPayload.getTimeInBook())
                 .timeOutBook(bookPayload.getTimeOutBook())
+                .carNumber(bookPayload.getCarNumber())
+                .dtCreate(new Timestamp(new Date().getTime()))
                 .timeCarIn(null)
                 .timeCarOut(null)
                 .userId(user.getId())
@@ -164,6 +170,10 @@ public class UserRepo_Impl implements UserRepo {
                     .idNumber(verifyTables.get(verifyTables.size() -1).getIdNumber())
                     .address(verifyTables.get(verifyTables.size() -1).getAddress())
                     .lastTimeAccess(verifyTables.get(verifyTables.size() -1).getLastTimeAccess())
+                    .phone(verifyTables.get(verifyTables.size() -1).getPhone())
+                    .sex(verifyTables.get(verifyTables.size() -1).getSex())
+                    .image(verifyTables.get(verifyTables.size() -1).getImage())
+                    .birth(verifyTables.get(verifyTables.size() -1).getBirth())
                     .build());
         }
         return true;
