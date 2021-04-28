@@ -18,9 +18,7 @@ public class ContractController {
 
     @PostMapping("api/ad/contract/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody ContractPayload contractPayload){
-        Contract contract = contractService.createAndUpdate(contractPayload);
-        return ResponseEntity.ok().body(MyResponse.success(contract));
-
+        return ResponseEntity.ok(MyResponse.success(contractService.createAndUpdate(contractPayload)));
     }
 
     @GetMapping("api/ad/contract/find_all")

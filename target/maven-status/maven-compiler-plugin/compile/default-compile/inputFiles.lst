@@ -25,6 +25,7 @@ E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\Contrac
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository\AdminRepo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository\SlotRepo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository_impl\GatewayRepo_Impl.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\TimeUpdateForm.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\data\Gateway.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository\ManagerRepo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\security\MvcConfig.java

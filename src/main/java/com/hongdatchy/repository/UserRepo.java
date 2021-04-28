@@ -1,5 +1,6 @@
 package com.hongdatchy.repository;
 
+import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.payload.BookPayload;
 import com.hongdatchy.entities.payload.ChangePassForm;
@@ -24,10 +25,12 @@ public interface UserRepo {
 
     List<User> findAll();
 
-    boolean book(BookPayload bookPayload, User user);
+    Contract book(BookPayload bookPayload, User user);
 
     boolean changePass(ChangePassForm changePassForm, User user);
 
     boolean verifyAccount(String mail, String code);
+
+
 
 }

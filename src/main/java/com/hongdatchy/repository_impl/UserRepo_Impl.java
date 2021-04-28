@@ -127,10 +127,9 @@ public class UserRepo_Impl implements UserRepo {
     }
 
     @Override
-    public boolean book(BookPayload bookPayload, User user) {
-        Contract contract = contractRepo.createAndUpdate(Contract.builder()
+    public Contract book(BookPayload bookPayload, User user) {
+        return contractRepo.createAndUpdate(Contract.builder()
                 .fieldId(bookPayload.getFieldId())
-                .id(-1)
                 .timeInBook(bookPayload.getTimeInBook())
                 .timeOutBook(bookPayload.getTimeOutBook())
                 .carNumber(bookPayload.getCarNumber())
@@ -139,7 +138,6 @@ public class UserRepo_Impl implements UserRepo {
                 .timeCarOut(null)
                 .userId(user.getId())
                 .build());
-        return contract != null;
     }
 
     @Override
@@ -178,6 +176,9 @@ public class UserRepo_Impl implements UserRepo {
         }
         return true;
     }
+
+
+
     public String getRandomCode(){
         String rs="";
         for (int i=0; i< 6; i++){

@@ -1,5 +1,6 @@
 package com.hongdatchy.entities.payload;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -11,9 +12,12 @@ public class ContractPayload {
     private Integer id;
     private Integer userId;
     private Integer fieldId;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp timeInBook;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp timeOutBook;
     private String carNumber;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp dtCreate;
 
 }

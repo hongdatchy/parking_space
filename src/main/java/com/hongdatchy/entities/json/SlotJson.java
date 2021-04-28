@@ -16,8 +16,8 @@ public class SlotJson {
     private Boolean statusCam;
     private String AddressGateway;
     private String AddressDetector;
-    private Timestamp lastTimeUpdate;
-    private Timestamp lastTimeSetup;
+    private Timestamp lastTimeCam;
+    private Timestamp lastTimeDetector;
     private Integer detectorId;
 
 }

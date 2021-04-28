@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Service
 @Transactional
@@ -34,6 +35,7 @@ public class InitData {
 
     @PostConstruct
     public void init(){
+
         if(slotRepo.findAll().size() != 100){
             System.out.println("Init data start");
             fieldRepo.createAndUpdate(new Field(1,"C9", "lat", "long", "số 1 đại cồ việt", "image", "price", "O", new BigDecimal("0.0"), "details"));
@@ -41,13 +43,15 @@ public class InitData {
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
             gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
             for (int i = 0; i < 50; i++) {
-                slotRepo.createAndUpdate(new Slot(i+1, 1, false, true));
+                slotRepo.createAndUpdate(new Slot(i+1, 1, false, false));
             }
             for (int i = 0; i < 50; i++) {
-                slotRepo.createAndUpdate(new Slot(i+51, 2, false, true));
+                slotRepo.createAndUpdate(new Slot(i+51, 2, false, false));
             }
             System.out.println("Init data end");
         }
+
+
 
 //        if(packageRepo.findAll().size() > 0){
 //            System.out.println("Init data2 start");

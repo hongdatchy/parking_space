@@ -1,8 +1,10 @@
 package com.hongdatchy.service_impl;
 
+import com.hongdatchy.entities.data.DataCamAndDetector;
 import com.hongdatchy.entities.data.Detector;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.entities.json.SlotJson;
+import com.hongdatchy.repository.DataCamAndDetectorRepo;
 import com.hongdatchy.repository.DetectorRepo;
 import com.hongdatchy.repository.GatewayRepo;
 import com.hongdatchy.repository.SlotRepo;
@@ -24,6 +26,9 @@ public class SlotService_Impl implements SlotService {
 
     @Autowired
     GatewayRepo gatewayRepo;
+
+    @Autowired
+    DataCamAndDetectorRepo dataCamAndDetectorRepo;
 
     @Override
     public SlotJson createAndUpdate(Slot slot) {
@@ -49,13 +54,18 @@ public class SlotService_Impl implements SlotService {
 
     public SlotJson data2Json(Slot slot){
         List<Detector> detectors = detectorRepo.findBySlotId(slot.getId());
+        List<DataCamAndDetector> dataCamAndDetectors = dataCamAndDetectorRepo.findAll().stream()
+                .filter(dataCamAndDetector -> (
+                        dataCamAndDetector.getSlotId().equals(slot.getId())
+                )).collect(Collectors.toList());
+
         return SlotJson.builder()
                 .id(slot.getId())
                 .AddressDetector(detectors.size() != 0 ? detectors.get(0).getAddressDetector() : null)
                 .AddressGateway(detectors.size() != 0 ? gatewayRepo.findById(detectors.get(0).getGatewayId()).getAddressGateway(): null)
                 .fieldId(slot.getFieldId())
-                .lastTimeSetup(detectors.size() != 0 ? detectors.get(0).getLastTimeSetup(): null)
-                .lastTimeUpdate(detectors.size() != 0 ? detectors.get(0).getLastTimeUpdate(): null)
+                .lastTimeDetector(detectors.size() != 0 ? detectors.get(0).getLastTimeUpdate(): null)
+                .lastTimeCam(dataCamAndDetectors.size() !=0 ?dataCamAndDetectors.get(dataCamAndDetectors.size()-1).getTime(): null)
                 .statusDetector(slot.getStatusDetector())
                 .statusCam(slot.getStatusCam())
                 .detectorId(detectors.size() != 0 ? detectors.get(0).getId() : null)

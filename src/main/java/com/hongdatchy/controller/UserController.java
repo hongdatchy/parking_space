@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @RestController
 public class UserController {
 
@@ -42,8 +44,8 @@ public class UserController {
 
     @PostMapping("api/us/book")
     public ResponseEntity<Object> book(@RequestBody BookPayload bookPayload, @RequestHeader String token){
-        String phone = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(userService.book(bookPayload, phone)));
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.book(bookPayload, email)));
     }
 
     @PostMapping("api/us/changePass")
@@ -55,6 +57,11 @@ public class UserController {
     @PostMapping("api/public/verify")
     public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
         return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getEmail(), verifyPayload.getCode())));
+    }
+
+    @PostMapping("api/us/update_time")
+    public ResponseEntity<Object> updateTime(@RequestBody TimeUpdateForm timeUpdateForm) throws ParseException {
+        return ResponseEntity.ok(MyResponse.success(userService.updateTime(timeUpdateForm)));
     }
 
 }

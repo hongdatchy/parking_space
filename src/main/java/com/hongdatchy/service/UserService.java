@@ -1,8 +1,10 @@
 package com.hongdatchy.service;
 
+import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.payload.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface UserService {
@@ -17,10 +19,12 @@ public interface UserService {
 
     List<User> findAll();
 
-    boolean book(BookPayload bookPayload, String email);
+    Contract book(BookPayload bookPayload, String email);
 
-    public boolean changePass(ChangePassForm changePassForm, String phone);
+    boolean changePass(ChangePassForm changePassForm, String email);
 
-    public boolean verifyAccount(String mail, String code);
+    boolean verifyAccount(String mail, String code);
+
+    Contract updateTime(TimeUpdateForm timeUpdateForm) throws ParseException;
 
 }

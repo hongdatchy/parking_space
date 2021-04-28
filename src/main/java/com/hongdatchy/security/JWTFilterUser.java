@@ -25,7 +25,6 @@ public class JWTFilterUser implements Filter {
         if (token != null) {
             String phone = jwtService.decode(token);
             if (phone != null && userRepo.findByEmail(phone) != null && blackListRepo.findByToken(token).size() ==0){
-                System.out.println("hi");
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 response.setStatus(401);

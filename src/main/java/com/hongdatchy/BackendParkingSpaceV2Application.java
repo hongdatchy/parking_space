@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.TimeZone;
+import java.sql.Timestamp;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.hongdatchy.entities.data.DataCamAndDetector;
@@ -30,6 +28,8 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.annotation.PostConstruct;
 
 
 @SpringBootApplication
@@ -54,6 +54,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         SpringApplication.run(BackendParkingSpaceV2Application.class, args);
     }
 
+
+
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.ant("/**")).build();
@@ -64,9 +67,17 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     @Value("${pathDetectorStatus}")
     String pathDetectorStatus;
 
+    @Autowired
+    com.fasterxml.jackson.databind.ObjectMapper objectMapper;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("******************** Start server ********************");
+//        set timezone cho backend
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+7"));
+//        set timezone cho controller
+        objectMapper.setTimeZone(TimeZone.getDefault());
+
         //update();
     }
 
