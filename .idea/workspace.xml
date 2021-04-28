@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/TimeUpdateForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/TimeUpdateForm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/BackendParkingSpaceV2Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/BackendParkingSpaceV2Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/InitData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/InitData.java" afterDir="false" />
@@ -22,21 +23,41 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/SlotService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/SlotService_Impl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/backendparkingspacev2-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/backendparkingspacev2-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/backendparkingspacev2-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/backendparkingspacev2-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/BackendParkingSpaceV2Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/BackendParkingSpaceV2Application.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/InitData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/InitData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/ContractController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/ContractController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/DataCamAndDetector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/DataCamAndDetector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Detector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Detector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Field.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Field.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/ManagerField.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/ManagerField.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/VerifyTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/VerifyTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/FieldJson.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/FieldJson.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson$SlotJsonBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson$SlotJsonBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/json/SlotJson.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/BookPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/BookPayload.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/ContractPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/ContractPayload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/RegisterForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/RegisterForm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/UserPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/UserPayload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector$MyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector$MyHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/getData/GetDataDetector.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository/UserRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository/UserRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ContractRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ContractRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ManagerRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ManagerRepo_Impl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/security/JWTFilterUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/security/JWTFilterUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/FieldService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/FieldService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/SlotService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/SlotService_Impl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +171,7 @@
       <workItem from="1619447703777" duration="11857000" />
       <workItem from="1619461240851" duration="614000" />
       <workItem from="1619492248425" duration="4464000" />
-      <workItem from="1619603387169" duration="18506000" />
+      <workItem from="1619603387169" duration="18918000" />
     </task>
     <task id="LOCAL-00001" summary="2021 ConfigVar">
       <created>1618292984132</created>
@@ -194,38 +215,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1619459580525" />
-    <state width="1323" height="207" key="GridCell.Tab.0.bottom" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.0.bottom" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.0.center" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.0.center" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.0.left" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.0.left" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.0.right" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.0.right" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.1.bottom" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.1.bottom" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.1.center" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.1.center" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.1.left" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.1.left" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
-    <state width="1323" height="207" key="GridCell.Tab.1.right" timestamp="1619630387261">
+    <state width="1323" height="207" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
+    <state width="1323" height="207" key="GridCell.Tab.1.right" timestamp="1619630835505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1619630387261" />
+    <state width="1323" height="207" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1619630835505" />
     <state width="1323" height="227" key="GridCell.Tab.2.bottom" timestamp="1619625279795">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
