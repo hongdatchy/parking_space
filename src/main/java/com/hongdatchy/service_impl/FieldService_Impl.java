@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,7 +81,7 @@ public class FieldService_Impl implements FieldService {
         return FieldJson.builder()
                 .id(field.getId())
                 .totalBook((int) contractRepo.findAll().stream()
-                        .filter(contract -> new Date().getTime() - contract.getTimeInBook().getTime() < Integer.parseInt(timeExpiredContract)
+                        .filter(contract -> new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() < Integer.parseInt(timeExpiredContract)
                                 && contract.getFieldId().equals(field.getId())
                                 && contract.getTimeCarIn() == null)
                         .count())

@@ -47,16 +47,30 @@ public class LoginAndLogoutController {
         }else if(adminService.login(loginForm)){
             return ResponseEntity.ok(MyResponse.loginSuccess("admin",jwtService.getToken(loginForm.getEmail())));
         }
-        return ResponseEntity.ok(MyResponse.fail("wrong phone or password"));
+        return ResponseEntity.ok(MyResponse.fail("wrong email or password"));
     }
     @GetMapping("api/public/logout")
     public ResponseEntity<Object> logout(@RequestHeader String token){
-        String phone = jwtService.decode(token);
-        if(userRepo.findByEmail(phone) != null
-                || managerRepo.findByEmail(phone) != null
-                || adminRepo.findByEmail(phone) != null){
+        String email = jwtService.decode(token);
+        if(userRepo.findByEmail(email) != null
+                || managerRepo.findByEmail(email) != null
+                || adminRepo.findByEmail(email) != null){
             return ResponseEntity.ok(MyResponse.success(true));
         }
         return ResponseEntity.ok(MyResponse.success(false));
+    }
+
+    @GetMapping("api/public/get_role")
+    public ResponseEntity<Object> getRole(@RequestHeader String token){
+        String email = jwtService.decode(token);
+        if(userRepo.findByEmail(email) != null){
+            return ResponseEntity.ok(MyResponse.success("user"));
+        }else if(managerRepo.findByEmail(email) != null){
+            return ResponseEntity.ok(MyResponse.success("manager"));
+        }else if(adminRepo.findByEmail(email) != null){
+            return ResponseEntity.ok(MyResponse.success("admin"));
+        }else {
+            return ResponseEntity.ok(MyResponse.fail("invalidate token"));
+        }
     }
 }

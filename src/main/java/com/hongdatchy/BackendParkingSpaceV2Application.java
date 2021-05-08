@@ -54,9 +54,6 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         SpringApplication.run(BackendParkingSpaceV2Application.class, args);
     }
 
-
-
-
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.ant("/**")).build();
