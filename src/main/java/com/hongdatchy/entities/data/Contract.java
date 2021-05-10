@@ -46,4 +46,7 @@ public class Contract  {
     @Column(name = "dt_create", nullable = false)
     private Timestamp dtCreate;
 
+    @Column(name = "status", nullable = false)
+    private String status;
+
 }

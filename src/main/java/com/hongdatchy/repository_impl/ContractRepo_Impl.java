@@ -24,6 +24,12 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public Contract createAndUpdate(Contract contract) {
+        if(!contract.getStatus().equals("V")// đặt trước
+                && !contract.getStatus().equals("Y")// đã thuê
+                && !contract.getStatus().equals("C")// đã huỷ
+                && !contract.getStatus().equals("R")){ // đã trả chỗ
+            return null;
+        }
         return entityManager.merge(contract);
     }
 

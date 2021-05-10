@@ -1,7 +1,9 @@
 package com.hongdatchy.controller;
 
+import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.*;
+import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class UserController {
 
     @Autowired
     JWTService jwtService;
+
+    @Autowired
+    ContractRepo contractRepo;
 
     @PostMapping("api/public/register")
     public ResponseEntity<Object> register(@RequestBody RegisterForm registerForm){
@@ -50,8 +55,8 @@ public class UserController {
 
     @PostMapping("api/us/changePass")
     public ResponseEntity<Object> changePass(@RequestBody ChangePassForm changePassForm, @RequestHeader String token){
-        String phone = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, phone)));
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.changePass(changePassForm, email)));
     }
 
     @PostMapping("api/public/verify")
@@ -59,9 +64,22 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getEmail(), verifyPayload.getCode())));
     }
 
-    @PostMapping("api/us/update_time")
-    public ResponseEntity<Object> updateTime(@RequestBody TimeUpdateForm timeUpdateForm) throws ParseException {
-        return ResponseEntity.ok(MyResponse.success(userService.updateTime(timeUpdateForm)));
+//    @PostMapping("api/us/update_time")
+//    public ResponseEntity<Object> updateTime(@RequestBody TimeUpdateForm timeUpdateForm, @RequestHeader String token) throws ParseException {
+//        String email = jwtService.decode(token);
+//        return ResponseEntity.ok(MyResponse.success(userService.updateTime(timeUpdateForm, email)));
+//    }
+
+    @GetMapping("api/us/get_list_contract")
+    public ResponseEntity<Object> getListContract(@RequestHeader String token) throws ParseException {
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.getListContract(email)));
+    }
+
+        @PostMapping("api/us/update_contract_for_user")
+    public ResponseEntity<Object> updateContractForUser(@RequestBody Contract contract, @RequestHeader String token) throws ParseException {
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.updateContractForUser(contract, email)));
     }
 
 }

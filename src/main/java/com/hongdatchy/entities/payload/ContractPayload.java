@@ -19,5 +19,5 @@ public class ContractPayload {
     private String carNumber;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp dtCreate;
-
+    private String status;
 }

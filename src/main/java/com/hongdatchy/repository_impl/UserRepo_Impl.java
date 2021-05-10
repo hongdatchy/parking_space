@@ -136,6 +136,7 @@ public class UserRepo_Impl implements UserRepo {
                 .dtCreate(new Timestamp(new Date().getTime()))
                 .timeCarIn(null)
                 .timeCarOut(null)
+                .status("V")
                 .userId(user.getId())
                 .build());
     }
@@ -158,7 +159,6 @@ public class UserRepo_Impl implements UserRepo {
         if(verifyTables.size() == 0 || !verifyTables.get(verifyTables.size() -1).getCode().equals(code)){
             return false;
         }
-
         if(!checkEmailExisted(email)){
             entityManager.merge(User.builder()
                     .id(null)
@@ -173,8 +173,10 @@ public class UserRepo_Impl implements UserRepo {
                     .image(verifyTables.get(verifyTables.size() -1).getImage())
                     .birth(verifyTables.get(verifyTables.size() -1).getBirth())
                     .build());
+            return true;
+        }else {
+            return false;
         }
-        return true;
     }
 
 

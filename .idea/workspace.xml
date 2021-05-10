@@ -5,14 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/json/ContractJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae1ed810-ca6c-4d3e-98b6-2fad92f0b856.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ae1ed810-ca6c-4d3e-98b6-2fad92f0b856.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/BackendParkingSpaceV2Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/BackendParkingSpaceV2Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/LoginAndLogoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/LoginAndLogoutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/BookPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/BookPayload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/ContractPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/ContractPayload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/TimeUpdateForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/TimeUpdateForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/ContractRepo_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/ContractRepo_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/UserRepo_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/UserRepo_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/ContractService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/ContractService_Impl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/FieldService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/FieldService_Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/BackendParkingSpaceV2Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/BackendParkingSpaceV2Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/LoginAndLogoutController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/LoginAndLogoutController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract$ContractBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract$ContractBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/data/Contract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/BookPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/BookPayload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/ContractPayload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/ContractPayload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/TimeUpdateForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/entities/payload/TimeUpdateForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ContractRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/ContractRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/security/JWTFilterUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/security/JWTFilterUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ContractService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/ContractService_Impl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/FieldService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/FieldService_Impl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" afterDir="false" />
     </list>
@@ -76,6 +94,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BackendParkingSpaceV2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="backendparkingspacev2" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.hongdatchy.BackendParkingSpaceV2Application" />
@@ -126,6 +155,7 @@
       <workItem from="1620356243891" duration="1239000" />
       <workItem from="1620390411693" duration="15000" />
       <workItem from="1620457437639" duration="499000" />
+      <workItem from="1620621909947" duration="15449000" />
     </task>
     <task id="LOCAL-00001" summary="2021 ConfigVar">
       <created>1618292984132</created>
@@ -149,10 +179,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1618071832253" />
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser" timestamp="1619611816235">
+    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser" timestamp="1620632935955">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1619611816235" />
+    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1620632935955" />
     <state x="337" y="293" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1619458885766">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -169,38 +199,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1619704607439" />
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.0.bottom" timestamp="1620637204287">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620637204287" />
+    <state width="1323" height="268" key="GridCell.Tab.0.center" timestamp="1620637204286">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1620637204286" />
+    <state width="1323" height="268" key="GridCell.Tab.0.left" timestamp="1620637204286">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1620637204286" />
+    <state width="1323" height="268" key="GridCell.Tab.0.right" timestamp="1620637204286">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.1.bottom" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1620637204286" />
+    <state width="1323" height="268" key="GridCell.Tab.1.bottom" timestamp="1620637204287">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.1.center" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620637204287" />
+    <state width="1323" height="268" key="GridCell.Tab.1.center" timestamp="1620637204287">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.1.left" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1620637204287" />
+    <state width="1323" height="268" key="GridCell.Tab.1.left" timestamp="1620637204287">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
-    <state width="1323" height="178" key="GridCell.Tab.1.right" timestamp="1620457941572">
+    <state width="1323" height="268" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1620637204287" />
+    <state width="1323" height="268" key="GridCell.Tab.1.right" timestamp="1620637204287">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1620457941572" />
+    <state width="1323" height="268" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1620637204287" />
     <state width="1323" height="227" key="GridCell.Tab.2.bottom" timestamp="1619632532939">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -237,6 +267,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="102" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1618293003607" />
+    <state x="0" y="0" width="585" height="738" key="find.popup" timestamp="1620638743345">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="0" y="0" width="585" height="738" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1620638743345" />
     <state x="274" y="30" key="new project wizard" timestamp="1618076780508">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

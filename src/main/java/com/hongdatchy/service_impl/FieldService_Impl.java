@@ -32,9 +32,6 @@ public class FieldService_Impl implements FieldService {
     @Autowired
     ContractRepo contractRepo;
 
-    @Value("${timeExpiredContract}")
-    String timeExpiredContract;
-
     @Override
     public FieldJson createAndUpdate(Field field) {
         return data2Json(fieldRepo.createAndUpdate(field));
@@ -81,9 +78,10 @@ public class FieldService_Impl implements FieldService {
         return FieldJson.builder()
                 .id(field.getId())
                 .totalBook((int) contractRepo.findAll().stream()
-                        .filter(contract -> new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() < Integer.parseInt(timeExpiredContract)
+                        .filter(contract -> (
+                                (contract.getStatus().equals("V") || contract.getStatus().equals("Y"))
                                 && contract.getFieldId().equals(field.getId())
-                                && contract.getTimeCarIn() == null)
+                        ))
                         .count())
                 .busySlot((int) slotRepo.findAll().stream()
                         .filter(slot -> ((slot.getStatusDetector() != null && slot.getStatusDetector())
