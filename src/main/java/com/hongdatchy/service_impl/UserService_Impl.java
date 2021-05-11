@@ -130,6 +130,7 @@ public class UserService_Impl implements UserService {
         }
         contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
         contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
+        contract.setStatus("V");
         return contractRepo.createAndUpdate(contract);
     }
 

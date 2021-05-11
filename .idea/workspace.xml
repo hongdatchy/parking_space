@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +121,7 @@
       <workItem from="1620652463945" duration="378000" />
       <workItem from="1620705597786" duration="6666000" />
       <workItem from="1620721936463" duration="540000" />
+      <workItem from="1620723188983" duration="310000" />
     </task>
     <task id="LOCAL-00001" summary="2021 ConfigVar">
       <created>1618292984132</created>
