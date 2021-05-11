@@ -139,20 +139,25 @@ public class UserService_Impl implements UserService {
             return null;
         }
 
-
-        contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
-        contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
+        if(getTime(timeUpdateForm.getTimeCarIn()) != null){
+            contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
+        }
+        if(getTime(timeUpdateForm.getTimeCarOut()) != null){
+            contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
+        }
         // luc dau dang là V
-        if(getTime(timeUpdateForm.getTimeCarIn()) == null && getTime(timeUpdateForm.getTimeCarOut()) != null){
+
+        // xe vao
+        if(getTime(timeUpdateForm.getTimeCarIn()) != null && getTime(timeUpdateForm.getTimeCarOut()) == null){
             contract.setStatus("Y");
         }
-        if(getTime(timeUpdateForm.getTimeCarIn()) != null && getTime(timeUpdateForm.getTimeCarOut()) != null){
+        if(getTime(timeUpdateForm.getTimeCarOut()) != null){
             contract.setStatus("R");
             double cost = contractService.getCost(contract.getTimeCarIn(), contract.getTimeCarOut()
                     , contract.getTimeCarIn(), contract.getTimeCarOut(), fields.get(0).getPrice());
             contract.setCost(String.valueOf(cost));
         }
-
+        System.out.println(contract);
         return contractRepo.createAndUpdate(contract);
     }
 
