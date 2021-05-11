@@ -1,11 +1,13 @@
 package com.hongdatchy.entities.payload;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
+@Builder
 @Data
 public class ContractPayload {
 

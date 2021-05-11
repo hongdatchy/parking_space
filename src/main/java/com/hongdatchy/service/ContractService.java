@@ -1,8 +1,10 @@
 package com.hongdatchy.service;
 
 import com.hongdatchy.entities.data.Contract;
+import com.hongdatchy.entities.data.Field;
 import com.hongdatchy.entities.payload.ContractPayload;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -14,5 +16,7 @@ public interface ContractService {
 
     List<Contract> findAll();
 
-    public Contract payload2data(ContractPayload contractPayload);
+    Contract payload2data(ContractPayload contractPayload);
+
+    double getCost(Timestamp timeCarin, Timestamp timeCarOut, Timestamp timeBookIn, Timestamp timeBookOut, double price);
 }

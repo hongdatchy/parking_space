@@ -7,6 +7,7 @@ import com.hongdatchy.entities.json.FieldJson;
 import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.BlackListRepo;
 import com.hongdatchy.repository.ContractRepo;
+import com.hongdatchy.repository.FieldRepo;
 import com.hongdatchy.repository.UserRepo;
 import com.hongdatchy.service.ContractService;
 import com.hongdatchy.service.FieldService;
@@ -28,6 +29,9 @@ public class UserService_Impl implements UserService {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    FieldRepo fieldRepo;
 
     @Autowired
     ContractRepo contractRepo;
@@ -128,9 +132,27 @@ public class UserService_Impl implements UserService {
         if(!contract.getUserId().equals(user.getId())){
             return null;
         }
+        List<Field> fields = fieldRepo.findAll().stream()
+                .filter(field -> (field.getId().equals(contract.getFieldId())))
+                .collect(Collectors.toList());
+        if(fields.size() == 0){
+            return null;
+        }
+
+
         contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
         contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
-        contract.setStatus("V");
+        // luc dau dang là V
+        if(getTime(timeUpdateForm.getTimeCarIn()) == null && getTime(timeUpdateForm.getTimeCarOut()) != null){
+            contract.setStatus("Y");
+        }
+        if(getTime(timeUpdateForm.getTimeCarIn()) != null && getTime(timeUpdateForm.getTimeCarOut()) != null){
+            contract.setStatus("R");
+            double cost = contractService.getCost(contract.getTimeCarIn(), contract.getTimeCarOut()
+                    , contract.getTimeCarIn(), contract.getTimeCarOut(), fields.get(0).getPrice());
+            contract.setCost(String.valueOf(cost));
+        }
+
         return contractRepo.createAndUpdate(contract);
     }
 

@@ -56,18 +56,8 @@ public class ContractService_Impl implements ContractService {
                 return null;
             }
             double price= fields.get(0).getPrice();
-            Timestamp timeCostIn, timeCostOut;
-            if(contractPayload.getTimeCarIn().getTime() < contractPayload.getTimeInBook().getTime() + Integer.parseInt(timeConditionDelay)){
-                timeCostIn = contractPayload.getTimeCarIn();
-            }else {
-                timeCostIn = contractPayload.getTimeInBook();
-            }
-            if(contractPayload.getTimeCarOut().getTime() < contractPayload.getTimeOutBook().getTime() - Integer.parseInt(timeConditionDelay)){
-                timeCostOut = contractPayload.getTimeOutBook();
-            }else {
-                timeCostOut = contractPayload.getTimeCarOut();
-            }
-            cost = (double)(timeCostOut.getTime() - timeCostIn.getTime())/1000/60/60 * price;
+            cost = getCost(contractPayload.getTimeCarIn(), contractPayload.getTimeCarOut()
+                    , contractPayload.getTimeInBook(), contractPayload.getTimeCarOut(), price);
         }
         return Contract.builder()
                 .id(contractPayload.getId())
@@ -82,6 +72,23 @@ public class ContractService_Impl implements ContractService {
                 .status(contractPayload.getStatus())
                 .cost(cost == 0 ? "" : String.valueOf(cost))
                 .build();
+    }
+
+    @Override
+    public double getCost(Timestamp timeCarin, Timestamp timeCarOut, Timestamp timeBookIn, Timestamp timeBookOut, double price) {
+        double cost;
+        Timestamp timeCostIn, timeCostOut;
+        if(timeCarin.getTime() < timeBookIn.getTime() + Integer.parseInt(timeConditionDelay)){
+            timeCostIn = timeCarin;
+        }else {
+            timeCostIn = timeBookIn;
+        }
+        if(timeCarOut.getTime() < timeBookOut.getTime() - Integer.parseInt(timeConditionDelay)){
+            timeCostOut = timeBookOut;
+        }else {
+            timeCostOut = timeCarOut;
+        }
+        return cost = (double)(timeCostOut.getTime() - timeCostIn.getTime())/1000/60/60 * price;
     }
 
 }
