@@ -113,22 +113,25 @@ public class UserService_Impl implements UserService {
         return userRepo.verifyAccount(mail, code);
     }
 
-//    @Override
-//    public Contract updateTime(TimeUpdateForm timeUpdateForm, String email) throws ParseException {
-//        User user = userRepo.findByEmail(email);
-//        List<Contract> contracts = contractRepo.findAll().stream()
-//                .filter(contract -> (
-//                            contract.getId()== timeUpdateForm.getContractId()
-//                        ))
-//                .collect(Collectors.toList());
-//        Contract contract = contracts.get(0);
-//        if(!contract.getUserId().equals(user.getId())){
-//            return null;
-//        }
-//        contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
-//        contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
-//        return contractRepo.createAndUpdate(contract);
-//    }
+    @Override
+    public Contract updateTime(TimeUpdateForm timeUpdateForm, String email) throws ParseException {
+        User user = userRepo.findByEmail(email);
+        List<Contract> contracts = contractRepo.findAll().stream()
+                .filter(contract -> (
+                            contract.getId()== timeUpdateForm.getContractId()
+                        ))
+                .collect(Collectors.toList());
+        if(contracts.size() == 0){
+            return null;
+        }
+        Contract contract = contracts.get(0);
+        if(!contract.getUserId().equals(user.getId())){
+            return null;
+        }
+        contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
+        contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
+        return contractRepo.createAndUpdate(contract);
+    }
 
     @Override
     public List<Contract> getListContract(String email) {
@@ -156,13 +159,13 @@ public class UserService_Impl implements UserService {
         return contractRepo.createAndUpdate(contractService.payload2data(contractPayload));
     }
 
-//    Timestamp getTime(String time) throws ParseException {
-//        Timestamp timestamp = null;
-//        if(!time.equals("")){
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-//            Date parsedDate = dateFormat.parse(time);
-//            timestamp = new Timestamp(parsedDate.getTime());
-//        }
-//        return timestamp;
-//    }
+    Timestamp getTime(String time) throws ParseException {
+        Timestamp timestamp = null;
+        if(!time.equals("")){
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            Date parsedDate = dateFormat.parse(time);
+            timestamp = new Timestamp(parsedDate.getTime());
+        }
+        return timestamp;
+    }
 }

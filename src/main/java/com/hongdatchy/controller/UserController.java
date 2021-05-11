@@ -64,11 +64,11 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getEmail(), verifyPayload.getCode())));
     }
 
-//    @PostMapping("api/us/update_time")
-//    public ResponseEntity<Object> updateTime(@RequestBody TimeUpdateForm timeUpdateForm, @RequestHeader String token) throws ParseException {
-//        String email = jwtService.decode(token);
-//        return ResponseEntity.ok(MyResponse.success(userService.updateTime(timeUpdateForm, email)));
-//    }
+    @PostMapping("api/us/update_time")
+    public ResponseEntity<Object> updateTime(@RequestBody TimeUpdateForm timeUpdateForm, @RequestHeader String token) throws ParseException {
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.updateTime(timeUpdateForm, email)));
+    }
 
     @GetMapping("api/us/get_list_contract")
     public ResponseEntity<Object> getListContract(@RequestHeader String token) throws ParseException {

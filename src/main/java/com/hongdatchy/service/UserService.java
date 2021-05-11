@@ -25,7 +25,7 @@ public interface UserService {
 
     boolean verifyAccount(String mail, String code);
 
-//    Contract updateTime(TimeUpdateForm timeUpdateForm, String email) throws ParseException;
+    Contract updateTime(TimeUpdateForm timeUpdateForm, String email) throws ParseException;
 
     List<Contract> getListContract(String email);
 
