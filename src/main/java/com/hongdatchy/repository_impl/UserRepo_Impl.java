@@ -137,6 +137,7 @@ public class UserRepo_Impl implements UserRepo {
                 .timeCarIn(null)
                 .timeCarOut(null)
                 .status("V")
+                .cost("")
                 .userId(user.getId())
                 .build());
     }

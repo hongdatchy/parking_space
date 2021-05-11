@@ -35,7 +35,7 @@ public class Field  {
     private String image;
 
     @Column(name = "price", nullable = false)
-    private String price;
+    private Double price;
 
     @Column(name = "openstatus", nullable = false)
     private String openstatus;

@@ -19,7 +19,7 @@ public class FieldJson {
     private String longitude;
     private String address;
     private String image;
-    private String price;
+    private Double price;
     private String openstatus;
     private BigDecimal space;
     private String details;

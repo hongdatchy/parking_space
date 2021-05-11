@@ -35,11 +35,10 @@ public class InitData {
 
     @PostConstruct
     public void init(){
-
-        if(slotRepo.findAll().size() != 100){
-            System.out.println("Init data start");
-            fieldRepo.createAndUpdate(new Field(1,"C9", "lat", "long", "số 1 đại cồ việt", "image", "price", "O", new BigDecimal("0.0"), "details"));
-            fieldRepo.createAndUpdate(new Field(2,"Trần Đại Nghĩa", "lat", "long", "số 1 đại cồ việt", "image", "price", "O", new BigDecimal("0.0"), "details"));
+        if(slotRepo.findAll().size() < 100){
+            System.out.println("Init 100 slot");
+            fieldRepo.createAndUpdate(new Field(1,"C9", "20.960377427559497", "105.79658800934396", "Đại học BKHN", "", 50000.0, "O", new BigDecimal("50.0"), "Bãi đồ xe C9"));
+            fieldRepo.createAndUpdate(new Field(2,"C3", "21.0066272", "105.8416806", "Đại học BKHN", "", 50000.0, "O", new BigDecimal("40.0"), "Bãi đồ xe C9"));
             gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
             gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
             for (int i = 0; i < 50; i++) {
@@ -50,25 +49,5 @@ public class InitData {
             }
             System.out.println("Init data end");
         }
-
-
-
-//        if(packageRepo.findAll().size() > 0){
-//            System.out.println("Init data2 start");
-//            for (int i = 50000; i < 60000; i++) {
-//                packageRepo.create(MyPackage.builder()
-//                        .id(i+1)
-//                        .idNode("idNode")
-//                        .batteryLevel("ssssssssss")
-//                        .state(true)
-//                        .nodeAddress("nodeAddress")
-//                        .communicationLevel("communicationLevel")
-//                        .location("location")
-//                        .packetNumber("packetNumber")
-//                        .time("20210401132437")
-//                        .build());
-//            }
-//            System.out.println("Init data2 end");
-//        }
     }
 }

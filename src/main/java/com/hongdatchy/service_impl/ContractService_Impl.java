@@ -2,7 +2,6 @@ package com.hongdatchy.service_impl;
 
 import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.Field;
-import com.hongdatchy.entities.json.ContractJson;
 import com.hongdatchy.entities.payload.ContractPayload;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.FieldRepo;
@@ -44,7 +43,32 @@ public class ContractService_Impl implements ContractService {
         return contractRepo.findAll();
     }
 
+    @Override
     public Contract payload2data(ContractPayload contractPayload){
+        double cost;
+        if(contractPayload.getTimeCarIn() == null || contractPayload.getTimeCarOut() == null){
+            cost = 0;
+        }else{
+            List<Field> fields = fieldRepo.findAll().stream()
+                    .filter(field -> (field.getId().equals(contractPayload.getFieldId())))
+                    .collect(Collectors.toList());
+            if(fields.size() == 0){
+                return null;
+            }
+            double price= fields.get(0).getPrice();
+            Timestamp timeCostIn, timeCostOut;
+            if(contractPayload.getTimeCarIn().getTime() < contractPayload.getTimeInBook().getTime() + Integer.parseInt(timeConditionDelay)){
+                timeCostIn = contractPayload.getTimeCarIn();
+            }else {
+                timeCostIn = contractPayload.getTimeInBook();
+            }
+            if(contractPayload.getTimeCarOut().getTime() < contractPayload.getTimeOutBook().getTime() - Integer.parseInt(timeConditionDelay)){
+                timeCostOut = contractPayload.getTimeOutBook();
+            }else {
+                timeCostOut = contractPayload.getTimeCarOut();
+            }
+            cost = (double)(timeCostOut.getTime() - timeCostIn.getTime())/1000/60/60 * price;
+        }
         return Contract.builder()
                 .id(contractPayload.getId())
                 .fieldId(contractPayload.getFieldId())
@@ -56,42 +80,7 @@ public class ContractService_Impl implements ContractService {
                 .carNumber(contractPayload.getCarNumber())
                 .dtCreate(contractPayload.getDtCreate())
                 .status(contractPayload.getStatus())
-                .build();
-    }
-
-    public ContractJson data2Json(Contract contract){
-        List<Field> fields = fieldRepo.findAll().stream()
-                .filter(field -> (field.getId().equals(contract.getFieldId())))
-                .collect(Collectors.toList());
-        if(fields.size() == 0){
-            return null;
-        }
-        float price= Float.parseFloat(fields.get(0).getPrice());
-        Timestamp timeCostIn, timeCostOut;
-        if(contract.getTimeCarIn().getTime() < contract.getTimeInBook().getTime() + Integer.parseInt(timeConditionDelay)){
-            timeCostIn = contract.getTimeCarIn();
-        }else {
-            timeCostIn = contract.getTimeInBook();
-        }
-        if(contract.getTimeCarOut().getTime() < contract.getTimeOutBook().getTime() - Integer.parseInt(timeConditionDelay)){
-            timeCostOut = contract.getTimeOutBook();
-        }else {
-            timeCostOut = contract.getTimeCarOut();
-        }
-
-        float cost = (float)(timeCostOut.getTime() - timeCostIn.getTime())/1000/60/60 * price;
-        return ContractJson.builder()
-                .id(contract.getId())
-                .carNumber(contract.getCarNumber())
-                .dtCreate(contract.getDtCreate())
-                .fieldId(contract.getFieldId())
-                .status(contract.getStatus())
-                .timeCarIn(contract.getTimeCarIn())
-                .timeCarOut(contract.getTimeCarOut())
-                .timeInBook(contract.getTimeInBook())
-                .timeOutBook(contract.getTimeOutBook())
-                .userId(contract.getUserId())
-                .cost(String.valueOf(cost))
+                .cost(cost == 0 ? "" : String.valueOf(cost))
                 .build();
     }
 

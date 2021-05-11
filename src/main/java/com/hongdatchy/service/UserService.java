@@ -29,5 +29,5 @@ public interface UserService {
 
     List<Contract> getListContract(String email);
 
-    Contract updateContractForUser(Contract contract, String email);
+    Contract updateContractForUser(ContractPayload contractPayload, String email);
 }

@@ -14,4 +14,5 @@ public interface ContractService {
 
     List<Contract> findAll();
 
+    public Contract payload2data(ContractPayload contractPayload);
 }

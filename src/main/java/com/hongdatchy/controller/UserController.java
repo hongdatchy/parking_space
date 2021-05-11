@@ -77,9 +77,9 @@ public class UserController {
     }
 
         @PostMapping("api/us/update_contract_for_user")
-    public ResponseEntity<Object> updateContractForUser(@RequestBody Contract contract, @RequestHeader String token) throws ParseException {
+    public ResponseEntity<Object> updateContractForUser(@RequestBody ContractPayload contractPayload, @RequestHeader String token) throws ParseException {
         String email = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(userService.updateContractForUser(contract, email)));
+        return ResponseEntity.ok(MyResponse.success(userService.updateContractForUser(contractPayload, email)));
     }
 
 }

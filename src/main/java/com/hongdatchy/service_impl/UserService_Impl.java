@@ -8,6 +8,7 @@ import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.BlackListRepo;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.UserRepo;
+import com.hongdatchy.service.ContractService;
 import com.hongdatchy.service.FieldService;
 import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class UserService_Impl implements UserService {
 
     @Autowired
     FieldService fieldService;
+
+    @Autowired
+    ContractService contractService;
 
     @Value("${timeConditionsToOrder}")
     String timeConditionsToOrder;
@@ -71,11 +75,10 @@ public class UserService_Impl implements UserService {
         if(user == null){
             return null;
         }
-
-        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","","","",new BigDecimal("0.0"), ""));
+        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), ""));
         if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
             && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
-            && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 3 hour
+            && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
         ){
             return userRepo.book(bookPayload, user);
         }else {
@@ -139,15 +142,18 @@ public class UserService_Impl implements UserService {
     }
 
     @Override
-    public Contract updateContractForUser(Contract contract, String email) {
+    public Contract updateContractForUser(ContractPayload contractPayload, String email) {
         User user = userRepo.findByEmail(email);
         boolean isValidateContract = contractRepo.findAll().stream()
-                .filter(contract1 -> (contract1.getId().equals(contract.getId())))
+                .filter(contract1 -> (contract1.getId().equals(contractPayload.getId())))
                 .count() != 0;
-        if(!isValidateContract || user == null || !contract.getUserId().equals(user.getId())){
+        if(!isValidateContract
+                || user == null
+                || !contractPayload.getUserId().equals(user.getId())
+                || contractPayload.getTimeInBook().getTime() >= contractPayload.getTimeOutBook().getTime()){
             return null;
         }
-        return contractRepo.createAndUpdate(contract);
+        return contractRepo.createAndUpdate(contractService.payload2data(contractPayload));
     }
 
 //    Timestamp getTime(String time) throws ParseException {
