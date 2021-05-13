@@ -1,7 +1,9 @@
 package com.hongdatchy.controller;
 
+import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.LoginForm;
+import com.hongdatchy.entities.payload.UserLoginPayload;
 import com.hongdatchy.repository.AdminRepo;
 import com.hongdatchy.repository.ManagerRepo;
 import com.hongdatchy.repository.UserRepo;
@@ -40,8 +42,10 @@ public class LoginAndLogoutController {
 
     @PostMapping("api/public/login")
     public ResponseEntity<Object> login(@RequestBody LoginForm loginForm) throws Exception {
-        if(userService.login(loginForm)){
-            return ResponseEntity.ok(MyResponse.loginSuccess("user",jwtService.getToken(loginForm.getEmail())));
+        User user =  userService.login(loginForm);
+        if(user !=null){
+            return ResponseEntity.ok(MyResponse
+                    .loginSuccess("user",new UserLoginPayload(jwtService.getToken(loginForm.getEmail()),user)));
         }else if(managerService.login(loginForm)){
             return ResponseEntity.ok(MyResponse.loginSuccess("manager",jwtService.getToken(loginForm.getEmail())));
         }else if(adminService.login(loginForm)){

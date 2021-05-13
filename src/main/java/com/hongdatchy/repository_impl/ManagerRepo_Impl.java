@@ -28,8 +28,16 @@ public class ManagerRepo_Impl implements ManagerRepo {
 
     @Override
     public Manager createAndUpdate(Manager manager) {
+        List<Manager> oldManagers = entityManager.createQuery("select x from Manager x where x.id =:id")
+                .setParameter("id", manager.getId()).getResultList();
         if(userRepo.checkEmailExisted(manager.getEmail())){
-            return null;
+            if(oldManagers.size() == 0
+                    || !oldManagers.get(0).getId().equals(manager.getId())
+                    || !oldManagers.get(0).getEmail().equals(manager.getEmail())){
+                System.out.println(oldManagers);
+                System.out.println(manager);
+                return null;
+            }
         }
         manager.setPass(SHA256Service.getSHA256(manager.getPass()));
         return entityManager.merge(manager);

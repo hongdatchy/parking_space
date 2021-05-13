@@ -31,7 +31,7 @@ public class UserRepo_Impl implements UserRepo {
     SendMailService sendMailService;
 
     @Override
-    public boolean login(LoginForm loginForm) {
+    public User login(LoginForm loginForm) {
         List<User> users = entityManager
                 .createQuery("select u from User u where u.email= :phone and u.password = :password")
                 .setParameter("phone", loginForm.getEmail())
@@ -39,9 +39,9 @@ public class UserRepo_Impl implements UserRepo {
                 .getResultList();
         if(users.size() != 0){
             users.get(0).setLastTimeAccess(new Timestamp(new Date().getTime()));
-            return true;
+            return users.get(0);
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -100,9 +100,14 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public User createAndUpdate(User user) {
-        user.setPassword(SHA256Service.getSHA256(user.getPassword()));
+        List<User> oldUsers = entityManager.createQuery("select x from User x where x.id =: id")
+                .setParameter("id", user.getId()).getResultList();
         if(checkEmailExisted(user.getEmail())){
-            return null;
+            if(oldUsers.size() == 0
+                    || !oldUsers.get(0).getId().equals(user.getId())
+                    || !oldUsers.get(0).getEmail().equals(user.getEmail())){
+                return null;
+            }
         }
         return entityManager.merge(user);
     }
@@ -179,8 +184,6 @@ public class UserRepo_Impl implements UserRepo {
             return false;
         }
     }
-
-
 
     public String getRandomCode(){
         String rs="";

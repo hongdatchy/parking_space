@@ -13,7 +13,7 @@ public interface UserRepo {
 
     boolean checkEmailExisted(String email);
 
-    boolean login(LoginForm loginForm);
+    User login(LoginForm loginForm);
 
     boolean register(RegisterForm registerForm);
 

@@ -43,6 +43,7 @@ E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\VerifyP
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\SocialService.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\json\GatewayJson.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\LoginForm.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\UserLoginPayload.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\GatewayService_Impl.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\GoogleService.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository_impl\PackageRepo_Impl.java
@@ -55,6 +56,7 @@ E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository_impl\ManagerR
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\controller\DetectorController.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository\DetectorRepo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\ManagerFieldService_Impl.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\UserUpdateInfo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\data\DataCamAndDetector.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository_impl\FieldRepo_Impl.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\data\Admin.java

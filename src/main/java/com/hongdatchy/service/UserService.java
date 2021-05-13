@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean login(LoginForm loginForm);
+    User login(LoginForm loginForm);
 
     boolean register(RegisterForm registerForm);
 
@@ -30,4 +30,6 @@ public interface UserService {
     List<Contract> getListContract(String email);
 
     Contract updateContractForUser(ContractPayload contractPayload, String email);
+
+    User updateInfo(UserUpdateInfo userUpdateInfo, String email);
 }

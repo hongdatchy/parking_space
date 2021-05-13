@@ -9,6 +9,7 @@ import com.hongdatchy.repository.BlackListRepo;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.FieldRepo;
 import com.hongdatchy.repository.UserRepo;
+import com.hongdatchy.security.SHA256Service;
 import com.hongdatchy.service.ContractService;
 import com.hongdatchy.service.FieldService;
 import com.hongdatchy.service.UserService;
@@ -49,7 +50,7 @@ public class UserService_Impl implements UserService {
     String timeConditionsToOrder;
 
     @Override
-    public boolean login(LoginForm loginForm) {
+    public User login(LoginForm loginForm) {
         return userRepo.login(loginForm);
     }
 
@@ -60,6 +61,7 @@ public class UserService_Impl implements UserService {
 
     @Override
     public User createAndUpdate(UserPayload userPayload) {
+        userPayload.setPassword(SHA256Service.getSHA256(userPayload.getPassword()));
         return userRepo.createAndUpdate(payload2Data(userPayload));
     }
 
@@ -185,6 +187,24 @@ public class UserService_Impl implements UserService {
             return null;
         }
         return contractRepo.createAndUpdate(contractService.payload2data(contractPayload));
+    }
+
+    @Override
+    public User updateInfo(UserUpdateInfo userUpdateInfo, String email) {
+        User user = userRepo.findByEmail(email);
+        return userRepo.createAndUpdate(User.builder()
+                .id(user.getId())
+                .birth(userUpdateInfo.getBirth())
+                .image(userUpdateInfo.getImage())
+                .sex(userUpdateInfo.getSex())
+                .phone(userUpdateInfo.getPhone())
+                .address(userUpdateInfo.getAddress())
+                .idNumber(userUpdateInfo.getIdNumber())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .equipment(userUpdateInfo.getEquipment())
+                .lastTimeAccess(user.getLastTimeAccess())
+                .build());
     }
 
     Timestamp getTime(String time) throws ParseException {

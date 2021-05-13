@@ -71,15 +71,21 @@ public class UserController {
     }
 
     @GetMapping("api/us/get_list_contract")
-    public ResponseEntity<Object> getListContract(@RequestHeader String token) throws ParseException {
+    public ResponseEntity<Object> getListContract(@RequestHeader String token) {
         String email = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(userService.getListContract(email)));
     }
 
-        @PostMapping("api/us/update_contract_for_user")
-    public ResponseEntity<Object> updateContractForUser(@RequestBody ContractPayload contractPayload, @RequestHeader String token) throws ParseException {
+    @PostMapping("api/us/update_contract")
+    public ResponseEntity<Object> updateContract(@RequestBody ContractPayload contractPayload, @RequestHeader String token) {
         String email = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(userService.updateContractForUser(contractPayload, email)));
+    }
+
+    @PostMapping("api/us/update_info")
+    public ResponseEntity<Object> updateInfo(@RequestBody UserUpdateInfo userUpdateInfo, @RequestHeader String token) {
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(userService.updateInfo(userUpdateInfo, email)));
     }
 
 }
