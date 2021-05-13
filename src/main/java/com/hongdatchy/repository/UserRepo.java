@@ -2,10 +2,7 @@ package com.hongdatchy.repository;
 
 import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.data.User;
-import com.hongdatchy.entities.payload.BookPayload;
-import com.hongdatchy.entities.payload.ChangePassForm;
-import com.hongdatchy.entities.payload.LoginForm;
-import com.hongdatchy.entities.payload.RegisterForm;
+import com.hongdatchy.entities.payload.*;
 
 import java.util.List;
 
@@ -31,6 +28,8 @@ public interface UserRepo {
 
     boolean verifyAccount(String mail, String code);
 
+    boolean resetPass(String email);
 
+    boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload);
 
 }

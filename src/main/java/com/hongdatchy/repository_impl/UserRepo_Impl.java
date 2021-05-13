@@ -69,10 +69,10 @@ public class UserRepo_Impl implements UserRepo {
     }
 
     @Override
-    public User findByEmail(String phone) {
+    public User findByEmail(String email) {
         Query query = entityManager
-                .createQuery("select u from User u where u.email= :phone");
-        List<User> users = query.setParameter("phone", phone).getResultList();
+                .createQuery("select u from User u where u.email= :email");
+        List<User> users = query.setParameter("email", email).getResultList();
         if(users.size() == 1){
             return users.get(0);
         }
@@ -185,12 +185,48 @@ public class UserRepo_Impl implements UserRepo {
         }
     }
 
+    @Override
+    public boolean resetPass(String email) {
+        if(findByEmail(email) == null){
+            return false;
+        }
+        String code = getRandomCode();
+        boolean b = sendMailService.sendMail(email
+                , "Parking space reset password"
+                , "To verify reset pass, please enter this code to reset page: " + code);
+        if(b) entityManager.merge(CodeResetPass.builder()
+                .code(code)
+                .email(email)
+                .id(null)
+                .build());
+        return b;
+    }
+
+    @Override
+    public boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload) {
+        User oldUser = findByEmail(verifyResetPassPayload.getEmail());
+        if(oldUser == null){
+            return false;
+        }
+        List<CodeResetPass> codeResetPasses = entityManager
+                .createQuery("select x from CodeResetPass x where x.email =: email")
+                .setParameter("email", verifyResetPassPayload.getEmail())
+                .getResultList();
+        if(codeResetPasses.size()!= 0
+                && codeResetPasses.get(codeResetPasses.size() - 1).getCode().equals(verifyResetPassPayload.getCode())){
+            oldUser.setPassword(SHA256Service.getSHA256(verifyResetPassPayload.getPass()));
+            createAndUpdate(oldUser);
+            return true;
+        }
+        return false;
+    }
+
     public String getRandomCode(){
         String rs="";
-        for (int i=0; i< 6; i++){
+        for (int i=0; i< 4; i++){
             rs += String.valueOf((int) (Math.random() * 10));
         }
-        return rs;
+        return rs + new Date().getTime()/1000;
     }
 
 }

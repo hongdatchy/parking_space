@@ -32,4 +32,8 @@ public interface UserService {
     Contract updateContractForUser(ContractPayload contractPayload, String email);
 
     User updateInfo(UserUpdateInfo userUpdateInfo, String email);
+
+    boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload);
+
+    boolean resetPass(String email);
 }

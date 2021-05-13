@@ -942,380 +942,379 @@ SELECT|sys.sys_config:null
     <table id="294" parent="6" name="black_list">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="295" parent="6" name="contract">
+    <table id="295" parent="6" name="code_reset_pass">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="296" parent="6" name="data_cam_and_detector">
+    <table id="296" parent="6" name="contract">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="297" parent="6" name="detector">
+    <table id="297" parent="6" name="data_cam_and_detector">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="298" parent="6" name="field">
+    <table id="298" parent="6" name="detector">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="299" parent="6" name="gateway">
+    <table id="299" parent="6" name="field">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="300" parent="6" name="manager">
+    <table id="300" parent="6" name="gateway">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="301" parent="6" name="manager_field">
+    <table id="301" parent="6" name="manager">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="302" parent="6" name="package">
+    <table id="302" parent="6" name="manager_field">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="303" parent="6" name="slot">
+    <table id="303" parent="6" name="package">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="304" parent="6" name="tag">
+    <table id="304" parent="6" name="slot">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="305" parent="6" name="user">
+    <table id="305" parent="6" name="tag">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="306" parent="6" name="verify_table">
+    <table id="306" parent="6" name="user">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <column id="307" parent="293" name="id">
+    <table id="307" parent="6" name="verify_table">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <column id="308" parent="293" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="308" parent="293" name="email">
+    <column id="309" parent="293" name="email">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="309" parent="293" name="pass">
+    <column id="310" parent="293" name="pass">
       <Position>3</Position>
       <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="310" parent="293" name="id_UNIQUE">
+    <index id="311" parent="293" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="311" parent="293" name="PRIMARY">
+    <key id="312" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="312" parent="293" name="id_UNIQUE">
+    <key id="313" parent="293" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="313" parent="294" name="id">
+    <column id="314" parent="294" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="314" parent="294" name="token">
+    <column id="315" parent="294" name="token">
       <Position>2</Position>
       <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="315" parent="294" name="id_UNIQUE">
+    <index id="316" parent="294" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="316" parent="294" name="PRIMARY">
+    <key id="317" parent="294" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="317" parent="294" name="id_UNIQUE">
+    <key id="318" parent="294" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="318" parent="295" name="id">
+    <column id="319" parent="295" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="319" parent="295" name="field_id">
+    <column id="320" parent="295" name="email">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="321" parent="295" name="code">
+      <Position>3</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="322" parent="295" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="323" parent="295" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="324" parent="295" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="325" parent="296" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="326" parent="296" name="field_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="320" parent="295" name="user_id">
+    <column id="327" parent="296" name="user_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="321" parent="295" name="time_car_in">
+    <column id="328" parent="296" name="time_car_in">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="322" parent="295" name="time_car_out">
+    <column id="329" parent="296" name="time_car_out">
       <Position>5</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="323" parent="295" name="time_in_book">
+    <column id="330" parent="296" name="time_in_book">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="324" parent="295" name="time_out_book">
+    <column id="331" parent="296" name="time_out_book">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="325" parent="295" name="car_number">
+    <column id="332" parent="296" name="car_number">
       <Position>8</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="326" parent="295" name="dt_create">
+    <column id="333" parent="296" name="dt_create">
       <Position>9</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="327" parent="295" name="cost">
+    <column id="334" parent="296" name="cost">
       <Position>10</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="328" parent="295" name="status">
+    <column id="335" parent="296" name="status">
       <Position>11</Position>
       <DataType>varchar(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="329" parent="295" name="id_UNIQUE">
+    <index id="336" parent="296" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="330" parent="295" name="field_id">
+    <index id="337" parent="296" name="field_id">
       <ColNames>field_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="331" parent="295" name="user_id">
+    <index id="338" parent="296" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="332" parent="295" name="PRIMARY">
+    <key id="339" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="333" parent="295" name="id_UNIQUE">
+    <key id="340" parent="296" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="334" parent="295" name="contract_ibfk_1">
+    <foreign-key id="341" parent="296" name="contract_ibfk_1">
       <ColNames>field_id</ColNames>
       <RefTableName>field</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="335" parent="295" name="contract_ibfk_2">
+    <foreign-key id="342" parent="296" name="contract_ibfk_2">
       <ColNames>user_id</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="336" parent="296" name="id">
+    <column id="343" parent="297" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="337" parent="296" name="slot_id">
+    <column id="344" parent="297" name="slot_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="338" parent="296" name="status_detector">
+    <column id="345" parent="297" name="status_detector">
       <Position>3</Position>
       <DataType>bit(1)|0s</DataType>
     </column>
-    <column id="339" parent="296" name="status_cam">
+    <column id="346" parent="297" name="status_cam">
       <Position>4</Position>
       <DataType>bit(1)|0s</DataType>
     </column>
-    <column id="340" parent="296" name="time">
+    <column id="347" parent="297" name="time">
       <Position>5</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="341" parent="296" name="id_UNIQUE">
+    <index id="348" parent="297" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="342" parent="296" name="PRIMARY">
+    <key id="349" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="343" parent="296" name="id_UNIQUE">
+    <key id="350" parent="297" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="344" parent="297" name="id">
+    <column id="351" parent="298" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="345" parent="297" name="address_detector">
+    <column id="352" parent="298" name="address_detector">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="346" parent="297" name="slot_id">
+    <column id="353" parent="298" name="slot_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="347" parent="297" name="gateway_id">
+    <column id="354" parent="298" name="gateway_id">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="348" parent="297" name="battery_level">
+    <column id="355" parent="298" name="battery_level">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="349" parent="297" name="communication_level">
+    <column id="356" parent="298" name="communication_level">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="350" parent="297" name="last_time_update">
+    <column id="357" parent="298" name="last_time_update">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="351" parent="297" name="last_time_setup">
+    <column id="358" parent="298" name="last_time_setup">
       <Position>8</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="352" parent="297" name="id_UNIQUE">
+    <index id="359" parent="298" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="353" parent="297" name="slot_id">
+    <index id="360" parent="298" name="slot_id">
       <ColNames>slot_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="354" parent="297" name="gateway_id">
+    <index id="361" parent="298" name="gateway_id">
       <ColNames>gateway_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="355" parent="297" name="PRIMARY">
+    <key id="362" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="356" parent="297" name="id_UNIQUE">
+    <key id="363" parent="298" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="357" parent="297" name="detector_ibfk_1">
+    <foreign-key id="364" parent="298" name="detector_ibfk_1">
       <ColNames>slot_id</ColNames>
       <RefTableName>slot</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="358" parent="297" name="detector_ibfk_2">
+    <foreign-key id="365" parent="298" name="detector_ibfk_2">
       <ColNames>gateway_id</ColNames>
       <RefTableName>gateway</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="359" parent="298" name="id">
+    <column id="366" parent="299" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="360" parent="298" name="name">
+    <column id="367" parent="299" name="name">
       <Position>2</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="361" parent="298" name="latitude">
+    <column id="368" parent="299" name="latitude">
       <Position>3</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="362" parent="298" name="longitude">
+    <column id="369" parent="299" name="longitude">
       <Position>4</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="363" parent="298" name="address">
+    <column id="370" parent="299" name="address">
       <Position>5</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="364" parent="298" name="image">
+    <column id="371" parent="299" name="image">
       <Position>6</Position>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="365" parent="298" name="price">
+    <column id="372" parent="299" name="price">
       <Position>7</Position>
-      <DataType>float|0s</DataType>
+      <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="366" parent="298" name="openstatus">
+    <column id="373" parent="299" name="openstatus">
       <Position>8</Position>
       <DataType>varchar(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="367" parent="298" name="space">
+    <column id="374" parent="299" name="space">
       <Position>9</Position>
       <DataType>decimal(10,1 digit)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="368" parent="298" name="details">
+    <column id="375" parent="299" name="details">
       <Position>10</Position>
       <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="369" parent="298" name="id_UNIQUE">
+    <index id="376" parent="299" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <key id="370" parent="298" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="371" parent="298" name="id_UNIQUE">
-      <ColNames>id</ColNames>
-      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
-    </key>
-    <column id="372" parent="299" name="id">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="373" parent="299" name="field_id">
-      <Position>2</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="374" parent="299" name="address_gateway">
-      <Position>3</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="375" parent="299" name="id_UNIQUE">
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <index id="376" parent="299" name="field_id">
-      <ColNames>field_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="377" parent="299" name="PRIMARY">
@@ -1327,69 +1326,68 @@ SELECT|sys.sys_config:null
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="379" parent="299" name="gateway_ibfk_1">
-      <ColNames>field_id</ColNames>
-      <RefTableName>field</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="380" parent="300" name="id">
+    <column id="379" parent="300" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="381" parent="300" name="email">
+    <column id="380" parent="300" name="field_id">
       <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="381" parent="300" name="address_gateway">
+      <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="382" parent="300" name="pass">
-      <Position>3</Position>
-      <DataType>varchar(256)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="383" parent="300" name="last_time_access">
-      <Position>4</Position>
-      <DataType>datetime|0s</DataType>
-    </column>
-    <column id="384" parent="300" name="acp">
-      <Position>5</Position>
-      <DataType>bit(1)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="385" parent="300" name="id_UNIQUE">
+    <index id="382" parent="300" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="386" parent="300" name="PRIMARY">
+    <index id="383" parent="300" name="field_id">
+      <ColNames>field_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="384" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="387" parent="300" name="id_UNIQUE">
+    <key id="385" parent="300" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="388" parent="301" name="id">
+    <foreign-key id="386" parent="300" name="gateway_ibfk_1">
+      <ColNames>field_id</ColNames>
+      <RefTableName>field</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="387" parent="301" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="389" parent="301" name="field_id">
+    <column id="388" parent="301" name="email">
       <Position>2</Position>
-      <DataType>int|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="390" parent="301" name="manager_id">
+    <column id="389" parent="301" name="pass">
       <Position>3</Position>
-      <DataType>int|0s</DataType>
+      <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="391" parent="301" name="last_time_setup">
+    <column id="390" parent="301" name="last_time_access">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
+    </column>
+    <column id="391" parent="301" name="acp">
+      <Position>5</Position>
+      <DataType>bit(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="392" parent="301" name="id_UNIQUE">
@@ -1397,315 +1395,350 @@ SELECT|sys.sys_config:null
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="393" parent="301" name="field_id">
-      <ColNames>field_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="394" parent="301" name="manager_id">
-      <ColNames>manager_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="395" parent="301" name="PRIMARY">
+    <key id="393" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="396" parent="301" name="id_UNIQUE">
+    <key id="394" parent="301" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="397" parent="301" name="manager_field_ibfk_1">
-      <ColNames>field_id</ColNames>
-      <RefTableName>field</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="398" parent="301" name="manager_field_ibfk_2">
-      <ColNames>manager_id</ColNames>
-      <RefTableName>manager</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="399" parent="302" name="id">
+    <column id="395" parent="302" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="400" parent="302" name="packet_number">
+    <column id="396" parent="302" name="field_id">
       <Position>2</Position>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="401" parent="302" name="id_node">
+    <column id="397" parent="302" name="manager_id">
       <Position>3</Position>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="402" parent="302" name="battery_level">
+    <column id="398" parent="302" name="last_time_setup">
       <Position>4</Position>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="403" parent="302" name="node_address">
-      <Position>5</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="404" parent="302" name="state">
-      <Position>6</Position>
-      <DataType>bit(1)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="405" parent="302" name="communication_level">
-      <Position>7</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="406" parent="302" name="time">
-      <Position>8</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="407" parent="302" name="location">
-      <Position>9</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="408" parent="302" name="id_UNIQUE">
+    <index id="399" parent="302" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="409" parent="302" name="PRIMARY">
+    <index id="400" parent="302" name="field_id">
+      <ColNames>field_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="401" parent="302" name="manager_id">
+      <ColNames>manager_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="402" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="410" parent="302" name="id_UNIQUE">
+    <key id="403" parent="302" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="411" parent="303" name="id">
+    <foreign-key id="404" parent="302" name="manager_field_ibfk_1">
+      <ColNames>field_id</ColNames>
+      <RefTableName>field</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="405" parent="302" name="manager_field_ibfk_2">
+      <ColNames>manager_id</ColNames>
+      <RefTableName>manager</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="406" parent="303" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="412" parent="303" name="field_id">
+    <column id="407" parent="303" name="packet_number">
       <Position>2</Position>
-      <DataType>int|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="413" parent="303" name="status_detector">
+    <column id="408" parent="303" name="id_node">
       <Position>3</Position>
-      <DataType>bit(1)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="414" parent="303" name="status_cam">
+    <column id="409" parent="303" name="battery_level">
       <Position>4</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="410" parent="303" name="node_address">
+      <Position>5</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="411" parent="303" name="state">
+      <Position>6</Position>
       <DataType>bit(1)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="412" parent="303" name="communication_level">
+      <Position>7</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="413" parent="303" name="time">
+      <Position>8</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="414" parent="303" name="location">
+      <Position>9</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
     <index id="415" parent="303" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="416" parent="303" name="field_id">
-      <ColNames>field_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="417" parent="303" name="PRIMARY">
+    <key id="416" parent="303" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="418" parent="303" name="id_UNIQUE">
+    <key id="417" parent="303" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="419" parent="303" name="slot_ibfk_1">
+    <column id="418" parent="304" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="419" parent="304" name="field_id">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="420" parent="304" name="status_detector">
+      <Position>3</Position>
+      <DataType>bit(1)|0s</DataType>
+    </column>
+    <column id="421" parent="304" name="status_cam">
+      <Position>4</Position>
+      <DataType>bit(1)|0s</DataType>
+    </column>
+    <index id="422" parent="304" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="423" parent="304" name="field_id">
+      <ColNames>field_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="424" parent="304" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="425" parent="304" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <foreign-key id="426" parent="304" name="slot_ibfk_1">
       <ColNames>field_id</ColNames>
       <RefTableName>field</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="420" parent="304" name="id">
+    <column id="427" parent="305" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="421" parent="304" name="user_id">
+    <column id="428" parent="305" name="user_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="422" parent="304" name="time_car_in">
+    <column id="429" parent="305" name="time_car_in">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="423" parent="304" name="time_car_out">
+    <column id="430" parent="305" name="time_car_out">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <index id="424" parent="304" name="id_UNIQUE">
+    <index id="431" parent="305" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="425" parent="304" name="user_id">
+    <index id="432" parent="305" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="426" parent="304" name="PRIMARY">
+    <key id="433" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="427" parent="304" name="id_UNIQUE">
+    <key id="434" parent="305" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="428" parent="304" name="tag_ibfk_1">
+    <foreign-key id="435" parent="305" name="tag_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="429" parent="305" name="id">
+    <column id="436" parent="306" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="430" parent="305" name="pass">
+    <column id="437" parent="306" name="pass">
       <Position>2</Position>
       <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="431" parent="305" name="id_number">
+    <column id="438" parent="306" name="id_number">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="432" parent="305" name="email">
+    <column id="439" parent="306" name="email">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="433" parent="305" name="equipment">
+    <column id="440" parent="306" name="equipment">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="434" parent="305" name="address">
+    <column id="441" parent="306" name="address">
       <Position>6</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="435" parent="305" name="phone">
+    <column id="442" parent="306" name="phone">
       <Position>7</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="436" parent="305" name="last_time_access">
+    <column id="443" parent="306" name="last_time_access">
       <Position>8</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="437" parent="305" name="image">
+    <column id="444" parent="306" name="image">
       <Position>9</Position>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="438" parent="305" name="sex">
+    <column id="445" parent="306" name="sex">
       <Position>10</Position>
       <DataType>varchar(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="439" parent="305" name="birth">
+    <column id="446" parent="306" name="birth">
       <Position>11</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="440" parent="305" name="id_UNIQUE">
+    <index id="447" parent="306" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="441" parent="305" name="PRIMARY">
+    <key id="448" parent="306" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="442" parent="305" name="id_UNIQUE">
+    <key id="449" parent="306" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="443" parent="306" name="code">
+    <column id="450" parent="307" name="code">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="444" parent="306" name="id">
+    <column id="451" parent="307" name="id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="445" parent="306" name="pass">
+    <column id="452" parent="307" name="pass">
       <Position>3</Position>
       <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="446" parent="306" name="id_number">
+    <column id="453" parent="307" name="id_number">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="447" parent="306" name="email">
+    <column id="454" parent="307" name="email">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="448" parent="306" name="equipment">
+    <column id="455" parent="307" name="equipment">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="449" parent="306" name="address">
+    <column id="456" parent="307" name="address">
       <Position>7</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="450" parent="306" name="phone">
+    <column id="457" parent="307" name="phone">
       <Position>8</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="451" parent="306" name="last_time_access">
+    <column id="458" parent="307" name="last_time_access">
       <Position>9</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="452" parent="306" name="image">
+    <column id="459" parent="307" name="image">
       <Position>10</Position>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="453" parent="306" name="sex">
+    <column id="460" parent="307" name="sex">
       <Position>11</Position>
       <DataType>varchar(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="454" parent="306" name="birth">
+    <column id="461" parent="307" name="birth">
       <Position>12</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="455" parent="306" name="id_UNIQUE">
+    <index id="462" parent="307" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="456" parent="306" name="PRIMARY">
+    <key id="463" parent="307" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="457" parent="306" name="id_UNIQUE">
+    <key id="464" parent="307" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>

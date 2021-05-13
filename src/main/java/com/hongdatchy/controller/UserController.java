@@ -1,6 +1,5 @@
 package com.hongdatchy.controller;
 
-import com.hongdatchy.entities.data.Contract;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.ContractRepo;
@@ -60,7 +59,7 @@ public class UserController {
     }
 
     @PostMapping("api/public/verify")
-    public ResponseEntity<Object> verify(@RequestBody VerifyPayload verifyPayload){
+    public ResponseEntity<Object> verify(@RequestBody VerifyAccountPayload verifyPayload){
         return ResponseEntity.ok(MyResponse.success(userService.verifyAccount(verifyPayload.getEmail(), verifyPayload.getCode())));
     }
 
@@ -86,6 +85,16 @@ public class UserController {
     public ResponseEntity<Object> updateInfo(@RequestBody UserUpdateInfo userUpdateInfo, @RequestHeader String token) {
         String email = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(userService.updateInfo(userUpdateInfo, email)));
+    }
+
+    @PostMapping("api/public/verify_reset_pass")
+    public ResponseEntity<Object> resetPass(@RequestBody VerifyResetPassPayload verifyResetPassPayload) {
+        return ResponseEntity.ok(MyResponse.success(userService.verifyResetPass(verifyResetPassPayload)));
+    }
+
+    @PostMapping("api/public/reset_pass")
+    public ResponseEntity<Object> resetPass(@RequestBody String email) {
+        return ResponseEntity.ok(MyResponse.success(userService.resetPass(email)));
     }
 
 }

@@ -207,6 +207,16 @@ public class UserService_Impl implements UserService {
                 .build());
     }
 
+    @Override
+    public boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload) {
+        return userRepo.verifyResetPass(verifyResetPassPayload);
+    }
+
+    @Override
+    public boolean resetPass(String email) {
+        return userRepo.resetPass(email);
+    }
+
     Timestamp getTime(String time) throws ParseException {
         Timestamp timestamp = null;
         if(!time.equals("")){
