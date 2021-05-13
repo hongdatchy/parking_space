@@ -16,6 +16,7 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 
 @Service
 public class GoogleService implements SocialService {
@@ -55,6 +56,7 @@ public class GoogleService implements SocialService {
     public User getUser(String token) throws IOException {
         String link = linkUser + token; // tạo link api
         String response = Request.Get(link).execute().returnContent().asString(); // call api
+        System.out.println("google response: " + response);
         ObjectMapper mapper = new ObjectMapper();
         GooglePojo pojo = mapper.readValue(response, GooglePojo.class); // map với entity
         String email = pojo.getEmail();
@@ -68,6 +70,11 @@ public class GoogleService implements SocialService {
                 .idNumber(0)
                 .address("")
                 .email(email)
+                .address("")
+                .phone("")
+                .sex("")
+                .image("")
+                .birth(new Date())
                 .build();
         return userRepo.createAndUpdate(newUser);
     }

@@ -49,7 +49,7 @@ public class User {
     @Column(name = "sex", nullable = false)
     private String sex;
 
-    @Column(name = "birth", nullable = false)
+    @Column(name = "birth")
     private Date birth;
 
 }
