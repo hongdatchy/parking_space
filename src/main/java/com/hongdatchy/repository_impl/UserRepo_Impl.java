@@ -150,7 +150,8 @@ public class UserRepo_Impl implements UserRepo {
     @Override
     public boolean changePass(ChangePassForm changePassForm, User user) {
         if(!changePassForm.getPassword().equals(changePassForm.getRePassword())
-        || !SHA256Service.getSHA256(changePassForm.getOldPassword()).equals(user.getPassword())){
+        || (!SHA256Service.getSHA256(changePassForm.getOldPassword()).equals(user.getPassword())
+                && !changePassForm.getOldPassword().equals(""))){
             return false;
         }
         user.setPassword(SHA256Service.getSHA256(changePassForm.getPassword()));

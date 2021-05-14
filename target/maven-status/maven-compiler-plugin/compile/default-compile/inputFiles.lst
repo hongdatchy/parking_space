@@ -35,11 +35,11 @@ E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\security\SHA256Service.j
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\social\GooglePojo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\RegisterForm.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\SlotService.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\social\GooglePojoIdToken.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\UserPayload.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\FieldService.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\controller\SocialController.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\ManagerService.java
-E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\VerifyPayload.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\SocialService.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\json\GatewayJson.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\LoginForm.java
@@ -48,9 +48,11 @@ E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\GatewayServ
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\GoogleService.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository_impl\PackageRepo_Impl.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\FieldService_Impl.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\VerifyResetPassPayload.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\SendMailService.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository\FieldRepo.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\controller\ContractController.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\data\CodeResetPass.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\security\JWTFilterManager.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\repository_impl\ManagerRepo_Impl.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\controller\DetectorController.java
@@ -94,6 +96,7 @@ E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\controller\MyPackageCont
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\security\SecurityConfig.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\controller\TestHome.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service_impl\ContractService_Impl.java
+E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\payload\VerifyAccountPayload.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\entities\data\Manager.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\security\SecurityConstants.java
 E:\BackEndParkingSpace2021\src\main\java\com\hongdatchy\service\UserService.java
