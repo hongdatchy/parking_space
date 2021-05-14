@@ -149,14 +149,18 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public boolean changePass(ChangePassForm changePassForm, User user) {
-        if(!changePassForm.getPassword().equals(changePassForm.getRePassword())
-        || (!SHA256Service.getSHA256(changePassForm.getOldPassword()).equals(user.getPassword())
-                && !changePassForm.getOldPassword().equals(""))){
-            return false;
+        if(changePassForm.getPassword().equals(changePassForm.getRePassword())){
+            if((user.getPassword() == null && changePassForm.getOldPassword().equals(""))
+                    || (SHA256Service.getSHA256(changePassForm.getOldPassword()).equals(user.getPassword())
+                            && (user.getPassword() != null)
+                    )
+            ){
+                user.setPassword(SHA256Service.getSHA256(changePassForm.getPassword()));
+                entityManager.merge(user);
+                return true;
+            }
         }
-        user.setPassword(SHA256Service.getSHA256(changePassForm.getPassword()));
-        entityManager.merge(user);
-        return true;
+        return false;
     }
 
     @Override
