@@ -3,6 +3,7 @@ package com.hongdatchy.service_impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.social.GooglePojo;
+import com.hongdatchy.entities.social.GooglePojoIdToken;
 import com.hongdatchy.repository.UserRepo;
 
 import com.hongdatchy.service.SocialService;
@@ -24,45 +25,48 @@ public class GoogleService implements SocialService {
     @Autowired
     private UserRepo userRepo;
 
-    @Value("${google.appId}")
-    private String appId;
-    @Value("${google.appSecret}")
-    private String appSecret;
-    @Value("${google.redirect}")
-    private String redirect;
-    @Value("${google.user_info}")
-    private String linkUser;
-    @Value("${google.scope}")
-    private String scope;
+    @Value("${google.link.access_token}")
+    private String linkAccessToken;
+
+    @Value("${google.link.id_token}")
+    private String linkIdToken;
 
     @Override
-    public String createAuthorizationURL() {
-        GoogleConnectionFactory connectionFactory = new GoogleConnectionFactory(appId, appSecret);
-        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-        OAuth2Parameters params = new OAuth2Parameters();
-        params.setRedirectUri(redirect);
-        params.setScope(scope);
-        return oauthOperations.buildAuthorizeUrl(params);
-    }
-
-    @Override
-    public String createAccessToken(String code) {
-        GoogleConnectionFactory connectionFactory = new GoogleConnectionFactory(appId, appSecret);
-        AccessGrant accessGrant = connectionFactory.getOAuthOperations().exchangeForAccess(code, redirect, null);
-        return accessGrant.getAccessToken();
-    }
-
-    @Override
-    public User getUser(String token) throws IOException {
-        String link = linkUser + token; // tạo link api
+    public User getUserAccessToken(String token) throws IOException {
+        String link = linkAccessToken + token; // tạo link api
         String response = Request.Get(link).execute().returnContent().asString(); // call api
-        System.out.println("google response: " + response);
+        System.out.println("google access token response: " + response);
         ObjectMapper mapper = new ObjectMapper();
         GooglePojo pojo = mapper.readValue(response, GooglePojo.class); // map với entity
         String email = pojo.getEmail();
         User user = userRepo.findByEmail(email);
         if (user != null) return user;
-        User newUser = User.builder()
+        User newUser = buildUser(email);
+        return userRepo.createAndUpdate(newUser);
+    }
+
+    @Override
+    public User getUserIdToken(String token) throws IOException {
+        String link = linkIdToken + token;
+        String response = Request.Get(link).execute().returnContent().asString(); // call api
+        System.out.println("google id token response: " + response);
+        ObjectMapper mapper = new ObjectMapper();
+        GooglePojoIdToken pojo = mapper.readValue(response, GooglePojoIdToken.class); // map với entity
+        String email = pojo.getEmail();
+        if(pojo.getEmail_verified().equals("true")){
+            User user = userRepo.findByEmail(email);
+            if (user != null){
+                return user;
+            }else {
+                User newUser = buildUser(email);
+                return userRepo.createAndUpdate(newUser);
+            }
+        }
+        return null;
+    }
+
+    public User buildUser(String email){
+        return User.builder()
                 .id(null)
                 .lastTimeAccess(null)
                 .password("")
@@ -76,6 +80,5 @@ public class GoogleService implements SocialService {
                 .image("")
                 .birth(new Date())
                 .build();
-        return userRepo.createAndUpdate(newUser);
     }
 }

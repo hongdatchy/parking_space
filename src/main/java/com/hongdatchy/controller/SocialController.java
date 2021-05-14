@@ -37,10 +37,18 @@ public class SocialController {
 //        return ResponseEntity.ok(jwtService.getToken(user.getEmail()));
 //    }
 
-    @GetMapping("api/login-google")
+    @GetMapping("api/login-google/access-token")
     @ResponseBody
-    public ResponseEntity<Object> createAndUpdate(@RequestParam(name = "token") String token) throws Exception {
-        User user = googleService.getUser(token);
+    public ResponseEntity<Object> accessToken(@RequestParam(name = "token") String token) throws Exception {
+        User user = googleService.getUserAccessToken(token);
         return ResponseEntity.ok(MyResponse.success(jwtService.getToken(user.getEmail())));
     }
+
+    @GetMapping("api/login-google/id-token")
+    @ResponseBody
+    public ResponseEntity<Object> idToken(@RequestParam(name = "token") String token) throws Exception {
+        googleService.getUserIdToken(token);
+        return ResponseEntity.ok("MyResponse.success(jwtService.getToken(user.getEmail()))");
+    }
+
 }

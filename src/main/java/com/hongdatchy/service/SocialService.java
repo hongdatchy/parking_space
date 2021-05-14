@@ -2,12 +2,12 @@ package com.hongdatchy.service;
 
 import com.hongdatchy.entities.data.User;
 
+import java.io.IOException;
+
 public interface SocialService {
 
-    String createAuthorizationURL();
+    User getUserAccessToken(String token) throws Exception;
 
-    String createAccessToken(String code) throws Exception;
-
-    User getUser(String token) throws Exception;
+    User getUserIdToken(String token) throws IOException;
 
 }

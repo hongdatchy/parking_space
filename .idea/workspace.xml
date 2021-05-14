@@ -5,20 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/data/CodeResetPass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/VerifyResetPassPayload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae1ed810-ca6c-4d3e-98b6-2fad92f0b856.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ae1ed810-ca6c-4d3e-98b6-2fad92f0b856.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/social/GooglePojoIdToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/VerifyPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/payload/VerifyAccountPayload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository/UserRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/UserRepo_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/repository_impl/UserRepo_Impl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/UserService_Impl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/SocialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/SocialController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/SocialService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/SocialService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/GoogleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/GoogleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/SocialController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/SocialController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/SocialService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/SocialService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/UserService_Impl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,13 +77,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -150,6 +149,7 @@
       <workItem from="1620873439889" duration="6971000" />
       <workItem from="1620883022996" duration="2600000" />
       <workItem from="1620891778991" duration="6195000" />
+      <workItem from="1620963945640" duration="3867000" />
     </task>
     <task id="LOCAL-00001" summary="2021 ConfigVar">
       <created>1618292984132</created>
@@ -173,10 +173,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1618071832253" />
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser" timestamp="1620895232123">
+    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser" timestamp="1620964509228">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1620895232123" />
+    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1620964509228" />
     <state x="337" y="293" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1619458885766">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -201,38 +201,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1619704607439" />
-    <state width="1323" height="225" key="GridCell.Tab.0.bottom" timestamp="1620898030955">
+    <state width="1323" height="225" key="GridCell.Tab.0.bottom" timestamp="1620970330957">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620898030955" />
-    <state width="1323" height="225" key="GridCell.Tab.0.center" timestamp="1620898030954">
+    <state width="1323" height="225" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620970330957" />
+    <state width="1323" height="225" key="GridCell.Tab.0.center" timestamp="1620970330957">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1620898030954" />
-    <state width="1323" height="225" key="GridCell.Tab.0.left" timestamp="1620898030954">
+    <state width="1323" height="225" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1620970330957" />
+    <state width="1323" height="225" key="GridCell.Tab.0.left" timestamp="1620970330957">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1620898030954" />
-    <state width="1323" height="225" key="GridCell.Tab.0.right" timestamp="1620898030955">
+    <state width="1323" height="225" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1620970330957" />
+    <state width="1323" height="225" key="GridCell.Tab.0.right" timestamp="1620970330957">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1620898030955" />
-    <state width="1323" height="225" key="GridCell.Tab.1.bottom" timestamp="1620898030955">
+    <state width="1323" height="225" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1620970330957" />
+    <state width="1323" height="225" key="GridCell.Tab.1.bottom" timestamp="1620970330958">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620898030955" />
-    <state width="1323" height="225" key="GridCell.Tab.1.center" timestamp="1620898030955">
+    <state width="1323" height="225" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1620970330958" />
+    <state width="1323" height="225" key="GridCell.Tab.1.center" timestamp="1620970330958">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1620898030955" />
-    <state width="1323" height="225" key="GridCell.Tab.1.left" timestamp="1620898030955">
+    <state width="1323" height="225" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1620970330958" />
+    <state width="1323" height="225" key="GridCell.Tab.1.left" timestamp="1620970330957">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1620898030955" />
-    <state width="1323" height="225" key="GridCell.Tab.1.right" timestamp="1620898030955">
+    <state width="1323" height="225" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1620970330957" />
+    <state width="1323" height="225" key="GridCell.Tab.1.right" timestamp="1620970330958">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="225" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1620898030955" />
+    <state width="1323" height="225" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1620970330958" />
     <state width="1323" height="227" key="GridCell.Tab.2.bottom" timestamp="1619632532939">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
