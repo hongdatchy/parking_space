@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="510c940e-8b02-44bb-ba66-e5c11ec422df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/entities/social/GooglePojoIdToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/SocialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/controller/SocialController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/SocialService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service/SocialService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/GoogleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hongdatchy/service_impl/GoogleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/SocialController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/controller/SocialController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/repository_impl/UserRepo_Impl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/SocialService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service/SocialService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hongdatchy/service_impl/GoogleService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,19 +69,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BackendParkingSpaceV2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="backendparkingspacev2" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.hongdatchy.BackendParkingSpaceV2Application" />
@@ -150,6 +129,7 @@
       <workItem from="1620883022996" duration="2600000" />
       <workItem from="1620891778991" duration="6195000" />
       <workItem from="1620963945640" duration="3867000" />
+      <workItem from="1620972391903" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="2021 ConfigVar">
       <created>1618292984132</created>

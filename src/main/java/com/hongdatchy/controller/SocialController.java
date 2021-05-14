@@ -3,6 +3,7 @@ package com.hongdatchy.controller;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.json.MyResponse;
+import com.hongdatchy.entities.payload.UserLoginPayload;
 import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service_impl.GoogleService;
 import lombok.AllArgsConstructor;
@@ -41,14 +42,16 @@ public class SocialController {
     @ResponseBody
     public ResponseEntity<Object> accessToken(@RequestParam(name = "token") String token) throws Exception {
         User user = googleService.getUserAccessToken(token);
-        return ResponseEntity.ok(MyResponse.success(jwtService.getToken(user.getEmail())));
+        return ResponseEntity.ok(MyResponse
+                .loginSuccess("user",new UserLoginPayload(jwtService.getToken(user.getEmail()),user)));
     }
 
     @GetMapping("api/login-google/id-token")
     @ResponseBody
     public ResponseEntity<Object> idToken(@RequestParam(name = "token") String token) throws Exception {
-        googleService.getUserIdToken(token);
-        return ResponseEntity.ok("MyResponse.success(jwtService.getToken(user.getEmail()))");
+        User user = googleService.getUserIdToken(token);
+        return ResponseEntity.ok(MyResponse
+                .loginSuccess("user",new UserLoginPayload(jwtService.getToken(user.getEmail()),user)));
     }
 
 }
