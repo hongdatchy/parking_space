@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class LoginAndLogoutController {
+public class CommonController {
 
     @Autowired
     UserService userService;
@@ -77,4 +77,6 @@ public class LoginAndLogoutController {
             return ResponseEntity.ok(MyResponse.fail("invalidate token"));
         }
     }
+
+
 }

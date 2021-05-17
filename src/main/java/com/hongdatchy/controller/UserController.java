@@ -1,8 +1,10 @@
 package com.hongdatchy.controller;
 
+import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.*;
 import com.hongdatchy.repository.ContractRepo;
+import com.hongdatchy.repository.UserRepo;
 import com.hongdatchy.security.JWTService;
 import com.hongdatchy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepo userRepo;
 
     @Autowired
     JWTService jwtService;
@@ -97,4 +102,13 @@ public class UserController {
         return ResponseEntity.ok(MyResponse.success(userService.resetPass(email)));
     }
 
+    @GetMapping("api/us/info")
+    public ResponseEntity<Object> getInfo(@RequestHeader String token){
+        String email = jwtService.decode(token);
+        User user = userRepo.findByEmail(email);
+        if(user != null){
+            return ResponseEntity.ok(MyResponse.success(user));
+        }
+        return ResponseEntity.ok(MyResponse.fail("invalidate token"));
+    }
 }
